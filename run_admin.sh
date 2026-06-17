@@ -20,9 +20,14 @@ DB_PORT=$(echo "$DB_URL" | sed -E 's|.*:([0-9]+)/.*|\1|')
 DB_HOST="${DB_HOST:-localhost}"
 DB_PORT="${DB_PORT:-5432}"
 
+# Check if PostgreSQL is ready using Python
+check_postgres() {
+    python3 scripts/check_postgres.py "$DB_URL" 2.0 >/dev/null 2>&1
+}
+
 # Check if PostgreSQL is ready
 echo "[*] Checking PostgreSQL at $DB_HOST:$DB_PORT..."
-if ! pg_isready -h "$DB_HOST" -p "$DB_PORT" -q 2>/dev/null; then
+if ! check_postgres; then
     echo "[!] PostgreSQL is not running."
     echo "[*] Attempting to start PostgreSQL with Docker..."
 
@@ -40,7 +45,7 @@ if ! pg_isready -h "$DB_HOST" -p "$DB_PORT" -q 2>/dev/null; then
     echo "[*] Verifying PostgreSQL is ready..."
     MAX_RETRIES=30
     i=0
-    until pg_isready -h "$DB_HOST" -p "$DB_PORT" -q 2>/dev/null; do
+    until check_postgres; do
         i=$((i + 1))
         if [ $i -ge $MAX_RETRIES ]; then
             echo "[!] PostgreSQL failed to become ready after startup."

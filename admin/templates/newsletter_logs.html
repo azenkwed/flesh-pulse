@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %}Newsletter Logs — Flesh Pulse Admin{% endblock %}
+{% block page_title %}Newsletter Logs{% endblock %}
+
+{% block topbar_actions %}
+<a href="/newsletter-preview" target="_blank" class="btn btn-secondary btn-sm">Preview Daily</a>
+<a href="/newsletter-preview?frequency=weekly" target="_blank" class="btn btn-secondary btn-sm">Preview Weekly</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="stats-grid" style="grid-template-columns:repeat(4,1fr)">
+  <div class="stat-card">
+    <div class="stat-value">{{ total }}</div>
+    <div class="stat-label">Total Sent</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">{{ total_daily }}</div>
+    <div class="stat-label">Daily Sends</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">{{ total_weekly }}</div>
+    <div class="stat-label">Weekly Sends</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">{{ unique_subscribers }}</div>
+    <div class="stat-label">Unique Recipients</div>
+  </div>
+</div>
+
+<div class="card" style="padding:16px 20px;margin-bottom:16px;">
+  <form method="get" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+    <input type="text" name="q" value="{{ q }}" placeholder="Search by email…"
+           style="flex:1;min-width:180px;padding:7px 10px;border:1px solid var(--border);border-radius:4px;font-size:13px;background:var(--bg);color:var(--text);">
+    <select name="frequency" style="padding:7px 10px;border:1px solid var(--border);border-radius:4px;font-size:13px;background:var(--bg);color:var(--text);">
+      <option value="">All frequencies</option>
+      <option value="daily" {{ 'selected' if frequency == 'daily' }}>Daily</option>
+      <option value="weekly" {{ 'selected' if frequency == 'weekly' }}>Weekly</option>
+    </select>
+    <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+    {% if q or frequency %}
+      <a href="/newsletter-logs" class="btn btn-secondary btn-sm">Clear</a>
+    {% endif %}
+  </form>
+</div>
+
+<div class="card" style="padding:0;overflow:hidden;">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Sent At</th>
+          <th>Recipient</th>
+          <th>Frequency</th>
+          <th>Period</th>
+          <th>Subject</th>
+          <th>Articles</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for log, email in rows %}
+        <tr>
+          <td style="white-space:nowrap">{{ log.sent_at.strftime('%Y-%m-%d %H:%M') if log.sent_at else '—' }}</td>
+          <td>{{ email or '—' }}</td>
+          <td>
+            <span class="badge {{ 'badge-ok' if log.frequency == 'daily' else 'badge-featured' }}">
+              {{ log.frequency }}
+            </span>
+          </td>
+          <td style="font-family:monospace;font-size:12px;">{{ log.period_key }}</td>
+          <td style="max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="{{ log.subject or '' }}">
+            {{ log.subject or '—' }}
+          </td>
+          <td style="text-align:center;">{{ log.article_count }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="6" style="color:var(--text-muted);text-align:center;padding:24px;">
+            No newsletters sent yet.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="pagination">
+  {% if page > 1 %}
+    <a href="?page={{ page - 1 }}&frequency={{ frequency }}&q={{ q }}">&laquo; Prev</a>
+  {% else %}
+    <span class="disabled">&laquo; Prev</span>
+  {% endif %}
+
+  {% for p in range([1, page - 2]|max, [total_pages + 1, page + 3]|min) %}
+    {% if p == page %}
+      <span class="current">{{ p }}</span>
+    {% else %}
+      <a href="?page={{ p }}&frequency={{ frequency }}&q={{ q }}">{{ p }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page < total_pages %}
+    <a href="?page={{ page + 1 }}&frequency={{ frequency }}&q={{ q }}">Next &raquo;</a>
+  {% else %}
+    <span class="disabled">Next &raquo;</span>
+  {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Privacy Policy — Flesh Pulse{% endblock %}
+{% block meta_description %}How Flesh Pulse collects, uses, and protects your data.{% endblock %}
+
+{% block content %}
+<div style="max-width:760px;margin:48px auto;padding:0 24px 80px;">
+
+  <h1 style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;margin-bottom:8px;">Privacy Policy</h1>
+  <p style="color:var(--text-muted);font-size:14px;margin-bottom:40px;">Last updated: {{ now().strftime('%B %d, %Y') }}</p>
+
+  <section style="margin-bottom:36px;">
+    <h2 style="font-size:18px;font-weight:700;margin-bottom:12px;">1. Who we are</h2>
+    <p>Flesh Pulse (<strong>fleshpulse.com</strong>) is an independent news archive that uses AI curation to track real-world surveillance, censorship, authoritarian governance, and corporate control. It is operated by Kader Djehaf. Questions about this policy can be sent to <a href="mailto:legal@fleshpulse.com">legal@fleshpulse.com</a>.</p>
+  </section>
+
+  <section style="margin-bottom:36px;">
+    <h2 style="font-size:18px;font-weight:700;margin-bottom:12px;">2. What data we collect</h2>
+    <h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">Visitors (no account)</h3>
+    <p>We do not run analytics scripts or advertising trackers. Standard web server logs (IP address, browser, page requested, timestamp) are retained by our hosting provider (Fly.io) for a short period for security and abuse-prevention purposes.</p>
+
+    <h3 style="font-size:15px;font-weight:600;margin:16px 0 8px;">Registered users</h3>
+    <p>If you create an account we store:</p>
+    <ul style="padding-left:20px;line-height:1.8;">
+      <li><strong>Email address</strong> — used for account authentication and optional newsletters.</li>
+      <li><strong>Display name</strong> — shown on your profile (optional).</li>
+      <li><strong>Hashed password</strong> — stored using bcrypt; we never store the plaintext.</li>
+      <li><strong>Category preferences</strong> — which news categories you follow.</li>
+      <li><strong>Newsletter frequency preference</strong> — daily, weekly, or never.</li>
+      <li><strong>Last login timestamp.</strong></li>
+    </ul>
+
+    <h3 style="font-size:15px;font-weight:600;margin:16px 0 8px;">Social sign-in (Google, LinkedIn, X/Twitter)</h3>
+    <p>If you sign in via a third-party provider we receive only the information that provider shares with us: typically a unique user ID, email address (if available), and display name. We do not receive your password or any data beyond what the OAuth flow provides. Your use of those providers is governed by their own privacy policies.</p>
+  </section>
+
+  <section style="margin-bottom:36px;">
+    <h2 style="font-size:18px;font-weight:700;margin-bottom:12px;">3. How we use your data</h2>
+    <ul style="padding-left:20px;line-height:1.8;">
+      <li>Authenticating you when you sign in.</li>
+      <li>Sending account-related emails (email verification, password reset).</li>
+      <li>Sending newsletters if you have opted in.</li>
+      <li>Personalising the category feed based on your preferences.</li>
+    </ul>
+    <p style="margin-top:12px;">We do not sell, rent, or share your personal data with third parties for marketing purposes.</p>
+  </section>
+
+  <section style="margin-bottom:36px;">
+    <h2 style="font-size:18px;font-weight:700;margin-bottom:12px;">4. Cookies and session storage</h2>
+    <p>We use a single session cookie (<code>access_token</code>) to keep you signed in for up to 30 days. We also store your dark-mode preference in <code>localStorage</code>. We do not use advertising cookies or third-party tracking cookies.</p>
+  </section>
+
+  <section style="margin-bottom:36px;">
+    <h2 style="font-size:18px;font-weight:700;margin-bottom:12px;">5. Third-party services</h2>
+    <ul style="padding-left:20px;line-height:1.8;">
+      <li><strong>Anthropic Claude</strong> — article content is sent to Anthropic's API for AI curation. No user data is included.</li>
+      <li><strong>Resend</strong> — transactional emails are delivered via Resend. Your email address is passed to Resend only when sending you an email.</li>
+      <li><strong>Fly.io</strong> — application hosting. Server logs are subject to Fly.io's data retention policies.</li>
+      <li><strong>NewsAPI</strong> — used to fetch publicly available news headlines. No user data is shared.</li>
+    </ul>
+  </section>
+
+  <section style="margin-bottom:36px;">
+    <h2 style="font-size:18px;font-weight:700;margin-bottom:12px;">6. Data retention</h2>
+    <p>Account data is retained for as long as your account is active. You may request deletion of your account at any time by emailing <a href="mailto:legal@fleshpulse.com">legal@fleshpulse.com</a> and your data will be removed within 30 days.</p>
+  </section>
+
+  <section style="margin-bottom:36px;">
+    <h2 style="font-size:18px;font-weight:700;margin-bottom:12px;">7. Your rights</h2>
+    <p>Depending on your location you may have rights under applicable privacy law (including GDPR and CCPA) to access, correct, port, or erase your personal data. To exercise any of these rights, contact us at <a href="mailto:legal@fleshpulse.com">legal@fleshpulse.com</a>.</p>
+  </section>
+
+  <section style="margin-bottom:36px;">
+    <h2 style="font-size:18px;font-weight:700;margin-bottom:12px;">8. Security</h2>
+    <p>Passwords are hashed with bcrypt. All traffic is served over HTTPS. We take reasonable technical measures to protect your data, but no system is completely immune to breach.</p>
+  </section>
+
+  <section>
+    <h2 style="font-size:18px;font-weight:700;margin-bottom:12px;">9. Changes to this policy</h2>
+    <p>We may update this policy from time to time. Material changes will be noted by updating the "Last updated" date above. Continued use of the service after a change constitutes acceptance.</p>
+  </section>
+
+</div>
+{% endblock %}

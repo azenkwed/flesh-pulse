@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block title %}Settings — Flesh Pulse Admin{% endblock %}
+{% block page_title %}Settings{% endblock %}
+
+{% block content %}
+
+<div class="two-col">
+
+  <!-- Curation settings -->
+  <div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Curation</span></div>
+      <form method="POST" action="/settings">
+        <div class="form-group">
+          <label class="form-label">Min Relevance Score</label>
+          <input type="number" name="min_relevance_score" class="form-control"
+                 min="0" max="1" step="0.05" value="{{ min_relevance_score }}">
+          <div class="form-hint">
+            Articles below this score are discarded. Articles &ge; 0.90 are marked featured.
+            Current: <strong>{{ min_relevance_score }}</strong>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Collection Interval (minutes)</label>
+          <input type="number" name="collection_interval" class="form-control"
+                 min="5" max="1440" step="5" value="{{ collection_interval }}">
+          <div class="form-hint">How often the pipeline runs. Requires main app restart to take effect.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-check">
+            <input type="checkbox" name="allow_manual_trigger" value="true"
+                   {{ 'checked' if allow_manual_trigger == 'true' else '' }}>
+            <span>Allow manual trigger via API</span>
+          </label>
+          <div class="form-hint" style="margin-top:6px;">Enables POST /api/trigger-collection on the main app.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Article Retention (days)</label>
+          <input type="number" name="article_retention_days" class="form-control"
+                 min="0" max="3650" step="1" value="{{ article_retention_days }}">
+          <div class="form-hint">
+            Articles older than this are deleted after each run. Set to <strong>0</strong> to keep forever.
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Settings</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Notes -->
+  <div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Notes</span></div>
+      <ul style="font-size:13px;color:var(--text-muted);line-height:2;padding-left:16px;">
+        <li>Settings are written to <code>.env</code> immediately.</li>
+        <li>Score and trigger changes take effect on the next pipeline run.</li>
+        <li>Interval changes require a main app restart.</li>
+        <li>The admin reads the updated values right away.</li>
+        <li>API keys and secrets must be edited directly in <code>.env</code>.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- Environment variables reference -->
+<div style="margin-top:28px;">
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Environment Variables</span>
+      <span style="font-size:12px;color:var(--text-muted);">Secret values masked — edit .env directly to change</span>
+    </div>
+
+    {% for group in env_groups %}
+    <div style="margin-bottom:28px;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:10px;">
+        {{ group.name }}
+      </div>
+      <table style="table-layout:fixed;">
+        <colgroup>
+          <col style="width:240px;">
+          <col style="width:56px;">
+          <col style="width:56px;">
+          <col style="width:220px;">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Required</th>
+            <th>Status</th>
+            <th>Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in group.rows %}
+          <tr>
+            <td><code style="font-size:12px;">{{ row.name }}</code></td>
+            <td>
+              {% if row.required %}
+              <span class="badge badge-danger" style="font-size:10px;">required</span>
+              {% else %}
+              <span style="font-size:11px;color:var(--text-muted);">optional</span>
+              {% endif %}
+            </td>
+            <td>
+              <span class="key-dot {{ 'key-dot-ok' if row.is_set else ('key-dot-err' if row.required else 'key-dot-warn') }}"></span>
+              <span style="font-size:12px;">{{ 'Set' if row.is_set else 'Unset' }}</span>
+            </td>
+            <td style="font-size:12px;color:{{ 'var(--text-muted)' if not row.is_set else 'inherit' }};word-break:break-all;">
+              {{ row.display }}
+            </td>
+            <td style="font-size:12px;color:var(--text-muted);">{{ row.description }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}{{ status_code }} {{ title }} — Flesh Pulse Admin{% endblock %}
+{% block page_title %}{{ title }}{% endblock %}
+{% block content %}
+<p style="color:#6b7280;">{{ detail }}</p>
+<a href="/articles" style="font-size:13px;">← Back to articles</a>
+{% endblock %}

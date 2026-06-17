@@ -1,0 +1,287 @@
+{% extends "base.html" %}
+{% import "macros.html" as ui %}
+{% block title %}{{ article.title }} — Flesh Pulse{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_title %}{{ article.title }}{% endblock %}
+{% block og_description %}{{ (article.ai_summary or article.description or '')[:200] }}{% endblock %}
+{% block og_image %}{{ article.display_image_url or '/static/icons/social-800.png' }}{% endblock %}
+{% block twitter_title %}{{ article.title }}{% endblock %}
+{% block twitter_description %}{{ (article.ai_summary or article.description or '')[:200] }}{% endblock %}
+{% block twitter_image %}{{ article.display_image_url or '/static/icons/social-800.png' }}{% endblock %}
+{% block meta_description %}{{ (article.ai_summary or article.description or '')[:160] }}{% endblock %}
+
+{% block head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": {{ article.title | tojson }},
+  "description": {{ (article.ai_summary or article.description or '') | tojson }},
+  "url": "{{ request.url }}",
+  "datePublished": "{{ article.display_datetime or '' }}",
+  "image": {{ (article.display_image_url or '') | tojson }},
+  "keywords": {{ (article.tags_list | join(', ')) | tojson }},
+  "articleSection": {{ article.category | tojson }},
+  "publisher": {
+    "@type": "Organization",
+    "name": "Flesh Pulse",
+    "url": "{{ request.base_url }}"
+  }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="article-layout">
+
+  <div class="article-breadcrumb">
+    <a href="/">Home</a> &rsaquo;
+    <a href="/category/{{ article.category_slug }}">{{ article.category }}</a> &rsaquo;
+    {{ article.title[:60] }}{% if article.title | length > 60 %}…{% endif %}
+  </div>
+
+  <h1 class="article-headline">{{ article.title }}</h1>
+
+  <div class="article-meta">
+    <span class="sev-dot {{ article.severity or 'low' }}"></span>
+    <span class="sev-badge {{ article.severity or 'low' }}">{{ article.severity or 'low' }}</span>
+    <span class="meta-sep">&middot;</span>
+    <span>{{ article.source_name }}</span>
+    {% if article.author %}
+    <span class="meta-sep">&middot;</span>
+    <span>{{ article.author }}</span>
+    {% endif %}
+    {% if article.display_date %}
+    <span class="meta-sep">&middot;</span>
+    <span class="article-date" data-datetime="{{ article.display_datetime }}">{{ article.display_date }}</span>
+    {% endif %}
+    <span class="meta-sep">&middot;</span>
+    <a href="/category/{{ article.category_slug }}" style="color:var(--accent)">{{ article.category }}</a>
+    {% if article.reading_time %}
+    <span class="meta-sep">&middot;</span>
+    <span>{{ article.reading_time }} min read</span>
+    {% endif %}
+  </div>
+
+  <div class="article-actions">
+    <div class="share-wrap">
+      <button type="button" class="article-action-link" id="share-toggle" aria-expanded="false" aria-controls="share-menu">
+        <span>Share</span>
+        <svg class="article-action-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="18" cy="5" r="3"></circle>
+          <circle cx="6" cy="12" r="3"></circle>
+          <circle cx="18" cy="19" r="3"></circle>
+          <path d="M8.6 10.6 15.4 6.4"></path>
+          <path d="M8.6 13.4 15.4 17.6"></path>
+        </svg>
+      </button>
+      <div class="share-menu" id="share-menu" hidden>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ share_url_encoded }}" target="_blank" rel="noopener noreferrer">
+          <svg class="share-menu-icon share-menu-icon-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14 8.5V6.8c0-.8.2-1.3 1.3-1.3H17V2.3c-.8-.1-1.6-.2-2.4-.2-2.5 0-4.2 1.5-4.2 4.3v2.1H7.6V12h2.8v9.9H14V12h2.8l.4-3.5H14Z"></path>
+          </svg>
+          <span>Facebook</span>
+        </a>
+        <a href="https://twitter.com/intent/tweet?url={{ share_url_encoded }}&text={{ share_title_encoded }}" target="_blank" rel="noopener noreferrer">
+          <svg class="share-menu-icon share-menu-icon-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.745l7.73-8.835L1.254 2.25H8.08l4.213 5.567zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+          </svg>
+          <span>X (Twitter)</span>
+        </a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url_encoded }}" target="_blank" rel="noopener noreferrer">
+          <svg class="share-menu-icon share-menu-icon-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6.6 9.1H3.2V21h3.4V9.1ZM4.9 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm16 11.2c0-3.2-1.7-5.3-4.5-5.3-1.7 0-2.7.9-3.2 1.8V9.1H9.9V21h3.4v-6.4c0-1.7.8-2.7 2.2-2.7 1.3 0 2 1 2 2.7V21h3.4v-6.8Z"></path>
+          </svg>
+          <span>LinkedIn</span>
+        </a>
+        <a href="mailto:?subject={{ share_title_encoded }}&body={{ share_url_encoded }}">
+          <svg class="share-menu-icon share-menu-icon-stroke" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="1.5"></rect>
+            <path d="m4 7 8 6 8-6"></path>
+          </svg>
+          <span>Email</span>
+        </a>
+        <button type="button" class="share-copy" data-copy-link="{{ share_url }}">
+          <svg class="share-menu-icon share-menu-icon-stroke" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="8" y="8" width="11" height="11" rx="1.5"></rect>
+            <path d="M5 16H4a1.5 1.5 0 0 1-1.5-1.5V4A1.5 1.5 0 0 1 4 2.5h10.5A1.5 1.5 0 0 1 16 4v1"></path>
+          </svg>
+          <span>Copy</span>
+        </button>
+      </div>
+    </div>
+
+    {% if current_user %}
+    <form method="POST" action="/article/{{ article.id }}/save" class="article-action-form">
+      <button type="submit" class="article-action-link{% if is_saved %} is-saved{% endif %}">
+        <span>{% if is_saved %}Saved{% else %}Save{% endif %}</span>
+        <svg class="article-action-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 3h12v18l-6-4-6 4Z"></path>
+        </svg>
+      </button>
+    </form>
+    {% else %}
+    <button type="button" class="article-action-link" id="save-cta">
+      <span>Save</span>
+      <svg class="article-action-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 3h12v18l-6-4-6 4Z"></path>
+      </svg>
+    </button>
+    {% endif %}
+  </div>
+
+  {% if article.display_image_url %}
+  <div class="article-image">
+    <img src="{{ article.display_image_url }}" alt="{{ article.title }}"
+         onerror="this.parentElement.style.display='none'">
+  </div>
+  {% endif %}
+
+  {% if article.ai_summary %}
+  <div class="ai-summary">
+    <div class="ai-summary-label">Summary</div>
+    <p class="ai-summary-text">{{ article.ai_summary }}</p>
+  </div>
+  {% endif %}
+
+  {% if article.body_text %}
+  <div class="article-body">
+    {{ article.body_html }}
+    {% if article.body_has_more %}
+    <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer">… [more]</a>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% if article.tags_list %}
+  <div class="article-tags">
+    {% for tag in article.tags_list %}
+    <span class="tag">{{ tag }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer" class="read-original">
+    Read original article &rarr;
+  </a>
+
+</div>
+
+{% if msg in ('saved', 'unsaved') %}
+<div class="save-toast" id="save-toast" role="status">
+  {% if msg == 'saved' %}Article saved to your <a href="/saved">reading list</a>.{% else %}Article removed from your reading list.{% endif %}
+</div>
+{% endif %}
+
+<div class="auth-modal" id="save-modal" hidden>
+  <div class="auth-modal-backdrop" data-modal-close></div>
+  <div class="auth-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="save-modal-title">
+    <button type="button" class="auth-modal-close" data-modal-close aria-label="Close dialog">×</button>
+    <h2 class="auth-modal-title" id="save-modal-title">Sign in to save for later</h2>
+    <p class="auth-modal-text">Save this article to your profile, then come back to it any time.</p>
+    <div class="auth-modal-actions">
+      <a class="action-btn" href="/login?next=/article/{{ article.id }}">Sign in</a>
+      <a class="action-btn action-btn-secondary" href="/register?next=/article/{{ article.id }}">Register</a>
+    </div>
+  </div>
+</div>
+
+{% if related %}
+<section class="related-section">
+  <div class="related-header">More from {{ article.category }}</div>
+  <div class="card-grid">
+    {% for art in related %}
+    <article class="article-card">
+      <div class="article-card-img{% if not art.display_image_url %} article-card-img--placeholder{% endif %}">
+        <a href="/article/{{ art.id }}">
+          {% if art.display_image_url %}<img src="{{ art.display_image_url }}" alt="{{ art.title }}" loading="lazy"
+               onerror="this.closest('.article-card-img').classList.add('article-card-img--placeholder');this.remove()">{% endif %}
+        </a>
+      </div>
+      <div class="article-card-cat">{{ art.category }}</div>
+      <h3 class="article-card-title"><a href="/article/{{ art.id }}">{{ art.title }}</a></h3>
+      {% set s = art.ai_summary or art.description or '' %}
+      {% if s %}<p class="article-card-summary">{{ ui.clipped_text(s, 140, '/article/' ~ art.id) }}</p>{% endif %}
+      <div class="article-card-meta">
+        <span class="sev-dot {{ art.severity or 'low' }}"></span>
+        <span>{{ art.source_name }}</span>
+        {% if art.display_date %}<span class="meta-sep">&middot;</span><span class="article-date" data-datetime="{{ art.display_datetime }}">{{ art.display_date }}</span>{% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+  var toggle = document.getElementById('share-toggle');
+  var menu = document.getElementById('share-menu');
+  var saveCta = document.getElementById('save-cta');
+  var saveModal = document.getElementById('save-modal');
+
+  if (toggle && menu) {
+    function closeMenu() {
+      menu.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var opening = menu.hidden;
+      menu.hidden = !opening;
+      toggle.setAttribute('aria-expanded', opening ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!menu.contains(e.target) && !toggle.contains(e.target)) closeMenu();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMenu();
+    });
+
+    menu.querySelectorAll('.share-copy').forEach(function (btn) {
+      btn.addEventListener('click', async function () {
+        var text = btn.getAttribute('data-copy-link');
+        var label = btn.querySelector('span');
+        if (!text) return;
+        try {
+          await navigator.clipboard.writeText(text);
+          if (label) label.textContent = 'Copied';
+          setTimeout(function () { if (label) label.textContent = 'Copy'; }, 1500);
+        } catch (err) {
+          window.prompt('Copy link', text);
+        }
+      });
+    });
+  }
+
+  if (saveCta && saveModal) {
+    var closeTargets = saveModal.querySelectorAll('[data-modal-close]');
+
+    function openModal() {
+      saveModal.hidden = false;
+      document.body.classList.add('modal-open');
+    }
+
+    function closeModal() {
+      saveModal.hidden = true;
+      document.body.classList.remove('modal-open');
+    }
+
+    saveCta.addEventListener('click', openModal);
+    closeTargets.forEach(function (el) {
+      el.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !saveModal.hidden) closeModal();
+    });
+  }
+}());
+</script>
+{% endblock %}

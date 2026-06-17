@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block title %}Articles — Flesh Pulse Admin{% endblock %}
+{% block page_title %}Articles{% endblock %}
+
+{% block topbar_actions %}
+<span style="font-size:13px;color:var(--text-muted)">{{ total }} total</span>
+{% endblock %}
+
+{% block content %}
+
+<!-- Filters -->
+<form method="GET" action="/articles">
+  <div class="filter-bar">
+    <input type="text" name="q" placeholder="Search title, source, summary..." value="{{ q }}">
+    <select name="category">
+      <option value="">All Categories</option>
+      {% for cat in categories_list %}
+      <option value="{{ cat }}" {{ 'selected' if category == cat else '' }}>{{ cat }}</option>
+      {% endfor %}
+    </select>
+    <select name="severity">
+      <option value="">All Severities</option>
+      {% for sev in severity_levels %}
+      <option value="{{ sev }}" {{ 'selected' if severity == sev else '' }}>{{ sev|capitalize }}</option>
+      {% endfor %}
+    </select>
+    <select name="featured">
+      <option value="" {{ 'selected' if featured == '' else '' }}>All</option>
+      <option value="1" {{ 'selected' if featured == '1' else '' }}>Featured only</option>
+    </select>
+    <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+    <a href="/articles" class="btn btn-ghost btn-sm">Reset</a>
+  </div>
+</form>
+
+<!-- Bulk delete form wraps the table -->
+<form method="POST" action="/articles/bulk-delete" id="bulk-form">
+  <div class="card" style="padding:0;overflow:hidden;">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="select-all" title="Select all"></th>
+            <th></th>
+            <th>Title</th>
+            <th>Source</th>
+            <th>Category</th>
+            <th>Severity</th>
+            <th>Score</th>
+            <th>Collected</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for a in articles %}
+          <tr>
+            <td><input type="checkbox" name="ids" value="{{ a.id }}"></td>
+            <td>
+              {% if a.featured %}
+                <span class="star" title="Featured">&#9733;</span>
+              {% else %}
+                <span class="star-off">&#9733;</span>
+              {% endif %}
+            </td>
+            <td class="col-title">
+              <a href="/articles/{{ a.id }}" title="{{ a.title }}">{{ a.title }}</a>
+            </td>
+            <td style="white-space:nowrap;color:var(--text-muted)">{{ a.source_name or '—' }}</td>
+            <td style="white-space:nowrap;font-size:12px">{{ a.category or '—' }}</td>
+            <td><span class="badge badge-{{ a.severity or 'low' }}">{{ a.severity or '—' }}</span></td>
+            <td>
+              <div class="score-wrap">
+                <div class="score-track">
+                  <div class="score-fill" style="width:{{ ((a.relevance_score or 0) * 100)|int }}%"></div>
+                </div>
+                <span class="score-num">{{ '%.2f'|format(a.relevance_score or 0) }}</span>
+              </div>
+            </td>
+            <td style="white-space:nowrap;color:var(--text-muted);font-size:12px">
+              {{ a.collected_at.strftime('%Y-%m-%d') if a.collected_at else '—' }}
+            </td>
+            <td>
+              <a href="/articles/{{ a.id }}" class="btn btn-ghost btn-sm">Edit</a>
+            </td>
+          </tr>
+          {% else %}
+          <tr><td colspan="9" style="color:var(--text-muted);text-align:center;padding:24px;">No articles found.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;">
+    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete selected articles?')">
+      Delete Selected
+    </button>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      {% if page > 1 %}
+        <a href="?q={{ q }}&category={{ category }}&severity={{ severity }}&featured={{ featured }}&page={{ page - 1 }}">&laquo; Prev</a>
+      {% else %}
+        <span class="disabled">&laquo; Prev</span>
+      {% endif %}
+
+      {% for p in range([1, page - 2]|max, [total_pages + 1, page + 3]|min) %}
+        {% if p == page %}
+          <span class="current">{{ p }}</span>
+        {% else %}
+          <a href="?q={{ q }}&category={{ category }}&severity={{ severity }}&featured={{ featured }}&page={{ p }}">{{ p }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page < total_pages %}
+        <a href="?q={{ q }}&category={{ category }}&severity={{ severity }}&featured={{ featured }}&page={{ page + 1 }}">Next &raquo;</a>
+      {% else %}
+        <span class="disabled">Next &raquo;</span>
+      {% endif %}
+    </div>
+  </div>
+</form>
+
+<script>
+  document.getElementById('select-all').addEventListener('change', function() {
+    document.querySelectorAll('input[name="ids"]').forEach(cb => cb.checked = this.checked);
+  });
+</script>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% import "macros.html" as ui %}
+{% block title %}Search — Flesh Pulse{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <h1 class="page-header-title">Search</h1>
+  <form class="search-form-lg" action="/search" method="get">
+    <input type="text" name="q" value="{{ query }}" placeholder="Search articles..." class="search-input-lg" autofocus />
+    <button type="submit" class="search-btn-lg">Search</button>
+  </form>
+  {% if query %}
+  <p class="search-result-meta">{{ articles | length }} result{{ 's' if articles | length != 1 else '' }} for &ldquo;{{ query }}&rdquo;</p>
+  {% endif %}
+</div>
+
+{% if rate_limited %}
+<p style="color:var(--text-muted);padding:24px 0;">Too many searches. Please wait a moment and try again.</p>
+{% elif articles %}
+<div class="card-grid">
+  {% for art in articles %}
+  <article class="article-card">
+    <div class="article-card-img{% if not art.display_image_url %} article-card-img--placeholder{% endif %}">
+      <a href="/article/{{ art.id }}">
+        {% if art.display_image_url %}<img src="{{ art.display_image_url }}" alt="{{ art.title }}" loading="lazy"
+             onerror="this.closest('.article-card-img').classList.add('article-card-img--placeholder');this.remove()">{% endif %}
+      </a>
+    </div>
+    <div class="article-card-cat">{{ art.category }}</div>
+    <h2 class="article-card-title"><a href="/article/{{ art.id }}">{{ art.title }}</a></h2>
+    {% set s = art.ai_summary or art.description or '' %}
+    {% if s %}<p class="article-card-summary">{{ ui.clipped_text(s, 140, '/article/' ~ art.id) }}</p>{% endif %}
+    <div class="article-card-meta">
+      <span class="sev-dot {{ art.severity or 'low' }}"></span>
+      <span>{{ art.source_name }}</span>
+      {% if art.display_date %}<span class="meta-sep">&middot;</span><span class="article-date" data-datetime="{{ art.display_datetime }}">{{ art.display_date }}</span>{% endif %}
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% elif query %}
+<div class="empty-state">
+  <p>No results for &ldquo;{{ query }}&rdquo;. Try different keywords.</p>
+</div>
+{% endif %}
+
+{% endblock %}

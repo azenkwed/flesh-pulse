@@ -1,0 +1,275 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Flesh Pulse Admin{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block topbar_actions %}
+<form method="POST" action="/trigger">
+  <button type="submit" class="btn btn-primary">Trigger Collection</button>
+</form>
+{% endblock %}
+
+{% block content %}
+{% if refreshing %}
+<script>
+(function () {
+  var known = {{ log_count }};
+  var attempts = 0;
+  var max = 40; // ~2 minutes at 3s intervals
+  var interval = setInterval(function () {
+    attempts++;
+    if (attempts > max) { clearInterval(interval); return; }
+    fetch('/api/last-run')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.count > known) {
+          clearInterval(interval);
+          window.location.href = data.error
+            ? '/?msg=Collection+failed:+' + encodeURIComponent(data.error.slice(0, 80)) + '&msg_type=error'
+            : '/?msg=Collection+complete&msg_type=success';
+        }
+      })
+      .catch(function() {});
+  }, 3000);
+}());
+</script>
+{% endif %}
+
+{% set failed_runs = recent_logs | selectattr('error') | list %}
+{% if failed_runs %}
+<div class="alert alert-error" style="margin-bottom:20px;">
+  <strong>⚠ Collection failures detected</strong> —
+  {{ failed_runs | length }} of the last {{ recent_logs | length }} run(s) failed.
+  Most recent: <em>{{ failed_runs[0].error | truncate(120) }}</em>
+  <a href="/logs" style="margin-left:8px;text-decoration:underline;">View all logs →</a>
+</div>
+{% endif %}
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-value">{{ total }}</div>
+    <div class="stat-label">Total Articles</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">{{ since_24h }}</div>
+    <div class="stat-label">Last 24 Hours</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">{{ featured_count }}</div>
+    <div class="stat-label">Featured</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">{{ total_logs }}</div>
+    <div class="stat-label">Collection Runs</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">{{ db_info.rows.Users }}</div>
+    <div class="stat-label">Users</div>
+  </div>
+</div>
+
+<div class="two-col">
+
+  <!-- Category breakdown -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Articles by Category</span>
+    </div>
+    <div class="cat-bars">
+      {% for cat, count in by_category %}
+      <div class="cat-row">
+        <span class="cat-row-name" title="{{ cat }}">{{ cat }}</span>
+        <div class="cat-row-track">
+          <div class="cat-row-fill" style="width: {{ ((count / max_cat) * 100)|int }}%"></div>
+        </div>
+        <span class="cat-row-count">{{ count }}</span>
+      </div>
+      {% else %}
+      <p style="color:var(--text-muted);font-size:13px;">No articles yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Severity + recent logs summary -->
+  <div>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">By Severity</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Severity</th><th>Count</th></tr>
+        </thead>
+        <tbody>
+          {% for sev in ['critical','high','medium','low'] %}
+          {% if by_severity.get(sev) %}
+          <tr>
+            <td><span class="badge badge-{{ sev }}">{{ sev }}</span></td>
+            <td>{{ by_severity[sev] }}</td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- Recent users -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-title">Recent Users</span>
+    <a href="/users" class="btn btn-ghost btn-sm">View all</a>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Name</th>
+          <th>Status</th>
+          <th>Auth</th>
+          <th>Newsletter</th>
+          <th>Created</th>
+          <th>Last login</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in recent_users %}
+        <tr>
+          <td class="col-title" title="{{ user.email }}">{{ user.email }}</td>
+          <td>{{ user.display_name or '—' }}</td>
+          <td>
+            {% if user.email_verified %}
+              <span class="badge badge-ok">Verified</span>
+            {% else %}
+              <span class="badge badge-error">Unverified</span>
+            {% endif %}
+          </td>
+          <td>
+            {% set providers = oauth_by_user.get(user.id, []) %}
+            {% if user.password_hash %}
+              <span class="badge badge-tag">password</span>
+            {% endif %}
+            {% for provider in providers %}
+              <span class="badge badge-tag">{{ provider }}</span>
+            {% endfor %}
+            {% if not user.password_hash and not providers %}
+              —
+            {% endif %}
+          </td>
+          <td>{{ user.newsletter_frequency or '—' }}</td>
+          <td style="white-space:nowrap;color:var(--text-muted);font-size:12px">{{ user.created_at.strftime('%Y-%m-%d') if user.created_at else '—' }}</td>
+          <td style="white-space:nowrap;color:var(--text-muted);font-size:12px">{{ user.last_login.strftime('%Y-%m-%d') if user.last_login else '—' }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7" style="color:var(--text-muted);text-align:center;padding:24px;">No users yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Database info -->
+<div class="card" style="margin-bottom:24px;">
+  <div class="card-header">
+    <span class="card-title">Database</span>
+    <span style="font-size:12px;color:var(--text-muted);font-family:monospace;">{{ db_info.path }}</span>
+  </div>
+  <div style="display:flex;gap:40px;flex-wrap:wrap;align-items:flex-start;">
+
+    <div>
+      <div class="db-section-label">Engine</div>
+      <table class="db-table">
+        <tr><td>SQLite version</td><td><strong>{{ db_info.sqlite_ver }}</strong></td></tr>
+        <tr><td>Encoding</td><td><strong>{{ db_info.encoding }}</strong></td></tr>
+        <tr><td>Journal mode</td><td><strong>{{ db_info.journal_mode }}</strong></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="db-section-label">Storage</div>
+      <table class="db-table">
+        <tr><td>File size</td><td><strong>{{ db_info.file_size }}</strong></td></tr>
+        <tr><td>Page size</td><td><strong>{{ db_info.page_size }}</strong></td></tr>
+        <tr><td>Total pages</td><td><strong>{{ db_info.page_count }}</strong></td></tr>
+        <tr><td>Used pages</td><td><strong>{{ db_info.used_pages }}</strong></td></tr>
+        <tr><td>Free pages</td><td><strong>{{ db_info.free_pages }}</strong></td></tr>
+        <tr><td>Utilization</td><td><strong>{{ db_info.utilization }}</strong></td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="db-section-label">Row counts</div>
+      <table class="db-table">
+        {% for table, count in db_info.rows.items() %}
+        <tr><td>{{ table }}</td><td><strong>{{ count }}</strong></td></tr>
+        {% endfor %}
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- Newsletter -->
+<div class="card" style="margin-bottom:24px;">
+  <div class="card-header">
+    <span class="card-title">Newsletter</span>
+    <span style="font-size:12px;color:var(--text-muted);">Sent daily at 07:00 UTC · weekly on Mondays</span>
+  </div>
+  <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">
+    Preview the newsletter as it will appear in subscribers' inboxes. Opens in the main app — no email is sent.
+  </p>
+  <div style="display:flex;gap:10px;">
+    <a href="/newsletter-preview?frequency=daily" target="_blank" class="btn btn-sm">
+      Preview daily digest
+    </a>
+    <a href="/newsletter-preview?frequency=weekly" target="_blank" class="btn btn-sm btn-ghost">
+      Preview weekly digest
+    </a>
+  </div>
+</div>
+
+<!-- Recent logs -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-title">Recent Collection Runs</span>
+    <a href="/logs" class="btn btn-ghost btn-sm">View all</a>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Source</th>
+          <th>Fetched</th>
+          <th>Accepted</th>
+          <th>Rejected</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for log in recent_logs %}
+        <tr>
+          <td style="white-space:nowrap">{{ log.ran_at.strftime('%Y-%m-%d %H:%M') if log.ran_at else '—' }}</td>
+          <td>{{ log.source or '—' }}</td>
+          <td>{{ log.articles_fetched }}</td>
+          <td>{{ log.articles_accepted }}</td>
+          <td>{{ log.articles_rejected }}</td>
+          <td>
+            {% if log.error %}
+              <span class="badge badge-error" title="{{ log.error }}">Error</span>
+            {% else %}
+              <span class="badge badge-ok">OK</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" style="color:var(--text-muted)">No runs yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

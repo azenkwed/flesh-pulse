@@ -1,0 +1,9 @@
+{% macro clipped_text(text, limit, url) -%}
+  {%- set clean = text or '' -%}
+  {%- if clean | length > limit -%}
+    {{ clean | truncate(limit, False, '…') }}
+    <a href="{{ url }}" target="_blank" rel="noopener noreferrer">[more]</a>
+  {%- else -%}
+    {{ clean }}
+  {%- endif -%}
+{%- endmacro %}

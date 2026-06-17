@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Saved articles — Flesh Pulse{% endblock %}
+
+{% block content %}
+{% if request.query_params.get('msg') == 'unsaved' %}
+<div class="save-toast" id="save-toast" role="status">Article removed from your reading list.</div>
+{% endif %}
+
+<div class="saved-page">
+  <div class="profile-header">
+    <h1 class="profile-title">Saved articles</h1>
+    <p class="profile-sub">Articles you saved for later.</p>
+  </div>
+
+  {% if saved_articles %}
+  <div class="saved-articles saved-articles-page">
+    {% for art in saved_articles %}
+    <div class="saved-article-row">
+      <a class="saved-article" href="/article/{{ art.id }}">
+        <div class="saved-article-title">{{ art.title }}</div>
+        <div class="saved-article-meta">
+          <span>{{ art.source_name }}</span>
+          {% if art.published_at %}
+          <span class="meta-sep">&middot;</span>
+          <span class="article-date" data-datetime="{{ art.published_at.strftime('%Y-%m-%dT%H:%M:%SZ') }}">{{ art.published_at.strftime('%Y-%m-%d %H:%M UTC') }}</span>
+          {% endif %}
+          {% if art.category %}
+          <span class="meta-sep">&middot;</span>
+          <span>{{ art.category }}</span>
+          {% endif %}
+        </div>
+      </a>
+      <form method="POST" action="/article/{{ art.id }}/save" class="unsave-form">
+        <input type="hidden" name="next" value="/saved">
+        <button type="submit" class="unsave-btn" title="Remove from saved" aria-label="Remove from saved">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"></polyline>
+            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+            <path d="M10 11v6"></path>
+            <path d="M14 11v6"></path>
+            <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+          </svg>
+        </button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+  {% if total_pages > 1 %}
+  <nav class="pagination" style="margin-top:32px;">
+    {% if page > 1 %}
+    <a href="/saved?page={{ page - 1 }}" class="pagination-btn">← Previous</a>
+    {% endif %}
+    <span class="pagination-info">Page {{ page }} of {{ total_pages }}</span>
+    {% if page < total_pages %}
+    <a href="/saved?page={{ page + 1 }}" class="pagination-btn">Next →</a>
+    {% endif %}
+  </nav>
+  {% endif %}
+  {% else %}
+  <div class="saved-empty">
+    <h2>No saved articles yet</h2>
+    <p>Use Save on an article to keep it here.</p>
+    <a class="auth-btn-outline" href="/">Browse articles</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

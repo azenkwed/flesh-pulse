@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %}Users — Flesh Pulse Admin{% endblock %}
+{% block page_title %}Users{% endblock %}
+
+{% block topbar_actions %}
+<span style="font-size:13px;color:var(--text-muted)">{{ total }} total</span>
+{% endblock %}
+
+{% block content %}
+
+<form method="GET" action="/users">
+  <div class="filter-bar">
+    <input type="text" name="q" placeholder="Search email or name..." value="{{ q }}">
+    <select name="verified">
+      <option value="" {{ 'selected' if verified == '' else '' }}>All statuses</option>
+      <option value="1" {{ 'selected' if verified == '1' else '' }}>Verified</option>
+      <option value="0" {{ 'selected' if verified == '0' else '' }}>Unverified</option>
+    </select>
+    <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+    <a href="/users" class="btn btn-ghost btn-sm">Reset</a>
+  </div>
+</form>
+
+<div class="card" style="padding:0;overflow:hidden;">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Email</th>
+          <th>Name</th>
+          <th>Status</th>
+          <th>Auth</th>
+          <th>Newsletter</th>
+          <th>Categories</th>
+          <th>Created</th>
+          <th>Last login</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td style="color:var(--text-muted)">{{ user.id }}</td>
+          <td class="col-title" title="{{ user.email }}">{{ user.email }}</td>
+          <td>{{ user.display_name or '—' }}</td>
+          <td>
+            {% if user.email_verified %}
+              <span class="badge badge-ok">Verified</span>
+            {% else %}
+              <span class="badge badge-error">Unverified</span>
+            {% endif %}
+          </td>
+          <td>
+            {% set providers = oauth_by_user.get(user.id, []) %}
+            {% if user.password_hash %}
+              <span class="badge badge-tag">password</span>
+            {% endif %}
+            {% for provider in providers %}
+              <span class="badge badge-tag">{{ provider }}</span>
+            {% endfor %}
+            {% if not user.password_hash and not providers %}
+              —
+            {% endif %}
+          </td>
+          <td>{{ user.newsletter_frequency or '—' }}</td>
+          <td class="col-title" title="{{ user.categories or '[]' }}">{{ user.categories or '[]' }}</td>
+          <td style="white-space:nowrap;color:var(--text-muted);font-size:12px">{{ user.created_at.strftime('%Y-%m-%d %H:%M') if user.created_at else '—' }}</td>
+          <td style="white-space:nowrap;color:var(--text-muted);font-size:12px">{{ user.last_login.strftime('%Y-%m-%d %H:%M') if user.last_login else '—' }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="9" style="color:var(--text-muted);text-align:center;padding:24px;">No users found.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="pagination">
+  {% if page > 1 %}
+    <a href="?q={{ q }}&verified={{ verified }}&page={{ page - 1 }}">&laquo; Prev</a>
+  {% else %}
+    <span class="disabled">&laquo; Prev</span>
+  {% endif %}
+
+  {% for p in range([1, page - 2]|max, [total_pages + 1, page + 3]|min) %}
+    {% if p == page %}
+      <span class="current">{{ p }}</span>
+    {% else %}
+      <a href="?q={{ q }}&verified={{ verified }}&page={{ p }}">{{ p }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page < total_pages %}
+    <a href="?q={{ q }}&verified={{ verified }}&page={{ page + 1 }}">Next &raquo;</a>
+  {% else %}
+    <span class="disabled">Next &raquo;</span>
+  {% endif %}
+</div>
+
+{% endblock %}

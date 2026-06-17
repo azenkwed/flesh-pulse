@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Flesh Pulse Admin{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/admin.css">
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <span class="sidebar-brand-name">Flesh Pulse</span>
+    <span class="sidebar-brand-sub">Admin Dashboard</span>
+  </div>
+  <nav>
+    <span class="nav-section">Navigation</span>
+    <a href="/" class="{{ 'active' if active == 'dashboard' else '' }}">Dashboard</a>
+    <a href="/articles" class="{{ 'active' if active == 'articles' else '' }}">Articles</a>
+    <a href="/users" class="{{ 'active' if active == 'users' else '' }}">Users</a>
+    <a href="/oauth-accounts" class="{{ 'active' if active == 'oauth' else '' }}">OAuth Accounts</a>
+    <a href="/curation-records" class="{{ 'active' if active == 'curation' else '' }}">Curation Records</a>
+    <a href="/logs" class="{{ 'active' if active == 'logs' else '' }}">Collection Logs</a>
+    <a href="/newsletter-logs" class="{{ 'active' if active == 'newsletter_logs' else '' }}">Newsletter Logs</a>
+    <a href="/tweet-logs" class="{{ 'active' if active == 'tweet_logs' else '' }}">Tweet Logs</a>
+    <a href="/settings" class="{{ 'active' if active == 'settings' else '' }}">Settings</a>
+  </nav>
+  <div class="sidebar-footer">Local only &middot; port 8001</div>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-title">{% block page_title %}{% endblock %}</span>
+    <div class="topbar-actions">{% block topbar_actions %}{% endblock %}</div>
+  </div>
+  <div class="content">
+    {% if msg %}
+      <div class="alert alert-{{ msg_type }}">{{ msg }}</div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </div>
+</main>
+
+</body>
+</html>

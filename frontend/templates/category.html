@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% import "macros.html" as ui %}
+{% block title %}{{ category }} — Flesh Pulse{% endblock %}
+{% block meta_description %}Browse {{ total }} articles on {{ category }}. Flesh Pulse tracks real-world surveillance, censorship, and authoritarian control.{% endblock %}
+{% block og_title %}{{ category }} — Flesh Pulse{% endblock %}
+{% block og_description %}Browse {{ total }} articles on {{ category }}. Flesh Pulse tracks real-world surveillance, censorship, and authoritarian control.{% endblock %}
+{% block twitter_title %}{{ category }} — Flesh Pulse{% endblock %}
+{% block twitter_description %}Browse {{ total }} articles on {{ category }}. Flesh Pulse tracks real-world surveillance, censorship, and authoritarian control.{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <h1 class="page-header-title">{{ category }}</h1>
+  <p class="page-header-sub">{{ total }} article{{ 's' if total != 1 else '' }}</p>
+</div>
+
+{% if articles %}
+<div class="card-grid">
+  {% for art in articles %}
+  <article class="article-card">
+    <div class="article-card-img{% if not art.display_image_url %} article-card-img--placeholder{% endif %}">
+      <a href="/article/{{ art.id }}">
+        {% if art.display_image_url %}<img src="{{ art.display_image_url }}" alt="{{ art.title }}" loading="lazy"
+             onerror="this.closest('.article-card-img').classList.add('article-card-img--placeholder');this.remove()">{% endif %}
+      </a>
+    </div>
+    <div class="article-card-cat">{{ art.category }}</div>
+    <h2 class="article-card-title"><a href="/article/{{ art.id }}">{{ art.title }}</a></h2>
+    {% set s = art.ai_summary or art.description or '' %}
+    {% if s %}<p class="article-card-summary">{{ ui.clipped_text(s, 140, '/article/' ~ art.id) }}</p>{% endif %}
+    <div class="article-card-meta">
+      <span class="sev-dot {{ art.severity or 'low' }}"></span>
+      <span>{{ art.source_name }}</span>
+      {% if art.display_date %}<span class="meta-sep">&middot;</span><span class="article-date" data-datetime="{{ art.display_datetime }}">{{ art.display_date }}</span>{% endif %}
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+  <p>No articles in this category yet.</p>
+</div>
+{% endif %}
+
+{% if total_pages > 1 %}
+<div class="pagination">
+  {% set slug = category | replace(' ', '-') | replace('&', 'and') | lower %}
+  {% if page > 1 %}
+    <a href="/category/{{ slug }}?page={{ page - 1 }}">&laquo; Previous</a>
+  {% else %}
+    <span class="disabled">&laquo; Previous</span>
+  {% endif %}
+
+  {% for p in range([1, page - 2]|max, [total_pages + 1, page + 3]|min) %}
+    {% if p == page %}
+      <span class="current">{{ p }}</span>
+    {% else %}
+      <a href="/category/{{ slug }}?page={{ p }}">{{ p }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page < total_pages %}
+    <a href="/category/{{ slug }}?page={{ page + 1 }}">Next &raquo;</a>
+  {% else %}
+    <span class="disabled">Next &raquo;</span>
+  {% endif %}
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% block title %}Article #{{ article.id }} — Flesh Pulse Admin{% endblock %}
+{% block page_title %}
+  <span style="color:var(--text-muted);font-weight:400"><a href="/articles" style="color:var(--text-muted);text-decoration:none">Articles</a> /</span>
+  #{{ article.id }}
+{% endblock %}
+
+{% block topbar_actions %}
+  <a href="{{ article.url }}" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Open original</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="three-col">
+
+  <!-- Left: article info -->
+  <div>
+
+    <!-- Title & status -->
+    <div class="card">
+      <div style="margin-bottom:12px;">
+        <div style="font-size:17px;font-weight:600;line-height:1.4;margin-bottom:8px;">
+          {{ article.title }}
+          {% if article.featured %}
+            <span class="badge badge-featured" style="margin-left:8px;">Featured</span>
+          {% endif %}
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-item">
+          <div class="meta-key">Source</div>
+          <div class="meta-val">{{ article.source_name or '—' }}{% if article.source_country %} ({{ article.source_country }}){% endif %}</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-key">Author</div>
+          <div class="meta-val">{{ article.author or '—' }}</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-key">Published</div>
+          <div class="meta-val">{{ article.published_at.strftime('%Y-%m-%d %H:%M') if article.published_at else '—' }}</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-key">Collected</div>
+          <div class="meta-val">{{ article.collected_at.strftime('%Y-%m-%d %H:%M') if article.collected_at else '—' }}</div>
+        </div>
+        <div class="meta-item" style="grid-column:1/-1">
+          <div class="meta-key">URL</div>
+          <div class="meta-val"><a href="{{ article.url }}" target="_blank" rel="noopener">{{ article.url }}</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI analysis -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">AI Analysis</span></div>
+      <div class="meta-grid" style="margin-bottom:14px;">
+        <div class="meta-item">
+          <div class="meta-key">Category</div>
+          <div class="meta-val">{{ article.category or '—' }}</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-key">Severity</div>
+          <div class="meta-val"><span class="badge badge-{{ article.severity or 'low' }}">{{ article.severity or '—' }}</span></div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-key">Relevance Score</div>
+          <div class="meta-val">
+            <div class="score-wrap">
+              <div class="score-track" style="width:80px;">
+                <div class="score-fill" style="width:{{ ((article.relevance_score or 0) * 100)|int }}%"></div>
+              </div>
+              <span class="score-num">{{ '%.3f'|format(article.relevance_score or 0) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% if article.ai_summary %}
+      <div style="margin-bottom:14px;">
+        <div class="meta-key" style="margin-bottom:4px;">Summary</div>
+        <div style="font-size:13px;line-height:1.6;color:var(--text)">{{ article.ai_summary }}</div>
+      </div>
+      {% endif %}
+      {% if tags %}
+      <div>
+        <div class="meta-key" style="margin-bottom:6px;">Tags</div>
+        <div class="tags-wrap">
+          {% for tag in tags %}
+            <span class="badge badge-tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Description/content preview -->
+    {% if article.description %}
+    <div class="card">
+      <div class="card-header"><span class="card-title">Description</span></div>
+      <div style="font-size:13px;line-height:1.6;color:var(--text-muted)">{{ article.description }}</div>
+    </div>
+    {% endif %}
+
+  </div>
+
+  <!-- Right: edit form + danger zone -->
+  <div>
+
+    <div class="card">
+      <div class="card-header"><span class="card-title">Edit</span></div>
+      <form method="POST" action="/articles/{{ article.id }}">
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select name="category" class="form-control">
+            {% for cat in categories_list %}
+            <option value="{{ cat }}" {{ 'selected' if article.category == cat else '' }}>{{ cat }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Severity</label>
+          <select name="severity" class="form-control">
+            {% for sev in severity_levels %}
+            <option value="{{ sev }}" {{ 'selected' if article.severity == sev else '' }}>{{ sev|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-check">
+            <input type="checkbox" name="featured" value="on" {{ 'checked' if article.featured else '' }}>
+            <span>Featured</span>
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="form-label">AI Summary</label>
+          <textarea name="ai_summary" class="form-control" rows="4">{{ article.ai_summary or '' }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%">Save Changes</button>
+      </form>
+    </div>
+
+    <div class="danger-zone">
+      <div class="card-title" style="margin-bottom:12px;">Danger Zone</div>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">
+        Permanently deletes this article from the database.
+      </p>
+      <form method="POST" action="/articles/{{ article.id }}/delete"
+            onsubmit="return confirm('Delete this article permanently?')">
+        <button type="submit" class="btn btn-danger" style="width:100%">Delete Article</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

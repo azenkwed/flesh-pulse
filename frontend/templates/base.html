@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Flesh Pulse{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Tracking real-world surveillance, censorship, authoritarian governance, and corporate control.{% endblock %}" />
+  <meta property="og:site_name" content="Flesh Pulse" />
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}" />
+  <meta property="og:title" content="{% block og_title %}Flesh Pulse{% endblock %}" />
+  <meta property="og:description" content="{% block og_description %}Tracking real-world surveillance, censorship, authoritarian governance, and corporate control.{% endblock %}" />
+  <meta property="og:image" content="{% block og_image %}/static/icons/social-800.png{% endblock %}" />
+  <meta property="og:url" content="{{ request.url }}" />
+  <link rel="canonical" href="{{ request.url }}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{% block twitter_title %}Flesh Pulse{% endblock %}" />
+  <meta name="twitter:description" content="{% block twitter_description %}Tracking real-world surveillance, censorship, authoritarian governance, and corporate control.{% endblock %}" />
+  <meta name="twitter:image" content="{% block twitter_image %}/static/icons/social-800.png{% endblock %}" />
+  <meta name="theme-color" content="#111827" />
+  <meta name="readable" content="false" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Flesh Pulse" />
+  <link rel="manifest" href="/static/manifest.json" />
+  <link rel="icon" href="/static/favicon.ico" sizes="any" />
+  <link rel="icon" href="/static/icons/favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="/static/icons/favicon-16.png" type="image/png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/main.css" />
+  {% block head %}{% endblock %}
+  <script>
+    (function(){
+      var t=localStorage.getItem('theme');
+      if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches))
+        document.documentElement.setAttribute('data-theme','dark');
+    })();
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-top">
+    <div>
+      <a href="/">
+        <span class="brand-name">Flesh Pulse</span>
+        <span class="brand-tagline">Independent reporting on surveillance, censorship, and authoritarian control</span>
+      </a>
+    </div>
+    <div class="header-right">
+      <form class="header-search" action="/search" method="get">
+        <input type="text" name="q" placeholder="Search articles..." class="search-input" />
+        <button type="submit" class="search-btn">Search</button>
+      </form>
+      <nav class="header-auth">
+        {% if stripe_enabled %}<a href="/donate" class="auth-nav-donate">Support</a>{% endif %}
+        {% if current_user %}
+          <div class="user-menu" id="user-menu">
+            <button class="user-menu-trigger" id="user-menu-trigger" aria-haspopup="true" aria-expanded="false">
+              {{ current_user.display_name or current_user.email }}
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" style="margin-left:4px;opacity:.6;"><path d="M1 3l4 4 4-4"/></svg>
+            </button>
+            <div class="user-menu-dropdown" id="user-menu-dropdown" role="menu">
+              <a href="/profile" class="user-menu-item" role="menuitem">Profile</a>
+              <a href="/saved" class="user-menu-item" role="menuitem">Saved articles</a>
+              <div class="user-menu-divider"></div>
+              <form method="POST" action="/logout">
+                <button type="submit" class="user-menu-item user-menu-signout" role="menuitem">Sign out</button>
+              </form>
+            </div>
+          </div>
+        {% else %}
+          <a href="/login" class="auth-nav-link">Sign in</a>
+          <a href="/register" class="auth-nav-register">Register</a>
+        {% endif %}
+      </nav>
+      <a href="https://x.com/flesh-pulse" target="_blank" rel="noopener noreferrer" class="header-x-link" aria-label="Follow Flesh Pulse on X">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="16" height="16" fill="currentColor"><path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66"/></svg>
+      </a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <nav class="category-nav" aria-label="Categories">
+    <div class="category-nav-inner">
+      <a href="/" class="cat-link {% if request.url.path == '/' %}active{% endif %}">All</a>
+      {% for cat in categories %}
+      <a href="/category/{{ cat | replace(' ', '-') | replace('&', 'and') | lower }}"
+         class="cat-link {% if cat | replace(' ', '-') | replace('&', 'and') | lower in request.url.path %}active{% endif %}">
+        {{ cat }}
+      </a>
+      {% endfor %}
+    </div>
+  </nav>
+
+  <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <nav>
+      <a href="/" class="mobile-nav-link {% if request.url.path == '/' %}active{% endif %}">All</a>
+      {% for cat in categories %}
+      <a href="/category/{{ cat | replace(' ', '-') | replace('&', 'and') | lower }}"
+         class="mobile-nav-link {% if cat | replace(' ', '-') | replace('&', 'and') | lower in request.url.path %}active{% endif %}">
+        {{ cat }}
+      </a>
+      {% endfor %}
+    </nav>
+    <div class="mobile-nav-auth">
+      {% if stripe_enabled %}<a href="/donate" class="mobile-nav-link" style="color:#b91c1c;font-weight:600;">Support Flesh Pulse</a>{% endif %}
+      {% if current_user %}
+        <a href="/saved" class="mobile-nav-link">Saved articles</a>
+        <a href="/profile" class="mobile-nav-link">{{ current_user.display_name or current_user.email }}</a>
+        <form method="POST" action="/logout">
+          <button type="submit" class="mobile-nav-link mobile-nav-signout">Sign out</button>
+        </form>
+      {% else %}
+        <a href="/login" class="mobile-nav-link">Sign in</a>
+        <a href="/register" class="mobile-nav-link mobile-nav-cta">Register</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+<main class="site-main">
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Flesh Pulse</div>
+      <p class="footer-desc">An independent archive documenting real-world events involving surveillance, censorship, authoritarian governance, and corporate control. All articles are sourced from public news outlets.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Categories</div>
+      <ul class="footer-links">
+        {% for cat in categories %}
+        <li><a href="/category/{{ cat | replace(' ', '-') | replace('&', 'and') | lower }}">{{ cat }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">About</div>
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/search">Search</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/donate">Support Flesh Pulse</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/terms">Terms of Service</a></li>
+      </ul>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;">
+        <a href="https://x.com/flesh-pulse" target="_blank" rel="noopener noreferrer" class="social-pill social-pill--x">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="14" height="14" fill="currentColor"><path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66"/></svg>
+          Follow us on X
+        </a>
+      </div>
+      <p style="margin-top:16px;font-size:12px;color:#6b7280;">Articles collected hourly.<br>Updated: {{ last_updated }}</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © {{ now().year }} Flesh Pulse — All information is a matter of public record.
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

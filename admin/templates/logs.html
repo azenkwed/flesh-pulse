@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Collection Logs — Flesh Pulse Admin{% endblock %}
+{% block page_title %}Collection Logs{% endblock %}
+
+{% block topbar_actions %}
+<form method="POST" action="/trigger">
+  <button type="submit" class="btn btn-primary btn-sm">Trigger Collection</button>
+</form>
+{% endblock %}
+
+{% block content %}
+
+<div class="stats-grid" style="grid-template-columns:repeat(3,1fr)">
+  <div class="stat-card">
+    <div class="stat-value">{{ total }}</div>
+    <div class="stat-label">Total Runs</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">{{ total_fetched }}</div>
+    <div class="stat-label">Total Fetched</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">{{ total_accepted }}</div>
+    <div class="stat-label">Total Accepted</div>
+  </div>
+</div>
+
+<div class="card" style="padding:0;overflow:hidden;">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Date / Time</th>
+          <th>Source</th>
+          <th>Fetched</th>
+          <th>Accepted</th>
+          <th>Rejected</th>
+          <th>Accept Rate</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for log in logs %}
+        <tr>
+          <td style="white-space:nowrap">{{ log.ran_at.strftime('%Y-%m-%d %H:%M:%S') if log.ran_at else '—' }}</td>
+          <td>{{ log.source or '—' }}</td>
+          <td>{{ log.articles_fetched }}</td>
+          <td>{{ log.articles_accepted }}</td>
+          <td>{{ log.articles_rejected }}</td>
+          <td>
+            {% if log.articles_fetched %}
+              {{ ((log.articles_accepted / log.articles_fetched) * 100)|int }}%
+            {% else %}
+              —
+            {% endif %}
+          </td>
+          <td>
+            {% if log.error %}
+              <span class="badge badge-error" title="{{ log.error }}">Error</span>
+            {% else %}
+              <span class="badge badge-ok">OK</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7" style="color:var(--text-muted);text-align:center;padding:24px;">No runs yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="pagination">
+  {% if page > 1 %}
+    <a href="?page={{ page - 1 }}">&laquo; Prev</a>
+  {% else %}
+    <span class="disabled">&laquo; Prev</span>
+  {% endif %}
+
+  {% for p in range([1, page - 2]|max, [total_pages + 1, page + 3]|min) %}
+    {% if p == page %}
+      <span class="current">{{ p }}</span>
+    {% else %}
+      <a href="?page={{ p }}">{{ p }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page < total_pages %}
+    <a href="?page={{ page + 1 }}">Next &raquo;</a>
+  {% else %}
+    <span class="disabled">Next &raquo;</span>
+  {% endif %}
+</div>
+
+{% endblock %}

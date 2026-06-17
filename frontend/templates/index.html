@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% import "macros.html" as ui %}
+{% block title %}Flesh Pulse — Surveillance, Censorship & Authoritarian Control News{% endblock %}
+{% block og_title %}Flesh Pulse — Surveillance, Censorship & Authoritarian Control News{% endblock %}
+{% block og_description %}An independent archive tracking surveillance, censorship, authoritarian governance, and corporate control. Updated hourly from global news sources.{% endblock %}
+{% block twitter_title %}Flesh Pulse — Surveillance, Censorship & Authoritarian Control News{% endblock %}
+{% block twitter_description %}An independent archive tracking surveillance, censorship, authoritarian governance, and corporate control. Updated hourly from global news sources.{% endblock %}
+{% block meta_description %}An independent archive tracking surveillance, censorship, authoritarian governance, and corporate control. Updated hourly from global news sources.{% endblock %}
+
+{% block content %}
+
+{% set hero = featured[0] if featured else (recent[0] if recent else None) %}
+
+{% if hero %}
+<section class="hero {{ 'no-image' if not hero.display_image_url else '' }}">
+  {% if hero.display_image_url %}
+  <div class="hero-image">
+    <a href="/article/{{ hero.id }}">
+      <img src="{{ hero.display_image_url }}" alt="{{ hero.title }}" loading="eager"
+           onerror="this.parentElement.parentElement.classList.add('no-image');this.parentElement.remove()">
+    </a>
+  </div>
+  {% endif %}
+  <div>
+    <div class="hero-cat">{{ hero.category }}</div>
+    <h1 class="hero-title"><a href="/article/{{ hero.id }}">{{ hero.title }}</a></h1>
+    {% set summary = hero.ai_summary or hero.description or '' %}
+    {% if summary %}
+    <p class="hero-summary">{{ ui.clipped_text(summary, 220, '/article/' ~ hero.id) }}</p>
+    {% endif %}
+    <div class="hero-meta">
+      <span class="sev-dot {{ hero.severity or 'low' }}"></span>
+      <span class="sev-badge {{ hero.severity or 'low' }}">{{ hero.severity or 'low' }}</span>
+      <span class="meta-sep">&middot;</span>
+      <span>{{ hero.source_name }}</span>
+      {% if hero.display_date %}
+      <span class="meta-sep">&middot;</span>
+      <span class="article-date" data-datetime="{{ hero.display_datetime }}">{{ hero.display_date }}</span>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if secondary %}
+<div class="card-grid" style="margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid var(--border);">
+  {% for art in secondary[:3] %}
+  <article class="article-card">
+    <div class="article-card-img{% if not art.display_image_url %} article-card-img--placeholder{% endif %}">
+      <a href="/article/{{ art.id }}">
+        {% if art.display_image_url %}<img src="{{ art.display_image_url }}" alt="{{ art.title }}" loading="lazy"
+             onerror="this.closest('.article-card-img').classList.add('article-card-img--placeholder');this.remove()">{% endif %}
+      </a>
+    </div>
+    <div class="article-card-cat">{{ art.category }}</div>
+    <h2 class="article-card-title"><a href="/article/{{ art.id }}">{{ art.title }}</a></h2>
+    {% set s = art.ai_summary or art.description or '' %}
+    {% if s %}<p class="article-card-summary">{{ ui.clipped_text(s, 140, '/article/' ~ art.id) }}</p>{% endif %}
+    <div class="article-card-meta">
+      <span class="sev-dot {{ art.severity or 'low' }}"></span>
+      <span>{{ art.source_name }}</span>
+      {% if art.display_date %}<span class="meta-sep">&middot;</span><span class="article-date" data-datetime="{{ art.display_datetime }}">{{ art.display_date }}</span>{% endif %}
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% endif %}
+
+<div class="section-head">
+  <span class="section-head-title">Latest</span>
+  <span class="section-head-meta">{{ total }} articles</span>
+</div>
+
+{% if recent %}
+<div class="card-grid">
+  {% for art in recent %}
+  <article class="article-card">
+    <div class="article-card-img{% if not art.display_image_url %} article-card-img--placeholder{% endif %}">
+      <a href="/article/{{ art.id }}">
+        {% if art.display_image_url %}<img src="{{ art.display_image_url }}" alt="{{ art.title }}" loading="lazy"
+             onerror="this.closest('.article-card-img').classList.add('article-card-img--placeholder');this.remove()">{% endif %}
+      </a>
+    </div>
+    <div class="article-card-cat">{{ art.category }}</div>
+    <h3 class="article-card-title"><a href="/article/{{ art.id }}">{{ art.title }}</a></h3>
+    {% set s = art.ai_summary or art.description or '' %}
+    {% if s %}<p class="article-card-summary">{{ ui.clipped_text(s, 140, '/article/' ~ art.id) }}</p>{% endif %}
+    <div class="article-card-meta">
+      <span class="sev-dot {{ art.severity or 'low' }}"></span>
+      <span>{{ art.source_name }}</span>
+      {% if art.display_date %}<span class="meta-sep">&middot;</span><span class="article-date" data-datetime="{{ art.display_datetime }}">{{ art.display_date }}</span>{% endif %}
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+  <p>No articles yet. The pipeline will run shortly after startup.</p>
+</div>
+{% endif %}
+
+{% if total_pages > 1 %}
+<div class="pagination">
+  {% if page > 1 %}
+    <a href="/?page={{ page - 1 }}">&laquo; Previous</a>
+  {% else %}
+    <span class="disabled">&laquo; Previous</span>
+  {% endif %}
+
+  {% for p in range([1, page - 2]|max, [total_pages + 1, page + 3]|min) %}
+    {% if p == page %}
+      <span class="current">{{ p }}</span>
+    {% else %}
+      <a href="/?page={{ p }}">{{ p }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page < total_pages %}
+    <a href="/?page={{ page + 1 }}">Next &raquo;</a>
+  {% else %}
+    <span class="disabled">Next &raquo;</span>
+  {% endif %}
+</div>
+{% endif %}
+
+{% endblock %}

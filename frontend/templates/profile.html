@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% block title %}Profile — Flesh Pulse{% endblock %}
+
+{% block content %}
+<div class="profile-page">
+
+  <div class="profile-header">
+    <h1 class="profile-title">{{ current_user.display_name or current_user.email }}</h1>
+    <p class="profile-sub">
+      Member since {{ current_user.created_at.strftime('%B %Y') }}
+      {% if current_user.last_login %}
+      &middot; Last sign-in {{ current_user.last_login.strftime('%d %b %Y') }}
+      {% endif %}
+      &middot;
+      {% if current_user.email_verified %}
+      <span style="color:#059669;">✓ Email verified</span>
+      {% else %}
+      <span style="color:#d97706;">Email not verified</span>
+      {% endif %}
+    </p>
+  </div>
+
+  {% if msg == 'saved' %}
+  <div class="auth-alert auth-alert-success profile-alert">Preferences saved.</div>
+  {% elif msg == 'password-changed' %}
+  <div class="auth-alert auth-alert-success profile-alert">Password updated.</div>
+  {% elif msg == 'welcome' %}
+  <div class="auth-alert auth-alert-info profile-alert">Welcome to Flesh Pulse. Set your newsletter preferences below to get started.</div>
+  {% endif %}
+
+  {% if pw_error %}
+  <div class="auth-alert auth-alert-error profile-alert">{{ pw_error }}</div>
+  {% endif %}
+
+  <a href="/saved" class="saved-articles-card">
+    <div class="saved-articles-card-label">Saved articles</div>
+    <div class="saved-articles-card-count">{{ saved_count }}</div>
+  </a>
+
+  <div class="profile-grid">
+
+    <!-- Preferences column -->
+    <section class="profile-section">
+      <h2 class="profile-section-title">Preferences</h2>
+
+      <form method="POST" action="/profile" class="auth-form profile-form">
+        <div class="form-group">
+          <label class="form-label">Display name</label>
+          <input type="text" name="display_name"
+                 value="{{ current_user.display_name or '' }}"
+                 class="form-input" placeholder="How you'll appear on the site" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Newsletter</label>
+          <div class="radio-group">
+            {% for val, label in [('daily','Daily digest'),('weekly','Weekly digest'),('never','Never')] %}
+            <label class="radio-option">
+              <input type="radio" name="newsletter_frequency" value="{{ val }}"
+                     {% if current_user.newsletter_frequency == val %}checked{% endif %} />
+              {{ label }}
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            Category interests
+            <span class="form-optional">— shapes your newsletter</span>
+          </label>
+          <div class="checkbox-grid">
+            {% for cat in categories %}
+            <label class="checkbox-option">
+              <input type="checkbox" name="categories" value="{{ cat }}"
+                     {% if cat in user_categories %}checked{% endif %} />
+              {{ cat }}
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+
+        <button type="submit" class="auth-btn">Save preferences</button>
+      </form>
+    </section>
+
+    <!-- Account column -->
+    <section class="profile-section">
+      <h2 class="profile-section-title">Account</h2>
+
+      {% if current_user.email.endswith('@flesh-pulse.local') %}
+      <div class="auth-alert auth-alert-info" style="margin-bottom:16px;font-size:13px;">
+        You signed in with X (Twitter), which doesn't share your email address.
+        Add an email below to receive newsletters and password reset links.
+      </div>
+      {% endif %}
+
+      <dl class="account-info">
+        <div class="account-info-row">
+          <dt class="account-info-label">Email</dt>
+          <dd class="account-info-value">
+            {% if current_user.email.endswith('@flesh-pulse.local') %}
+              <span style="color:var(--text-muted);font-style:italic;">Not set</span>
+            {% else %}
+              {{ current_user.email }}
+            {% endif %}
+          </dd>
+        </div>
+        <div class="account-info-row">
+          <dt class="account-info-label">Verified</dt>
+          <dd class="account-info-value">{{ 'Yes' if current_user.email_verified else 'Pending' }}</dd>
+        </div>
+        <div class="account-info-row">
+          <dt class="account-info-label">Last sign-in</dt>
+          <dd class="account-info-value">
+            {{ current_user.last_login.strftime('%Y-%m-%d %H:%M') if current_user.last_login else '—' }}
+          </dd>
+        </div>
+      </dl>
+
+      <h3 class="profile-subsection-title">Change password</h3>
+      <form method="POST" action="/profile/change-password" class="auth-form profile-form">
+        <div class="form-group">
+          <label class="form-label">Current password</label>
+          <input type="password" name="current_password" class="form-input" required
+                 autocomplete="current-password" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">New password</label>
+          <input type="password" name="new_password" class="form-input" required
+                 placeholder="At least 8 characters" autocomplete="new-password" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Confirm new password</label>
+          <input type="password" name="confirm_new_password" class="form-input" required
+                 autocomplete="new-password" />
+        </div>
+        <button type="submit" class="auth-btn auth-btn-secondary">Change password</button>
+      </form>
+
+      <div class="profile-signout">
+        <form method="POST" action="/logout">
+          <button type="submit" class="auth-btn-outline">Sign out</button>
+        </form>
+      </div>
+    </section>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Curation Records — Flesh Pulse Admin{% endblock %}
+{% block page_title %}Curation Records{% endblock %}
+
+{% block topbar_actions %}
+<span style="font-size:13px;color:var(--text-muted)">{{ total }} total</span>
+{% endblock %}
+
+{% block content %}
+
+<form method="GET" action="/curation-records">
+  <div class="filter-bar">
+    <input type="text" name="q" placeholder="Search title, source, category, URL..." value="{{ q }}">
+    <select name="status">
+      <option value="" {{ 'selected' if status == '' else '' }}>All statuses</option>
+      <option value="accepted" {{ 'selected' if status == 'accepted' else '' }}>Accepted</option>
+      <option value="rejected" {{ 'selected' if status == 'rejected' else '' }}>Rejected</option>
+    </select>
+    <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+    <a href="/curation-records" class="btn btn-ghost btn-sm">Reset</a>
+  </div>
+</form>
+
+<div class="card" style="padding:0;overflow:hidden;">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Status</th>
+          <th>Title</th>
+          <th>Source</th>
+          <th>Category</th>
+          <th>Score</th>
+          <th>Evaluated</th>
+          <th>URL</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for record in records %}
+        <tr>
+          <td style="color:var(--text-muted)">{{ record.id }}</td>
+          <td>
+            {% if record.status == 'accepted' %}
+              <span class="badge badge-ok">Accepted</span>
+            {% else %}
+              <span class="badge badge-error">Rejected</span>
+            {% endif %}
+          </td>
+          <td class="col-title" title="{{ record.title or '' }}">{{ record.title or '—' }}</td>
+          <td style="white-space:nowrap;color:var(--text-muted)">{{ record.source_name or '—' }}</td>
+          <td style="white-space:nowrap;font-size:12px">{{ record.category or '—' }}</td>
+          <td>{{ '%.2f'|format(record.relevance_score) if record.relevance_score is not none else '—' }}</td>
+          <td style="white-space:nowrap;color:var(--text-muted);font-size:12px">{{ record.evaluated_at.strftime('%Y-%m-%d %H:%M') if record.evaluated_at else '—' }}</td>
+          <td class="col-title"><a href="{{ record.url }}" target="_blank" rel="noopener">{{ record.url }}</a></td>
+        </tr>
+        {% else %}
+        <tr><td colspan="8" style="color:var(--text-muted);text-align:center;padding:24px;">No curation records found.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="pagination">
+  {% if page > 1 %}
+    <a href="?q={{ q }}&status={{ status }}&page={{ page - 1 }}">&laquo; Prev</a>
+  {% else %}
+    <span class="disabled">&laquo; Prev</span>
+  {% endif %}
+
+  {% for p in range([1, page - 2]|max, [total_pages + 1, page + 3]|min) %}
+    {% if p == page %}
+      <span class="current">{{ p }}</span>
+    {% else %}
+      <a href="?q={{ q }}&status={{ status }}&page={{ p }}">{{ p }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page < total_pages %}
+    <a href="?q={{ q }}&status={{ status }}&page={{ page + 1 }}">Next &raquo;</a>
+  {% else %}
+    <span class="disabled">Next &raquo;</span>
+  {% endif %}
+</div>
+
+{% endblock %}

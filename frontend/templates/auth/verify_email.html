@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Email verification — Flesh Pulse{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+  <div class="auth-card" style="text-align:center;">
+    {% if success %}
+    <div class="verify-icon verify-icon-ok">✓</div>
+    <h1 class="auth-title">Email verified</h1>
+    <p style="color:var(--text-2);margin-bottom:28px;">Your account is active. You can now sign in.</p>
+    <a href="/login" class="auth-btn" style="display:inline-block;text-decoration:none;">Sign in</a>
+    {% else %}
+    <div class="verify-icon verify-icon-err">✗</div>
+    <h1 class="auth-title">Verification failed</h1>
+    <p style="color:var(--text-2);margin-bottom:8px;">{{ msg }}</p>
+    <p style="color:var(--text-muted);font-size:14px;margin-bottom:28px;">
+      If your link has expired, register again to receive a new verification email.
+    </p>
+    <a href="/register" class="auth-btn" style="display:inline-block;text-decoration:none;">Register</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

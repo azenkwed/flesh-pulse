@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Contact — Flesh Pulse{% endblock %}
+{% block meta_description %}Contact Flesh Pulse for general questions, support, legal requests, and news tips.{% endblock %}
+
+{% block content %}
+<div style="max-width:900px;margin:48px auto;padding:0 24px 80px;">
+  <h1 style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;margin-bottom:8px;">Contact</h1>
+  <p style="color:var(--text-muted);font-size:15px;line-height:1.6;margin-bottom:32px;">
+    Reach Flesh Pulse for general questions, account support, legal requests, or news tips.
+  </p>
+
+  <div class="contact-grid">
+    <section style="border:1px solid var(--border);padding:24px;background:var(--bg-card);">
+      <h2 style="font-size:18px;font-weight:700;margin-bottom:16px;">Email</h2>
+      <p style="margin-bottom:10px;"><strong>General:</strong><br><a href="mailto:contact@fleshpulse.com">contact@fleshpulse.com</a></p>
+      <p style="margin-bottom:10px;"><strong>Support:</strong><br><a href="mailto:support@fleshpulse.com">support@fleshpulse.com</a></p>
+      <p style="margin-bottom:0;"><strong>Legal and privacy:</strong><br><a href="mailto:legal@fleshpulse.com">legal@fleshpulse.com</a></p>
+    </section>
+
+    <section class="auth-card" style="max-width:none;margin:0;">
+      <h2 class="auth-title" style="font-size:24px;margin-bottom:20px;">Send a message</h2>
+
+      {% if msg == 'sent' %}
+      <div class="auth-alert auth-alert-success">Your message has been sent.</div>
+      {% endif %}
+
+      {% if error %}
+      <div class="auth-alert auth-alert-error">{{ error }}</div>
+      {% endif %}
+
+      <form method="POST" action="/contact" class="auth-form">
+        <div class="form-group">
+          <label class="form-label">Name</label>
+          <input type="text" name="name" class="form-input" required value="{{ name or '' }}" autocomplete="name" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email address</label>
+          <input type="email" name="email" class="form-input" required value="{{ email or '' }}" autocomplete="email" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Topic</label>
+          <select name="topic" class="form-input">
+            {% set selected_topic = topic or 'General' %}
+            {% for option in ['General', 'Support', 'Legal/privacy', 'Other'] %}
+            <option value="{{ option }}" {% if selected_topic == option %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea name="message" class="form-input" rows="7" required maxlength="4000" style="resize:vertical;">{{ message or '' }}</textarea>
+        </div>
+
+        <div style="display:none;" aria-hidden="true">
+          <label>Website</label>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <button type="submit" class="auth-btn">Send message</button>
+      </form>
+    </section>
+  </div>
+</div>
+{% endblock %}

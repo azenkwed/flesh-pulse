@@ -4,7 +4,7 @@
 
 Flesh Pulse is an AI-powered news aggregator for sexuality, sexual health, and the adult industry. It collects articles from curated RSS feeds and keyword sources, sends each one to Claude for relevance scoring and categorization, and presents the filtered result as a clean, browsable feed.
 
-It is a direct fork of the [Panoptiqa](https://panoptiqa.com) architecture — same pipeline, same tech stack, different editorial lens.
+It shares its pipeline architecture with another aggregator project — same tech stack, different editorial lens.
 
 ## What it covers
 
@@ -74,7 +74,7 @@ flesh-pulse/
 └── Makefile
 ```
 
-## Key design decisions inherited from Panoptiqa
+## Key design decisions
 
 - **Two FastAPI processes**: main app on port 8000 (public), admin on port 8001 (localhost only)
 - **SQLite**: no external DB dependency, works on Fly.io with a persistent volume

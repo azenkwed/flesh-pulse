@@ -7,9 +7,9 @@ PostgreSQL via SQLAlchemy async ORM (`backend/database/models.py`). Seven tables
 
 ---
 
-## Key differences from Panoptiqa (SQLite)
+## SQLite vs PostgreSQL — why PostgreSQL
 
-| Aspect | Panoptiqa (SQLite) | Flesh Pulse (Postgres) |
+| Aspect | SQLite | Flesh Pulse (Postgres) |
 |---|---|---|
 | Full-text search | FTS5 virtual table | `tsvector` column + GIN index + trigger |
 | JSON fields | `Text` + `json.loads()` | `JSONB` — native indexable JSON |
@@ -194,7 +194,7 @@ alembic revision --autogenerate -m "describe change"
 alembic upgrade head
 ```
 
-Supabase also has a built-in SQL editor and migration history — either approach works. Do not use raw `ALTER TABLE` in `init_db()` as Panoptiqa did; use Alembic instead.
+Supabase also has a built-in SQL editor and migration history — either approach works. Do not use raw `ALTER TABLE` in `init_db()`; use Alembic instead.
 
 ---
 

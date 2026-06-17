@@ -2,7 +2,7 @@
 chcp 65001 >nul
 echo.
 echo  ========================
-echo  PANOPTIQA ADMIN (Fly.io)
+echo  FLESH PULSE ADMIN (Fly.io)
 echo  ========================
 echo.
 echo [*] Opening tunnel to flesh-pulse on Fly.io...

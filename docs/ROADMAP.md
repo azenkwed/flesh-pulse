@@ -4,14 +4,14 @@
 
 ## Phase 1 — Fork & adapt (week 1)
 
-- [ ] Fork Panoptiqa codebase into this repo
-- [ ] Replace `CATEGORIES` in `curator.py` and `routes.py` with Flesh Pulse categories (see `CATEGORIES.md`)
-- [ ] Rewrite curator system prompt for sexuality/health editorial lens
-- [ ] Replace `RSS_FEEDS` list with sources from `SOURCES.md`
-- [ ] Add Google News RSS keyword feeds
-- [ ] Update all brand strings: "Panoptiqa" → "Flesh Pulse", colors, fonts
+- [x] Fork codebase and adapt for Flesh Pulse
+- [x] Replace `CATEGORIES` in `curator.py` and `routes.py` with Flesh Pulse categories (see `CATEGORIES.md`)
+- [x] Rewrite curator system prompt for sexuality/health editorial lens
+- [x] Replace `RSS_FEEDS` list with sources from `SOURCES.md`
+- [x] Add Google News RSS keyword feeds
+- [x] Update all brand strings to "Flesh Pulse"
+- [x] Switch database layer to PostgreSQL + asyncpg (Supabase)
 - [ ] Replace category default images
-- [ ] Update `.env.example` with Flesh Pulse defaults
 - [ ] Update privacy policy and terms of service templates
 
 ---
@@ -40,7 +40,7 @@
 
 ## Phase 4 — Growth features
 
-- [ ] **Newsletter** — daily/weekly digest, personalized by category preference (already built in Panoptiqa — just carry over)
+- [ ] **Newsletter** — daily/weekly digest, personalized by category preference (already built — just needs configuration)
 - [ ] **Search** — FTS5 full-text search (already built — carry over)
 - [ ] **Saved articles** — bookmarks (already built — carry over)
 - [ ] **Dark mode** (already built — carry over)

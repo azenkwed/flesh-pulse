@@ -57,7 +57,7 @@ If any EU users register:
 - Cookie consent — JWT cookies are functional (no consent required), but analytics cookies require opt-in
 - Data processing agreement with Resend (email provider)
 
-The existing Panoptiqa privacy policy template covers most of this. Update it for Flesh Pulse.
+The existing privacy policy template covers most of this — update the branding and contact details before publishing.
 
 ---
 
@@ -79,7 +79,7 @@ Check that your host allows adult-adjacent content:
 Stripe, PayPal, and most payment processors have restrictions on "adult content" businesses. However, the restriction is on businesses that **sell pornographic content**, not on news aggregators.
 
 - Register as a media/publishing business, not as an adult content business
-- Stripe works fine for media subscriptions — Panoptiqa already uses it
+- Stripe works fine for media subscriptions (already integrated in the codebase)
 - Avoid "high-risk" merchant category codes (MCCs) — use standard publishing MCC
 
 ---

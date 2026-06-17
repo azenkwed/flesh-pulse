@@ -3,7 +3,7 @@ set -euo pipefail
 
 echo ""
 echo " ========================"
-echo " PANOPTIQA"
+echo " FLESH PULSE"
 echo " ========================"
 echo ""
 

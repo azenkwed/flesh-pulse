@@ -2,7 +2,7 @@
 chcp 65001 >nul
 echo.
 echo  ========================
-echo  PANOPTIQA ADMIN
+echo  FLESH PULSE ADMIN
 echo  ========================
 echo.
 

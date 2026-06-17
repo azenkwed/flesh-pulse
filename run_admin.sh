@@ -3,7 +3,7 @@ set -euo pipefail
 
 echo ""
 echo " ========================"
-echo " PANOPTIQA ADMIN"
+echo " FLESH PULSE ADMIN"
 echo " ========================"
 echo ""
 

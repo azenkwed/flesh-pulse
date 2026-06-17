@@ -22,7 +22,7 @@ These are the editorial categories used by both the AI curator and the web UI. T
 
 ## Severity levels
 
-Shared with the Panoptiqa model — repurposed for this editorial context:
+Repurposed for this editorial context:
 
 | Level | Meaning |
 |---|---|

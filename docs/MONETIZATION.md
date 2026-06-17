@@ -69,7 +69,7 @@ Strategy: Wait until 3–6 months of published content and a demonstrated audien
 
 ### 5. Industry advertising (considered, rejected)
 
-Adult industry companies (platforms, toy manufacturers, health brands) might pay for advertising. This is **rejected** for the same reason Panoptiqa rejects display ads — it creates editorial conflict. If XBIZ is an advertiser, we cannot critically cover XBIZ. The signal quality is the product.
+Adult industry companies (platforms, toy manufacturers, health brands) might pay for advertising. This is **rejected** — it creates editorial conflict. If XBIZ is an advertiser, we cannot critically cover XBIZ. The signal quality is the product.
 
 **Exception**: Sponsorship of specific content verticals (e.g., "Sexual Health section sponsored by [health brand]") could work if clearly labeled and the editorial team retains full independence. Only consider after establishing the brand.
 
@@ -78,7 +78,7 @@ Adult industry companies (platforms, toy manufacturers, health brands) might pay
 ## Build order
 
 1. **Stripe donations** — 1 day, immediately deployable, no gating required
-2. **Newsletter system** — already built in Panoptiqa, carry over
+2. **Newsletter system** — already built, just needs Resend credentials configured
 3. **Membership tiers** — Stripe subscriptions + feature gating
 4. **Keyword alerts** — member perk, builds stickiness
 5. **API key management** — rate limiting + billing

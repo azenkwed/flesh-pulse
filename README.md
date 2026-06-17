@@ -12,7 +12,7 @@ An automated news archive that continuously collects articles from global source
 
 - **Collects** news from 16+ RSS feeds and NewsAPI every hour
 - **Curates** each article using Claude AI — scoring relevance, assigning a category, severity level, and a one-line summary
-- **Stores** qualifying articles in a SQLite database
+- **Stores** qualifying articles in a PostgreSQL database
 - **Publishes** them on a live web interface with categories, search, pagination, related articles, and dark mode
 - **Authenticates** users via email/password or OAuth (Google, LinkedIn, X)
 
@@ -93,7 +93,7 @@ sexhealthnews/
 │   │   └── curator.py               # Claude Haiku scoring + categorization
 │   ├── database/
 │   │   ├── models.py                # SQLAlchemy models (Article, CollectionLog, User)
-│   │   └── db.py                    # Async SQLite engine
+│   │   └── db.py                    # Async PostgreSQL engine
 │   ├── auth/                        # JWT + OAuth (Google, LinkedIn, X)
 │   ├── scheduler.py                 # Hourly pipeline (collect → curate → store → prune)
 │   └── routes.py                    # FastAPI routes + REST API
@@ -103,7 +103,7 @@ sexhealthnews/
 │       ├── css/main.css             # Stylesheet
 │       └── js/main.js               # Minimal frontend JS
 └── data/
-    └── sexhealthnews.db               # SQLite database (auto-created, git-ignored)
+    └── (PostgreSQL database)
 ```
 
 ## REST API

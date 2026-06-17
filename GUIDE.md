@@ -96,7 +96,7 @@ The pipeline runs on an interval (default: every 60 minutes). Each run does the 
 
 Articles scoring below `MIN_RELEVANCE_SCORE` (default `0.65`) are rejected. Articles scoring `0.90+` are marked featured and shown at the top of the homepage.
 
-**Step 4 — Store.** Accepted articles are written to SQLite. A `CollectionLog` entry is created with counts.
+**Step 4 — Store.** Accepted articles are written to PostgreSQL. A `CollectionLog` entry is created with counts.
 
 ### Manually trigger a run
 
@@ -218,30 +218,41 @@ Small (14px) / Medium (16px, default) / Large (18px) — applied to the `html` e
 
 ## 6. Managing the database
 
-The database is stored at `data/sexhealthnews.db` (SQLite). It is created automatically on first run and is excluded from git.
+PostgreSQL is managed via Docker. The database is created automatically when you run `docker-compose up -d`.
 
-### Inspect with SQLite CLI
+### Inspect with PostgreSQL CLI
 
 ```bash
-sqlite3 data/sexhealthnews.db
+# Connect to the database
+psql -h localhost -U postgres -d sexhealthnews
 
-.tables
+# List tables
+\dt
+
+# Query articles
 SELECT count(*) FROM articles;
 SELECT category, count(*) FROM articles GROUP BY category;
 SELECT title, relevance_score, severity FROM articles ORDER BY collected_at DESC LIMIT 10;
 ```
 
+### Access pgAdmin UI
+
+Open http://localhost:5050 and login with:
+- Email: `admin@sexhealthnews.local`
+- Password: `admin`
+
+Browse, query, and manage your database graphically.
+
 ### Reset the database
 
-Stop the server, then:
+Stop the app and PostgreSQL, then:
 
 ```bash
-make reset        # cross-platform
-del data\sexhealthnews.db   # Windows manual
-rm data/sexhealthnews.db    # Linux / macOS manual
+docker-compose down -v    # Remove containers and volumes
+docker-compose up -d      # Recreate with fresh database
 ```
 
-The next startup recreates it from scratch. The next pipeline run repopulates it.
+The tables are created automatically on the next app startup.
 
 ### Export articles to JSON
 

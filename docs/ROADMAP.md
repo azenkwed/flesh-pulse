@@ -29,7 +29,7 @@
 
 ## Phase 3 — Launch (week 2–3)
 
-- [ ] Deploy to Fly.io (`fly launch` + persistent volume for SQLite)
+- [ ] Deploy to Fly.io (connect to Supabase PostgreSQL or self-hosted PostgreSQL)
 - [ ] Configure custom domain (sexhealthnew.com or aphrodiqa.com)
 - [ ] Set up Resend with verified domain for transactional email
 - [ ] First pipeline run — review accepted articles manually

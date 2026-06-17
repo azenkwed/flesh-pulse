@@ -7,19 +7,6 @@ PostgreSQL via SQLAlchemy async ORM (`backend/database/models.py`). Seven tables
 
 ---
 
-## SQLite vs PostgreSQL — why PostgreSQL
-
-| Aspect | SQLite | Sex Health News (Postgres) |
-|---|---|---|
-| Full-text search | FTS5 virtual table | `tsvector` column + GIN index + trigger |
-| JSON fields | `Text` + `json.loads()` | `JSONB` — native indexable JSON |
-| Auto-increment | `AUTOINCREMENT` | `SERIAL` / `BIGSERIAL` (SQLAlchemy handles) |
-| WAL mode | `PRAGMA journal_mode=WAL` | Built into Postgres — not needed |
-| Connection | File path | `DATABASE_URL` env var |
-| Migrations | Manual `ALTER TABLE` in `init_db()` | Alembic (recommended) |
-
----
-
 ## Article
 
 | Column | Type | Notes |
@@ -75,7 +62,7 @@ CREATE OR REPLACE TRIGGER articles_search_vector_update
   FOR EACH ROW EXECUTE FUNCTION update_articles_search_vector();
 ```
 
-Search query (replaces SQLite FTS5 `MATCH`):
+Search query (PostgreSQL full-text search):
 
 ```python
 # In routes.py search handler:

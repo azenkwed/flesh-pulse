@@ -1,6 +1,6 @@
 # Sex Health News — Architecture
 
-Two FastAPI processes, one SQLite database, one AI pipeline.
+Two FastAPI processes, one PostgreSQL database, one AI pipeline.
 
 ---
 

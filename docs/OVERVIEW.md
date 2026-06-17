@@ -27,7 +27,7 @@ It shares its pipeline architecture with another aggregator project — same tec
 | Layer | Technology |
 |---|---|
 | Backend | Python 3.11+, FastAPI, SQLAlchemy (async) |
-| Database | SQLite (file-based, zero-config) |
+| Database | PostgreSQL (Docker or Supabase) |
 | AI curation | Anthropic Claude Haiku |
 | Scheduler | APScheduler (async) |
 | Templates | Jinja2 |
@@ -77,7 +77,7 @@ sexhealthnews/
 ## Key design decisions
 
 - **Two FastAPI processes**: main app on port 8000 (public), admin on port 8001 (localhost only)
-- **SQLite**: no external DB dependency, works on Fly.io with a persistent volume
+- **PostgreSQL**: production-ready database, run locally via Docker or use Supabase
 - **Synchronous Anthropic SDK** called via `run_in_executor` — avoids async compatibility issues
 - **CurationRecord** table: rejected articles are never re-evaluated; deduplication is permanent
 - **`verify=False` on Windows**: all outbound `httpx` calls skip SSL verification on Windows only

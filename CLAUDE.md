@@ -16,8 +16,6 @@ Requires a `.env` file (copy from `.env.example`). `ANTHROPIC_API_KEY` and `JWT_
 
 ```bash
 make trigger   # manually fire the collection pipeline
-make reset     # delete the database (stop server first)
-sqlite3 data/sexhealthnews.db "SELECT category, count(*) FROM articles GROUP BY category;"
 ```
 
 Set `DISABLE_NEWSAPI=true` in `.env` (or via `fly secrets set`) to skip the NewsAPI collector during testing — RSS feeds still run normally. Unset or set to `false` to re-enable.
@@ -44,7 +42,7 @@ The app is two FastAPI processes:
 
 ### Pipeline (automated, runs on startup then hourly)
 
-`backend/scheduler.py` drives the full loop: `rss_collector` + `newsapi_collector` fetch raw articles in parallel → deduplicate against the DB by URL and `CurationRecord` (so rejected articles are not re-evaluated) → `curator.curate_batch` sends each new article to Claude Haiku → accepted articles are written to SQLite. Both `Article` rows and `CurationRecord` rows (accepted + rejected) are written after each run. `CollectionLog` records each run's counts.
+`backend/scheduler.py` drives the full loop: `rss_collector` + `newsapi_collector` fetch raw articles in parallel → deduplicate against the DB by URL and `CurationRecord` (so rejected articles are not re-evaluated) → `curator.curate_batch` sends each new article to Claude Haiku → accepted articles are written to PostgreSQL. Both `Article` rows and `CurationRecord` rows (accepted + rejected) are written after each run. `CollectionLog` records each run's counts.
 
 The scheduler also fires newsletter jobs: daily digest at 07:00 UTC, weekly digest at 07:00 UTC on Mondays.
 

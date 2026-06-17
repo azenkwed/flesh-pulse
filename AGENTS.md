@@ -30,4 +30,4 @@ Recent history uses short imperative Conventional Commit prefixes, for example `
 
 ## Security & Configuration Tips
 
-Never commit `.env`, API keys, OAuth secrets, or generated SQLite data. Windows SSL behavior is intentionally handled with `verify=False` in collectors and curation; do not remove it without testing RSS feeds and a live curation call on Windows.
+Never commit `.env`, API keys, or OAuth secrets. Windows SSL behavior is intentionally handled with `verify=False` in collectors and curation; do not remove it without testing RSS feeds and a live curation call on Windows.

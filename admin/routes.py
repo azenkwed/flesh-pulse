@@ -100,32 +100,19 @@ async def dashboard(
         select(User).order_by(desc(User.created_at)).limit(8)
     )).scalars().all()
     oauth_by_user = await _oauth_providers_for_users(db, [user.id for user in recent_users])
-    page_count  = (await db.execute(text("PRAGMA page_count"))).scalar() or 0
-    page_size   = (await db.execute(text("PRAGMA page_size"))).scalar() or 4096
-    wal_mode    = (await db.execute(text("PRAGMA journal_mode"))).scalar() or "—"
-    encoding    = (await db.execute(text("PRAGMA encoding"))).scalar() or "—"
-    sqlite_ver  = (await db.execute(text("SELECT sqlite_version()"))).scalar() or "—"
-    freelist    = (await db.execute(text("PRAGMA freelist_count"))).scalar() or 0
-    db_size_bytes = DB_PATH.stat().st_size if DB_PATH.exists() else 0
-    db_path_str   = str(DB_PATH.resolve())
+
+    # PostgreSQL version and info
+    pg_version  = (await db.execute(text("SELECT version()"))).scalar() or "—"
+    db_size_bytes = (await db.execute(text("SELECT pg_database_size(current_database())"))).scalar() or 0
 
     def _fmt_size(b: int) -> str:
         if b < 1024: return f"{b} B"
         if b < 1024 ** 2: return f"{b / 1024:.1f} KB"
         return f"{b / 1024 ** 2:.2f} MB"
 
-    used_pages = page_count - freelist
     db_info = {
-        "file_size":   _fmt_size(db_size_bytes),
-        "path":        db_path_str,
-        "sqlite_ver":  sqlite_ver,
-        "encoding":    encoding,
-        "journal_mode": wal_mode.upper(),
-        "page_size":   f"{page_size // 1024} KB" if page_size >= 1024 else f"{page_size} B",
-        "page_count":  page_count,
-        "used_pages":  used_pages,
-        "free_pages":  freelist,
-        "utilization": f"{(used_pages / page_count * 100):.1f}%" if page_count else "—",
+        "size":        _fmt_size(db_size_bytes),
+        "pg_version":  pg_version,
         "rows": {
             "Articles": total,
             "Users": user_count,

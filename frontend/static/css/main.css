@@ -113,8 +113,8 @@ img { max-width: 100%; height: auto; display: block; }
   transition: color 0.15s, border-color 0.15s;
 }
 
-.cat-link:hover { color: var(--text); }
-.cat-link.active { color: var(--text); border-bottom-color: var(--text); font-weight: 600; }
+.cat-link:hover { color: var(--accent); }
+.cat-link.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
 
 /* ── Main layout ── */
 .site-main {
@@ -189,7 +189,7 @@ img { max-width: 100%; height: auto; display: block; }
   justify-content: space-between;
   margin-bottom: 20px;
   padding-bottom: 12px;
-  border-bottom: 2px solid var(--text);
+  border-bottom: 2px solid var(--accent);
 }
 
 .section-head-title {
@@ -742,7 +742,7 @@ body.modal-open { overflow: hidden; }
 .page-header {
   margin-bottom: 32px;
   padding-bottom: 16px;
-  border-bottom: 2px solid var(--text);
+  border-bottom: 2px solid var(--accent);
 }
 
 .page-header-title {
@@ -802,7 +802,7 @@ body.modal-open { overflow: hidden; }
 }
 
 .pagination a:hover { background: var(--bg); }
-.pagination .current { background: var(--text); color: var(--white); border-color: var(--text); }
+.pagination .current { background: var(--accent); color: #fff; border-color: var(--accent); }
 .pagination .disabled { color: var(--border); }
 
 /* ── Refresh toast ── */
@@ -1003,14 +1003,14 @@ body.modal-open { overflow: hidden; }
 
 .auth-nav-register {
   padding: 5px 12px;
-  background: var(--text);
-  color: var(--white);
+  background: var(--accent);
+  color: #fff;
   border-radius: 3px;
   font-size: 13px;
   font-weight: 500;
 }
 
-.auth-nav-register:hover { background: var(--text-2); color: var(--white); }
+.auth-nav-register:hover { background: #9f1239; color: #fff; }
 
 .auth-nav-donate {
   padding: 5px 12px;
@@ -1052,7 +1052,7 @@ body.modal-open { overflow: hidden; }
   min-width: 152px;
   background: var(--white);
   border: 1px solid var(--border);
-  border-top: 2px solid var(--text);
+  border-top: 2px solid var(--accent);
   box-shadow: 0 4px 16px rgba(0,0,0,.10);
   z-index: 1000;
   padding: 2px 0;
@@ -1262,7 +1262,7 @@ body.modal-open { overflow: hidden; }
 .profile-header {
   margin-bottom: 28px;
   padding-bottom: 20px;
-  border-bottom: 2px solid var(--text);
+  border-bottom: 2px solid var(--accent);
 }
 
 .profile-title {

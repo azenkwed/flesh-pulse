@@ -3,15 +3,15 @@
 Drop one generated image per category into this directory. Use `.webp` files with
 these exact filenames:
 
-- `surveillance-privacy.webp`
-- `censorship-information-control.webp`
-- `authoritarian-governance.webp`
-- `corporate-control.webp`
-- `climate-collapse.webp`
-- `ai-technology-control.webp`
-- `economic-oppression.webp`
-- `war-militarization.webp`
-- `biopolitics-body-control.webp`
+- `sexual-health-wellness.webp`
+- `reproductive-health-policy.webp`
+- `maternal-child-health.webp`
+- `infectious-diseases-stis.webp`
+- `mental-health-sexuality.webp`
+- `lgbtq-rights-issues.webp`
+- `sex-education-literacy.webp`
+- `sexual-violence-consent.webp`
+- `sex-workers-adult-industry.webp`
 
 Recommended output:
 
@@ -36,7 +36,7 @@ magick input.png \
   -quality 85 output.webp
 ```
 
-With the text watermark:
+With copyright watermark:
 
 ```bash
 magick input.png \
@@ -51,64 +51,64 @@ magick input.png \
 
 ## Shared Style
 
-Use this shared style clause for every image:
+Use this shared style clause at the end of every prompt:
 
 ```text
-Editorial documentary-style digital illustration for an independent news archive, realistic but not depicting identifiable real people, cinematic natural lighting, restrained color palette, high detail, no text, no logos, no flags, no UI, no watermark, 16:9 landscape.
+Editorial documentary-style digital illustration for an independent sexual health news archive, warm and human-centered composition, diverse anonymous individuals, soft natural lighting, modern healthcare aesthetic, no explicit or sexual content, no text, no logos, no UI, no watermark, 16:9 landscape.
 ```
 
 ## Prompts
 
-### Surveillance & Privacy
+### Sexual Health & Wellness
 
 ```text
-A dense modern city at dusk with security cameras, phone screens, and soft reflections in glass suggesting digital monitoring and privacy erosion, no identifiable people. Editorial documentary-style digital illustration for an independent news archive, realistic but not depicting identifiable real people, cinematic natural lighting, restrained color palette, high detail, no text, no logos, no flags, no UI, no watermark, 16:9 landscape.
+A warmly lit healthcare consultation room with anatomical health posters on the wall, wellness brochures fanned on a desk, and a stethoscope resting beside a plant, suggesting supportive and open sexual health care. Editorial documentary-style digital illustration for an independent sexual health news archive, warm and human-centered composition, diverse anonymous individuals, soft natural lighting, modern healthcare aesthetic, no explicit or sexual content, no text, no logos, no UI, no watermark, 16:9 landscape.
 ```
 
-### Censorship & Information Control
+### Reproductive Health & Policy
 
 ```text
-A quiet newsroom desk with scattered papers, a darkened monitor, crossed-out newspaper columns, and a muted printing press in the background, suggesting blocked information and media pressure. Editorial documentary-style digital illustration for an independent news archive, realistic but not depicting identifiable real people, cinematic natural lighting, restrained color palette, high detail, no text, no logos, no flags, no UI, no watermark, 16:9 landscape.
+A modern clinical desk with contraceptive packaging, a medical intake form, and a blurred government building visible through a rain-streaked window in the background, suggesting the intersection of reproductive medicine and public policy. Editorial documentary-style digital illustration for an independent sexual health news archive, warm and human-centered composition, diverse anonymous individuals, soft natural lighting, modern healthcare aesthetic, no explicit or sexual content, no text, no logos, no UI, no watermark, 16:9 landscape.
 ```
 
-### Authoritarian Governance
+### Maternal & Child Health
 
 ```text
-An imposing government building seen from a public square through rain-streaked glass, with distant anonymous silhouettes and stark security barriers, suggesting concentrated state power. Editorial documentary-style digital illustration for an independent news archive, realistic but not depicting identifiable real people, cinematic natural lighting, restrained color palette, high detail, no text, no logos, no flags, no UI, no watermark, 16:9 landscape.
+A soft-lit prenatal care room with an ultrasound machine, a handwritten journal open on a side table, and infant health materials on a consultation desk, suggesting attentive maternal care and family support. Editorial documentary-style digital illustration for an independent sexual health news archive, warm and human-centered composition, diverse anonymous individuals, soft natural lighting, modern healthcare aesthetic, no explicit or sexual content, no text, no logos, no UI, no watermark, 16:9 landscape.
 ```
 
-### Corporate Control
+### Infectious Diseases & STIs
 
 ```text
-A towering corporate office interior with reflective glass, abstract data charts, and small anonymous workers below, suggesting market concentration and algorithmic management. Editorial documentary-style digital illustration for an independent news archive, realistic but not depicting identifiable real people, cinematic natural lighting, restrained color palette, high detail, no text, no logos, no flags, no UI, no watermark, 16:9 landscape.
+A clinical laboratory workbench with test tubes in a rack, microscope slides, diagnostic result charts, and blue-white overhead light, suggesting medical research and disease prevention. Editorial documentary-style digital illustration for an independent sexual health news archive, warm and human-centered composition, diverse anonymous individuals, soft natural lighting, modern healthcare aesthetic, no explicit or sexual content, no text, no logos, no UI, no watermark, 16:9 landscape.
 ```
 
-### Climate Collapse
+### Mental Health & Sexuality
 
 ```text
-A city edge under extreme weather, cracked dry ground in the foreground and floodwater reflecting distant buildings, suggesting environmental instability and climate risk. Editorial documentary-style digital illustration for an independent news archive, realistic but not depicting identifiable real people, cinematic natural lighting, restrained color palette, high detail, no text, no logos, no flags, no UI, no watermark, 16:9 landscape.
+A quiet therapy office with two chairs facing each other, a notepad and pen on a side table, a potted plant, and soft diffused light through frosted glass, suggesting emotional support, trust, and mental wellness. Editorial documentary-style digital illustration for an independent sexual health news archive, warm and human-centered composition, diverse anonymous individuals, soft natural lighting, modern healthcare aesthetic, no explicit or sexual content, no text, no logos, no UI, no watermark, 16:9 landscape.
 ```
 
-### AI & Technology Control
+### LGBTQ+ Rights & Issues
 
 ```text
-A server room and urban transit platform blended together, with abstract machine-vision light patterns tracking anonymous silhouettes, suggesting AI systems shaping public life. Editorial documentary-style digital illustration for an independent news archive, realistic but not depicting identifiable real people, cinematic natural lighting, restrained color palette, high detail, no text, no logos, no flags, no UI, no watermark, 16:9 landscape.
+A busy city street during daytime with a large rainbow flag hanging from a building facade and smaller flags visible along the sidewalk, anonymous diverse pedestrians in motion below, warm sunlight catching the colors, suggesting public visibility, pride, and community rights. Editorial documentary-style digital illustration for an independent sexual health news archive, warm and human-centered composition, diverse anonymous individuals, soft natural lighting, modern healthcare aesthetic, no explicit or sexual content, no text, no logos, no UI, no watermark, 16:9 landscape.
 ```
 
-### Economic Oppression
+### Sex Education & Literacy
 
 ```text
-A stark urban street with a luxury high-rise reflected in a closed storefront window, unpaid bills and job notices on a table, suggesting inequality and financial pressure. Editorial documentary-style digital illustration for an independent news archive, realistic but not depicting identifiable real people, cinematic natural lighting, restrained color palette, high detail, no text, no logos, no flags, no UI, no watermark, 16:9 landscape.
+A community classroom or health center table with open anatomy notebooks, informational health diagrams, and educational materials spread out under bright natural light, suggesting open discussion, learning, and access to knowledge. Editorial documentary-style digital illustration for an independent sexual health news archive, warm and human-centered composition, diverse anonymous individuals, soft natural lighting, modern healthcare aesthetic, no explicit or sexual content, no text, no logos, no UI, no watermark, 16:9 landscape.
 ```
 
-### War & Militarization
+### Sexual Violence & Consent
 
 ```text
-An empty checkpoint road at dawn with armored vehicles in the distance, surveillance lights, and concrete barriers, suggesting militarization without active violence. Editorial documentary-style digital illustration for an independent news archive, realistic but not depicting identifiable real people, cinematic natural lighting, restrained color palette, high detail, no text, no logos, no flags, no UI, no watermark, 16:9 landscape.
+An extreme close-up of bare hands raised defensively against encroaching darkness, palms forward, fingers spread, a single harsh directional light source casting sharp shadows, suggesting fear, resistance, and violation of bodily autonomy. Editorial documentary-style digital illustration for an independent sexual health news archive, raw and unflinching composition, no identifiable faces, dramatic chiaroscuro lighting, no explicit or sexual content, no text, no logos, no UI, no watermark, 16:9 landscape.
 ```
 
-### Biopolitics & Body Control
+### Sex Workers & Adult Industry
 
 ```text
-A clinical public health checkpoint with biometric scanners, medical forms, and anonymous silhouettes waiting under cool fluorescent light, suggesting bodily governance and institutional control. Editorial documentary-style digital illustration for an independent news archive, realistic but not depicting identifiable real people, cinematic natural lighting, restrained color palette, high detail, no text, no logos, no flags, no UI, no watermark, 16:9 landscape.
+A woman's silhouette standing in a glowing doorway at night, backlit by warm pink and red neon light, fishnet stockings and high heels visible, wet city pavement reflecting the neon colors below, suggesting the adult industry and nightlife without explicit content. Cinematic editorial digital illustration, dramatic neon noir lighting, anonymous figure, no face visible, no nudity, no text, no logos, no UI, no watermark, 16:9 landscape.
 ```

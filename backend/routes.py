@@ -61,7 +61,15 @@ SEVERITY_COLORS = {
 }
 
 CATEGORY_DEFAULT_IMAGES: dict[str, str] = {
-    # Populated once category images are designed — falls back to social-800.png
+    "Sexual Health & Wellness":        "sexual-health-wellness.webp",
+    "Reproductive Health & Policy":    "reproductive-health-policy.webp",
+    "Maternal & Child Health":         "maternal-child-health.webp",
+    "Infectious Diseases & STIs":      "infectious-diseases-stis.webp",
+    "Mental Health & Sexuality":       "mental-health-sexuality.webp",
+    "LGBTQ+ Rights & Issues":          "lgbtq-rights-issues.webp",
+    "Sex Education & Literacy":        "sex-education-literacy.webp",
+    "Sexual Violence & Consent":       "sexual-violence-consent.webp",
+    "Sex Workers & Adult Industry":    "sex-workers-adult-industry.webp",
 }
 
 

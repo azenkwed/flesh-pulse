@@ -3,714 +3,793 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sex Health News — Design System & Brand Guidelines</title>
+  <title>Sex Health News — Design System</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: #fafafa;
+      color: #111827;
       line-height: 1.6;
-      color: #2d3748;
-      background: #f7fafc;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 60px 32px;
-    }
-    h1 {
-      font-size: 48px;
-      font-weight: 800;
-      margin-bottom: 12px;
-      background: linear-gradient(135deg, #8B5CF6, #7C3AED);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .tagline {
-      font-size: 20px;
-      color: #718096;
-      margin-bottom: 60px;
-    }
-    h2 {
-      font-size: 32px;
-      font-weight: 700;
-      margin-top: 60px;
-      margin-bottom: 32px;
-      color: #1a202c;
-      border-bottom: 3px solid #8B5CF6;
-      padding-bottom: 12px;
-    }
-    h3 {
-      font-size: 20px;
-      font-weight: 600;
-      margin-top: 24px;
-      margin-bottom: 16px;
-      color: #2d3748;
     }
 
-    /* Color Palette Section */
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 32px;
+    }
+
+    /* ── Page header ── */
+    .page-header {
+      margin-bottom: 64px;
+      padding-bottom: 32px;
+      border-bottom: 3px solid #e11d48;
+    }
+
+    .page-header h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 48px;
+      color: #111827;
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+
+    .page-header p {
+      font-size: 16px;
+      color: #6b7280;
+    }
+
+    /* ── Section ── */
+    .section { margin-bottom: 64px; }
+
+    .section-title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 28px;
+      color: #111827;
+      margin-bottom: 6px;
+    }
+
+    .section-sub {
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 32px;
+    }
+
+    /* ── Color Grid ── */
     .color-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 24px;
-      margin-bottom: 40px;
-    }
-    .color-box {
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .color-box:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    }
-    .color-sample {
-      height: 140px;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 600;
-      font-size: 14px;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-    .color-info {
-      padding: 16px;
-      background: white;
-    }
-    .color-name {
-      font-weight: 600;
-      margin-bottom: 4px;
-      color: #1a202c;
-    }
-    .color-code {
-      font-family: 'Courier New', monospace;
-      font-size: 12px;
-      color: #718096;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
     }
 
-    /* Typography Section */
-    .typography-sample {
-      margin-bottom: 32px;
-      padding: 24px;
-      background: white;
+    .color-card {
       border-radius: 8px;
-      border-left: 4px solid #8B5CF6;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
     }
-    .typography-label {
+
+    .color-swatch {
+      height: 80px;
+    }
+
+    .color-info {
+      padding: 12px 14px;
+      background: #fff;
+    }
+
+    .color-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 2px;
+    }
+
+    .color-hex {
       font-size: 12px;
+      font-family: monospace;
+      color: #6b7280;
+      margin-bottom: 2px;
+    }
+
+    .color-role {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    /* ── Mode Previews ── */
+    .modes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .mode-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #6b7280;
+      margin-bottom: 12px;
+    }
+
+    .mock {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    /* Light mode mock */
+    .mock-header-light {
+      background: #ffffff;
+      border-bottom: 3px solid #e11d48;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .mock-brand-light {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 18px;
+      color: #111827;
+    }
+
+    .mock-body-light {
+      background: #fafafa;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .mock-card-light {
+      background: #ffffff;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+      overflow: hidden;
+    }
+
+    .mock-footer-light {
+      background: #1c0a10;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Dark mode mock */
+    .mock-header-dark {
+      background: #111827;
+      border-bottom: 3px solid #e11d48;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .mock-brand-dark {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 18px;
+      color: #f9fafb;
+    }
+
+    .mock-body-dark {
+      background: #0d1117;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .mock-card-dark {
+      background: #1f2937;
+      border-radius: 6px;
+      border: 1px solid #374151;
+      overflow: hidden;
+    }
+
+    .mock-footer-dark {
+      background: #0d1117;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #1f2937;
+    }
+
+    /* Shared card parts */
+    .mock-card-img {
+      height: 52px;
+    }
+
+    .mock-card-body { padding: 8px 10px; }
+
+    .mock-card-cat {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .mock-card-title {
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .mock-nav {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .mock-nav-item {
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .mock-btn {
+      padding: 5px 12px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 700;
+      background: #e11d48;
+      color: #fff;
+    }
+
+    /* ── Typography ── */
+    .type-stack { display: flex; flex-direction: column; gap: 20px; }
+
+    .type-row {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+    }
+
+    .type-meta {
+      min-width: 120px;
+      flex-shrink: 0;
+    }
+
+    .type-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #e11d48;
+      margin-bottom: 2px;
+    }
+
+    .type-spec {
+      font-size: 11px;
+      color: #9ca3af;
+      font-family: monospace;
+    }
+
+    .type-sample { flex: 1; }
+
+    .t-display {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 38px;
+      line-height: 1.15;
+      color: #111827;
+    }
+
+    .t-h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 28px;
+      line-height: 1.2;
+      color: #111827;
+    }
+
+    .t-h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 22px;
+      line-height: 1.3;
+      color: #111827;
+    }
+
+    .t-body {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #374151;
+    }
+
+    .t-ui {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .t-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: #718096;
-      margin-bottom: 8px;
+      color: #e11d48;
     }
-    .typography-preview {
-      margin-bottom: 8px;
-    }
-    .typography-details {
+
+    .t-meta {
+      font-family: 'DM Sans', sans-serif;
       font-size: 12px;
-      color: #718096;
-      font-family: 'Courier New', monospace;
+      color: #9ca3af;
     }
 
-    .h1-sample { font-size: 48px; font-weight: 800; line-height: 1.2; }
-    .h2-sample { font-size: 36px; font-weight: 700; line-height: 1.2; }
-    .h3-sample { font-size: 28px; font-weight: 700; line-height: 1.3; }
-    .h4-sample { font-size: 20px; font-weight: 600; line-height: 1.4; }
-    .body-sample { font-size: 16px; font-weight: 400; line-height: 1.6; }
-    .caption-sample { font-size: 12px; font-weight: 500; line-height: 1.5; }
-
-    /* Components Section */
+    /* ── Components ── */
     .components-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: 1fr 1fr;
       gap: 24px;
-      margin-bottom: 40px;
-    }
-    .component {
-      background: white;
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
 
-    /* Buttons */
-    .btn {
-      display: inline-block;
-      padding: 12px 24px;
+    .component-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
       border-radius: 8px;
+      padding: 24px;
+    }
+
+    .component-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #9ca3af;
+      margin-bottom: 16px;
+    }
+
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+    .btn {
+      padding: 9px 18px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
       border: none;
-      font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      font-size: 14px;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, #8B5CF6, #7C3AED);
-      color: white;
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(139, 92, 246, 0.3);
-    }
-    .btn-secondary {
-      background: #f7fafc;
-      color: #8B5CF6;
-      border: 2px solid #8B5CF6;
-    }
-    .btn-secondary:hover {
-      background: #edf2f7;
-    }
-    .btn-accent {
-      background: linear-gradient(135deg, #ff6b9d, #ff1a7c);
-      color: white;
-    }
-    .btn-accent:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(255, 27, 124, 0.3);
     }
 
-    /* Cards */
-    .card {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-      transition: all 0.3s ease;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-    }
-    .card-image {
-      height: 180px;
-      background: linear-gradient(135deg, #8B5CF6, #7C3AED);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 14px;
-    }
-    .card-content {
-      padding: 16px;
-    }
-    .card-title {
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #1a202c;
-    }
-    .card-text {
-      font-size: 14px;
-      color: #718096;
-    }
+    .btn-primary { background: #e11d48; color: #fff; }
+    .btn-dark    { background: #111827; color: #fff; }
+    .btn-outline { background: transparent; color: #111827; border: 1px solid #e5e7eb; }
+    .btn-ghost   { background: transparent; color: #e11d48; padding: 9px 0; }
 
-    /* Badges */
     .badge {
       display: inline-block;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 10px;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-    }
-    .badge-primary { background: #e0f7ff; color: #7C3AED; }
-    .badge-accent { background: #ffe0f0; color: #ff1a7c; }
-    .badge-success { background: #e6f7ed; color: #22a447; }
-    .badge-warning { background: #fff9e6; color: #ffa500; }
-
-    /* Spacing Demo */
-    .spacing-demo {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-    }
-    .spacing-box {
-      flex: 1;
-      min-width: 100px;
-      padding: 16px;
-      background: linear-gradient(135deg, #8B5CF6, #7C3AED);
-      border-radius: 8px;
-      color: white;
-      font-size: 12px;
-      font-weight: 600;
-      text-align: center;
+      padding: 2px 8px;
+      border-radius: 3px;
     }
 
-    /* Design Principles */
-    .principles {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 24px;
-      margin-bottom: 40px;
-    }
-    .principle {
-      background: white;
-      padding: 24px;
-      border-radius: 12px;
-      border-top: 4px solid #8B5CF6;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    }
-    .principle h4 {
-      font-size: 18px;
-      font-weight: 600;
+    .badge-row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .badge-low      { background: #f0fdf4; color: #16a34a; }
+    .badge-medium   { background: #fefce8; color: #ca8a04; }
+    .badge-high     { background: #fff7ed; color: #ea580c; }
+    .badge-critical { background: #fef2f2; color: #dc2626; }
+
+    .cat-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #e11d48;
       margin-bottom: 8px;
-      color: #1a202c;
-    }
-    .principle p {
-      font-size: 14px;
-      color: #718096;
-      line-height: 1.6;
     }
 
-    /* Code Blocks */
-    .code-block {
-      background: #2d3748;
-      color: #e2e8f0;
-      padding: 16px;
-      border-radius: 8px;
-      font-family: 'Courier New', monospace;
-      font-size: 12px;
-      overflow-x: auto;
-      margin: 16px 0;
-    }
-
-    /* Tables */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 24px;
-      background: white;
-      border-radius: 8px;
+    .article-preview {
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
-    th {
-      background: #f7fafc;
-      padding: 16px;
-      text-align: left;
-      font-weight: 600;
-      color: #1a202c;
-      border-bottom: 2px solid #e2e8f0;
-    }
-    td {
-      padding: 16px;
-      border-bottom: 1px solid #e2e8f0;
-      color: #4a5568;
-    }
-    tr:last-child td { border-bottom: none; }
 
-    /* Accessibility Section */
-    .accessibility {
-      background: white;
-      padding: 24px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-      margin-bottom: 40px;
+    .article-preview-img {
+      height: 100px;
+      background: linear-gradient(135deg, #e11d48, #9f1239);
     }
-    .accessibility h3 { margin-top: 0; }
-    .a11y-item {
-      margin: 16px 0;
-      padding: 12px;
-      background: #f7fafc;
-      border-left: 3px solid #8B5CF6;
-      border-radius: 4px;
-    }
-    .a11y-item strong { color: #1a202c; }
 
-    footer {
-      text-align: center;
-      padding: 40px;
-      color: #718096;
-      font-size: 14px;
-      border-top: 1px solid #e2e8f0;
-      margin-top: 60px;
+    .article-preview-body { padding: 14px; }
+
+    .article-preview-title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 15px;
+      line-height: 1.35;
+      color: #111827;
+      margin-bottom: 6px;
+    }
+
+    .article-preview-meta {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      margin: 64px 0;
+    }
+
+    @media (max-width: 768px) {
+      .modes-grid, .components-grid { grid-template-columns: 1fr; }
+      .mock-body-light, .mock-body-dark { grid-template-columns: 1fr 1fr; }
+      .type-row { flex-direction: column; gap: 8px; }
+      .type-meta { min-width: auto; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Sex Health News</h1>
-    <p class="tagline">Design System & Brand Guidelines • Targeting 18-35 Year Olds</p>
+<div class="page">
 
-    <!-- Color Palette -->
-    <h2>Color Palette</h2>
-    <p>Our vibrant, contemporary color system appeals to young adults while maintaining readability and accessibility. We use bold gradients and high-contrast combinations.</p>
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Sex Health News<br>Design System</h1>
+    <p>Brand guidelines, color palette, typography, and components — updated June 2026</p>
+  </div>
 
-    <h3>Primary Colors</h3>
+  <!-- ── COLOUR PALETTE ── -->
+  <div class="section">
+    <h2 class="section-title">Colour Palette</h2>
+    <p class="section-sub">Minimal palette — one accent, neutrals do the rest.</p>
+
     <div class="color-grid">
-      <div class="color-box">
-        <div class="color-sample" style="background: linear-gradient(135deg, #8B5CF6, #7C3AED);">Primary Purple</div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#e11d48;"></div>
         <div class="color-info">
-          <div class="color-name">Purple (Primary)</div>
-          <div class="color-code">#8B5CF6</div>
+          <div class="color-name">Rose Crimson</div>
+          <div class="color-hex">#e11d48</div>
+          <div class="color-role">Primary accent — light mode</div>
         </div>
       </div>
-      <div class="color-box">
-        <div class="color-sample" style="background: linear-gradient(135deg, #7C3AED, #6D28D9);">Deep Purple</div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#fb7185;"></div>
         <div class="color-info">
-          <div class="color-name">Deep Purple</div>
-          <div class="color-code">#7C3AED</div>
+          <div class="color-name">Rose Light</div>
+          <div class="color-hex">#fb7185</div>
+          <div class="color-role">Primary accent — dark mode</div>
         </div>
       </div>
-      <div class="color-box">
-        <div class="color-sample" style="background: linear-gradient(135deg, #6D28D9, #5B21B6);">Darker Purple</div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#111827;"></div>
         <div class="color-info">
-          <div class="color-name">Darker Purple</div>
-          <div class="color-code">#0066ff</div>
+          <div class="color-name">Slate 900</div>
+          <div class="color-hex">#111827</div>
+          <div class="color-role">Primary text</div>
         </div>
       </div>
-    </div>
-
-    <h3>Accent Colors</h3>
-    <div class="color-grid">
-      <div class="color-box">
-        <div class="color-sample" style="background: linear-gradient(135deg, #ff6b9d, #ff1a7c);">Coral Pink</div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#374151;"></div>
         <div class="color-info">
-          <div class="color-name">Coral Pink (Accent)</div>
-          <div class="color-code">#ff1a7c</div>
+          <div class="color-name">Slate 700</div>
+          <div class="color-hex">#374151</div>
+          <div class="color-role">Body text</div>
         </div>
       </div>
-      <div class="color-box">
-        <div class="color-sample" style="background: linear-gradient(135deg, #7c3aed, #5b21b6);">Purple</div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#6b7280;"></div>
         <div class="color-info">
-          <div class="color-name">Purple</div>
-          <div class="color-code">#7c3aed</div>
+          <div class="color-name">Slate 500</div>
+          <div class="color-hex">#6b7280</div>
+          <div class="color-role">Muted / meta text</div>
         </div>
       </div>
-      <div class="color-box">
-        <div class="color-sample" style="background: linear-gradient(135deg, #22a447, #16a34a);">Green</div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#fafafa; border:1px solid #e5e7eb;"></div>
         <div class="color-info">
-          <div class="color-name">Green</div>
-          <div class="color-code">#22a447</div>
+          <div class="color-name">Off White</div>
+          <div class="color-hex">#fafafa</div>
+          <div class="color-role">Page background — light</div>
         </div>
       </div>
-    </div>
-
-    <h3>Neutral Colors</h3>
-    <div class="color-grid">
-      <div class="color-box">
-        <div class="color-sample" style="background: #1a202c; color: white;">Charcoal</div>
-        <div class="color-info">
-          <div class="color-name">Charcoal (Text)</div>
-          <div class="color-code">#1a202c</div>
-        </div>
-      </div>
-      <div class="color-box">
-        <div class="color-sample" style="background: #f7fafc; color: #1a202c; border: 1px solid #e2e8f0;">Light Gray</div>
-        <div class="color-info">
-          <div class="color-name">Light Gray (BG)</div>
-          <div class="color-code">#f7fafc</div>
-        </div>
-      </div>
-      <div class="color-box">
-        <div class="color-sample" style="background: #ffffff; color: #1a202c; border: 1px solid #e2e8f0;">White</div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#ffffff; border:1px solid #e5e7eb;"></div>
         <div class="color-info">
           <div class="color-name">White</div>
-          <div class="color-code">#ffffff</div>
+          <div class="color-hex">#ffffff</div>
+          <div class="color-role">Card / header background</div>
         </div>
       </div>
-    </div>
-
-    <h3>Status & Severity Colors</h3>
-    <div class="color-grid">
-      <div class="color-box">
-        <div class="color-sample" style="background: #22a447;">Low/Positive</div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#1c0a10;"></div>
         <div class="color-info">
-          <div class="color-name">Green</div>
-          <div class="color-code">#22a447</div>
+          <div class="color-name">Rose Black</div>
+          <div class="color-hex">#1c0a10</div>
+          <div class="color-role">Footer — light mode</div>
         </div>
       </div>
-      <div class="color-box">
-        <div class="color-sample" style="background: #ffa500;">Medium/Warning</div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#0d1117;"></div>
         <div class="color-info">
-          <div class="color-name">Amber</div>
-          <div class="color-code">#ffa500</div>
+          <div class="color-name">Dark Base</div>
+          <div class="color-hex">#0d1117</div>
+          <div class="color-role">Page background — dark</div>
         </div>
       </div>
-      <div class="color-box">
-        <div class="color-sample" style="background: #ff6b35;">High</div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#1f2937;"></div>
         <div class="color-info">
-          <div class="color-name">Orange</div>
-          <div class="color-code">#ff6b35</div>
-        </div>
-      </div>
-      <div class="color-box">
-        <div class="color-sample" style="background: #ef4444;">Critical</div>
-        <div class="color-info">
-          <div class="color-name">Red</div>
-          <div class="color-code">#ef4444</div>
+          <div class="color-name">Dark Surface</div>
+          <div class="color-hex">#1f2937</div>
+          <div class="color-role">Card background — dark</div>
         </div>
       </div>
     </div>
-
-    <!-- Typography -->
-    <h2>Typography</h2>
-    <p>Modern, clean typography system optimized for readability and brand personality. We use system fonts for performance and reliability.</p>
-
-    <h3>Font Family</h3>
-    <div class="component">
-      <p>Primary: <strong>-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif</strong></p>
-      <p style="color: #718096; font-size: 14px; margin-top: 12px;">Native system fonts provide optimal rendering across all devices and operating systems. Clean, modern, and highly legible for long reading sessions.</p>
-    </div>
-
-    <h3>Type Scales</h3>
-    <div class="typography-sample">
-      <div class="typography-label">Display / H1</div>
-      <div class="typography-preview h1-sample">48px • Bold (800)</div>
-      <div class="typography-details">font-size: 48px; font-weight: 800; line-height: 1.2;</div>
-    </div>
-
-    <div class="typography-sample">
-      <div class="typography-label">Heading / H2</div>
-      <div class="typography-preview h2-sample">36px • Bold (700)</div>
-      <div class="typography-details">font-size: 36px; font-weight: 700; line-height: 1.2;</div>
-    </div>
-
-    <div class="typography-sample">
-      <div class="typography-label">Subheading / H3</div>
-      <div class="typography-preview h3-sample">28px • Bold (700)</div>
-      <div class="typography-details">font-size: 28px; font-weight: 700; line-height: 1.3;</div>
-    </div>
-
-    <div class="typography-sample">
-      <div class="typography-label">Section Title / H4</div>
-      <div class="typography-preview h4-sample">20px • Semi-Bold (600)</div>
-      <div class="typography-details">font-size: 20px; font-weight: 600; line-height: 1.4;</div>
-    </div>
-
-    <div class="typography-sample">
-      <div class="typography-label">Body Text</div>
-      <div class="typography-preview body-sample">16px • Regular (400)</div>
-      <div class="typography-details">font-size: 16px; font-weight: 400; line-height: 1.6;</div>
-    </div>
-
-    <div class="typography-sample">
-      <div class="typography-label">Small / Caption</div>
-      <div class="typography-preview caption-sample">12px • Medium (500)</div>
-      <div class="typography-details">font-size: 12px; font-weight: 500; line-height: 1.5;</div>
-    </div>
-
-    <!-- Components -->
-    <h2>Components & Patterns</h2>
-
-    <h3>Buttons</h3>
-    <div class="components-grid">
-      <div class="component">
-        <h4 style="margin-bottom: 16px;">Primary</h4>
-        <button class="btn btn-primary">Read Article</button>
-        <div class="code-block">background: linear-gradient(135deg, #8B5CF6, #7C3AED);</div>
-      </div>
-      <div class="component">
-        <h4 style="margin-bottom: 16px;">Secondary</h4>
-        <button class="btn btn-secondary">Learn More</button>
-        <div class="code-block">border: 2px solid #8B5CF6;</div>
-      </div>
-      <div class="component">
-        <h4 style="margin-bottom: 16px;">Accent</h4>
-        <button class="btn btn-accent">Share Story</button>
-        <div class="code-block">background: linear-gradient(135deg, #ff6b9d, #ff1a7c);</div>
-      </div>
-    </div>
-
-    <h3>Cards</h3>
-    <div class="components-grid">
-      <div class="card">
-        <div class="card-image">Featured Article Image</div>
-        <div class="card-content">
-          <div class="card-title">Sexual Health & Policy</div>
-          <div class="card-text">Comprehensive coverage of sexual health legislation and research breakthroughs.</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-image" style="background: linear-gradient(135deg, #ff6b9d, #ff1a7c);">Featured Article Image</div>
-        <div class="card-content">
-          <div class="card-title">LGBTQ+ Rights</div>
-          <div class="card-text">Breaking news on equality, protection, and community advancement.</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-image" style="background: linear-gradient(135deg, #7c3aed, #5b21b6);">Featured Article Image</div>
-        <div class="card-content">
-          <div class="card-title">Reproductive Rights</div>
-          <div class="card-text">In-depth reporting on bodily autonomy and reproductive access.</div>
-        </div>
-      </div>
-    </div>
-
-    <h3>Badges & Labels</h3>
-    <div class="component">
-      <span class="badge badge-primary">Educational</span>
-      <span class="badge badge-accent" style="margin-left: 8px;">Breaking News</span>
-      <span class="badge badge-success" style="margin-left: 8px;">Verified</span>
-      <span class="badge badge-warning" style="margin-left: 8px;">Important</span>
-    </div>
-
-    <!-- Spacing -->
-    <h2>Spacing & Layout</h2>
-    <p>Consistent spacing system based on 4px increments. Creates visual rhythm and improves readability for young audiences who value clean, breathable design.</p>
-
-    <div class="spacing-demo">
-      <div class="spacing-box">4px (min)</div>
-      <div class="spacing-box">8px</div>
-      <div class="spacing-box">12px</div>
-      <div class="spacing-box">16px (base)</div>
-      <div class="spacing-box">24px</div>
-      <div class="spacing-box">32px</div>
-      <div class="spacing-box">48px</div>
-    </div>
-
-    <table>
-      <tr>
-        <th>Purpose</th>
-        <th>Size</th>
-        <th>Use Case</th>
-      </tr>
-      <tr>
-        <td>Minimal</td>
-        <td>4px</td>
-        <td>Icon spacing, tight pairs</td>
-      </tr>
-      <tr>
-        <td>Small</td>
-        <td>8px</td>
-        <td>Element padding, small gaps</td>
-      </tr>
-      <tr>
-        <td>Regular</td>
-        <td>16px</td>
-        <td>Standard padding, component spacing</td>
-      </tr>
-      <tr>
-        <td>Medium</td>
-        <td>24px</td>
-        <td>Section spacing, card padding</td>
-      </tr>
-      <tr>
-        <td>Large</td>
-        <td>32px</td>
-        <td>Page sections, major breaks</td>
-      </tr>
-      <tr>
-        <td>Extra Large</td>
-        <td>48px</td>
-        <td>Hero sections, page top spacing</td>
-      </tr>
-    </table>
-
-    <!-- Design Principles -->
-    <h2>Design Principles</h2>
-    <div class="principles">
-      <div class="principle">
-        <h4>🎯 Bold & Vibrant</h4>
-        <p>Use bright, modern colors and gradients to create energy and appeal to younger demographics who expect visual excitement.</p>
-      </div>
-      <div class="principle">
-        <h4>✨ Modern & Clean</h4>
-        <p>Rounded corners, subtle shadows, and ample whitespace create a contemporary feel that feels trustworthy and approachable.</p>
-      </div>
-      <div class="principle">
-        <h4>📱 Mobile-First</h4>
-        <p>Design for mobile devices first. Most of our audience browses on phones, so responsive, touch-friendly design is essential.</p>
-      </div>
-      <div class="principle">
-        <h4>♿ Accessible</h4>
-        <p>WCAG 2.1 AA compliance. Color contrast ratios meet accessibility standards. Text alternatives for images. Keyboard navigation.</p>
-      </div>
-      <div class="principle">
-        <h4>⚡ Performance</h4>
-        <p>Fast load times, optimized images, efficient CSS. Young users expect snappy performance or they'll leave.</p>
-      </div>
-      <div class="principle">
-        <h4>🎨 Consistent</h4>
-        <p>Every element follows the design system. Predictability builds trust and makes the site easier to navigate.</p>
-      </div>
-    </div>
-
-    <!-- Accessibility -->
-    <div class="accessibility">
-      <h3>Accessibility Guidelines</h3>
-      <div class="a11y-item">
-        <strong>Color Contrast:</strong> All text meets WCAG AA standard (4.5:1 for body text, 3:1 for large text).
-      </div>
-      <div class="a11y-item">
-        <strong>Typography:</strong> Minimum 16px for body text on mobile. Line height 1.5 minimum for readability.
-      </div>
-      <div class="a11y-item">
-        <strong>Focus States:</strong> Clear focus indicators on all interactive elements. Minimum 2px outline with sufficient contrast.
-      </div>
-      <div class="a11y-item">
-        <strong>Touch Targets:</strong> Minimum 44x44px touch targets for buttons and interactive elements.
-      </div>
-      <div class="a11y-item">
-        <strong>Images:</strong> All images have meaningful alt text. Decorative images use empty alt attributes.
-      </div>
-      <div class="a11y-item">
-        <strong>Motion:</strong> Animations respect `prefers-reduced-motion`. No auto-playing media with sound.
-      </div>
-    </div>
-
-    <!-- Brand Voice -->
-    <h2>Brand Voice & Tone</h2>
-    <div class="component">
-      <h3 style="margin-top: 0;">Who We Are</h3>
-      <ul style="color: #4a5568; line-height: 1.8;">
-        <li><strong>Informative:</strong> We provide factual, well-researched information on sexual health</li>
-        <li><strong>Approachable:</strong> We speak in accessible language, not medical jargon</li>
-        <li><strong>Inclusive:</strong> We center diverse experiences and identities</li>
-        <li><strong>Empowering:</strong> We help people make informed decisions about their health and rights</li>
-        <li><strong>Contemporary:</strong> We feel modern and relevant to young adults</li>
-        <li><strong>Trustworthy:</strong> We source reputable news outlets and fact-check rigorously</li>
-      </ul>
-    </div>
-
-    <!-- Implementation -->
-    <h2>CSS Custom Properties (Variables)</h2>
-    <div class="code-block">
-:root {
-  /* Colors */
-  --primary: #8B5CF6;
-  --primary-dark: #7C3AED;
-  --primary-darker: #0066ff;
-  --accent: #ff1a7c;
-  --accent-light: #ff6b9d;
-  --text: #1a202c;
-  --text-secondary: #4a5568;
-  --text-muted: #718096;
-  --border: #e2e8f0;
-  --bg: #f7fafc;
-  --white: #ffffff;
-
-  /* Severity */
-  --success: #22a447;
-  --warning: #ffa500;
-  --danger: #ff6b35;
-  --critical: #ef4444;
-
-  /* Spacing */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --spacing-2xl: 48px;
-
-  /* Sizing */
-  --max-width: 1200px;
-  --border-radius: 8px;
-  --border-radius-lg: 12px;
-}
-    </div>
-
-    <footer>
-      <p>Sex Health News — Design System v1.0</p>
-      <p style="margin-top: 8px; font-size: 12px;">Last updated: June 2026 • For questions contact: design@sexhealthnew.com</p>
-    </footer>
   </div>
+
+  <hr>
+
+  <!-- ── LIGHT & DARK MODE PREVIEWS ── -->
+  <div class="section">
+    <h2 class="section-title">Light & Dark Mode</h2>
+    <p class="section-sub">Same content, two modes. Rose accent carries the brand in both.</p>
+
+    <div class="modes-grid">
+
+      <!-- Light mode -->
+      <div>
+        <p class="mode-label">Light Mode</p>
+        <div class="mock">
+          <div class="mock-header-light">
+            <div class="mock-brand-light">Sex Health News</div>
+            <div class="mock-nav">
+              <span class="mock-nav-item" style="color:#e11d48;border-bottom:2px solid #e11d48;padding-bottom:2px;">All</span>
+              <span class="mock-nav-item" style="color:#6b7280;">Sexual Health</span>
+              <span class="mock-nav-item" style="color:#6b7280;">LGBTQ+</span>
+            </div>
+            <span class="mock-btn">Register</span>
+          </div>
+          <div class="mock-body-light">
+            <div class="mock-card-light">
+              <div class="mock-card-img" style="background:linear-gradient(135deg,#e11d48,#9f1239);"></div>
+              <div class="mock-card-body">
+                <div class="mock-card-cat" style="color:#e11d48;">Sexual Health</div>
+                <div class="mock-card-title" style="color:#111827;">New study on STI prevention rates</div>
+              </div>
+            </div>
+            <div class="mock-card-light">
+              <div class="mock-card-img" style="background:#f3f4f6;"></div>
+              <div class="mock-card-body">
+                <div class="mock-card-cat" style="color:#e11d48;">LGBTQ+</div>
+                <div class="mock-card-title" style="color:#111827;">Rights legislation moves forward</div>
+              </div>
+            </div>
+            <div class="mock-card-light">
+              <div class="mock-card-img" style="background:#f3f4f6;"></div>
+              <div class="mock-card-body">
+                <div class="mock-card-cat" style="color:#e11d48;">Reproductive</div>
+                <div class="mock-card-title" style="color:#111827;">Access to care remains unequal</div>
+              </div>
+            </div>
+          </div>
+          <div class="mock-footer-light">
+            <span style="font-family:'DM Serif Display',Georgia,serif;font-size:14px;color:#fff;font-weight:700;">Sex Health News</span>
+            <span style="font-size:11px;color:#9ca3af;">© 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dark mode -->
+      <div>
+        <p class="mode-label">Dark Mode — Editorial</p>
+        <div class="mock">
+          <div class="mock-header-dark">
+            <div class="mock-brand-dark">Sex Health News</div>
+            <div class="mock-nav">
+              <span class="mock-nav-item" style="color:#fb7185;border-bottom:2px solid #fb7185;padding-bottom:2px;">All</span>
+              <span class="mock-nav-item" style="color:#6b7280;">Sexual Health</span>
+              <span class="mock-nav-item" style="color:#6b7280;">LGBTQ+</span>
+            </div>
+            <span class="mock-btn">Register</span>
+          </div>
+          <div class="mock-body-dark">
+            <div class="mock-card-dark">
+              <div class="mock-card-img" style="background:linear-gradient(135deg,#e11d48,#9f1239);"></div>
+              <div class="mock-card-body">
+                <div class="mock-card-cat" style="color:#fb7185;">Sexual Health</div>
+                <div class="mock-card-title" style="color:#f9fafb;">New study on STI prevention rates</div>
+              </div>
+            </div>
+            <div class="mock-card-dark">
+              <div class="mock-card-img" style="background:#374151;"></div>
+              <div class="mock-card-body">
+                <div class="mock-card-cat" style="color:#fb7185;">LGBTQ+</div>
+                <div class="mock-card-title" style="color:#f9fafb;">Rights legislation moves forward</div>
+              </div>
+            </div>
+            <div class="mock-card-dark">
+              <div class="mock-card-img" style="background:#374151;"></div>
+              <div class="mock-card-body">
+                <div class="mock-card-cat" style="color:#fb7185;">Reproductive</div>
+                <div class="mock-card-title" style="color:#f9fafb;">Access to care remains unequal</div>
+              </div>
+            </div>
+          </div>
+          <div class="mock-footer-dark">
+            <span style="font-family:'DM Serif Display',Georgia,serif;font-size:14px;color:#f9fafb;font-weight:700;">Sex Health News</span>
+            <span style="font-size:11px;color:#6b7280;">© 2026</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ── TYPOGRAPHY ── -->
+  <div class="section">
+    <h2 class="section-title">Typography</h2>
+    <p class="section-sub">DM Serif Display for editorial impact. DM Sans for clarity and readability.</p>
+
+    <div class="type-stack">
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-label">Display</div>
+          <div class="type-spec">DM Serif Display<br>38px / 1.15</div>
+        </div>
+        <div class="type-sample">
+          <div class="t-display">New Study Links Mental Health to Sexual Wellness</div>
+        </div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-label">Heading 1</div>
+          <div class="type-spec">DM Serif Display<br>28px / 1.2</div>
+        </div>
+        <div class="type-sample">
+          <div class="t-h1">Researchers Find Strong Link Between Anxiety and Intimacy</div>
+        </div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-label">Heading 2</div>
+          <div class="type-spec">DM Serif Display<br>22px / 1.3</div>
+        </div>
+        <div class="type-sample">
+          <div class="t-h2">Related Articles on Mental & Sexual Health</div>
+        </div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-label">Body</div>
+          <div class="type-spec">DM Sans 400<br>16px / 1.7</div>
+        </div>
+        <div class="type-sample">
+          <div class="t-body">A new peer-reviewed study reveals that adults between 18 and 35 who report higher anxiety are significantly more likely to experience disruptions in their sexual health. The findings suggest these areas are more deeply connected than previously understood.</div>
+        </div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-label">UI / Nav</div>
+          <div class="type-spec">DM Sans 600<br>13px</div>
+        </div>
+        <div class="type-sample">
+          <div class="t-ui">Sign in &nbsp;·&nbsp; Register &nbsp;·&nbsp; Save article &nbsp;·&nbsp; Share</div>
+        </div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-label">Category</div>
+          <div class="type-spec">DM Sans 700<br>11px / uppercase</div>
+        </div>
+        <div class="type-sample">
+          <div class="t-label">Sexual Health &amp; Wellness</div>
+        </div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-label">Meta</div>
+          <div class="type-spec">DM Sans 400<br>12px</div>
+        </div>
+        <div class="type-sample">
+          <div class="t-meta">Reuters &nbsp;·&nbsp; 4 min read &nbsp;·&nbsp; June 17, 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ── COMPONENTS ── -->
+  <div class="section">
+    <h2 class="section-title">Components</h2>
+    <p class="section-sub">Reusable UI elements with consistent styling.</p>
+
+    <div class="components-grid">
+
+      <!-- Buttons -->
+      <div class="component-card">
+        <p class="component-label">Buttons</p>
+        <div class="btn-row">
+          <button class="btn btn-primary">Register</button>
+          <button class="btn btn-dark">Read article</button>
+          <button class="btn btn-outline">Sign in</button>
+          <button class="btn btn-ghost">Save ↗</button>
+        </div>
+      </div>
+
+      <!-- Severity badges -->
+      <div class="component-card">
+        <p class="component-label">Severity Badges</p>
+        <div class="badge-row">
+          <span class="badge badge-low">Low</span>
+          <span class="badge badge-medium">Medium</span>
+          <span class="badge badge-high">High</span>
+          <span class="badge badge-critical">Critical</span>
+        </div>
+      </div>
+
+      <!-- Article card -->
+      <div class="component-card">
+        <p class="component-label">Article Card</p>
+        <div class="article-preview">
+          <div class="article-preview-img"></div>
+          <div class="article-preview-body">
+            <div class="cat-tag">Sexual Health &amp; Wellness</div>
+            <div class="article-preview-title">New Findings on STI Prevention Show Progress in Urban Centres</div>
+            <div class="article-preview-meta">Reuters · 3 min read · June 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nav active state -->
+      <div class="component-card">
+        <p class="component-label">Category Navigation</p>
+        <div style="display:flex;gap:0;border-bottom:1px solid #e5e7eb;">
+          <span style="padding:10px 14px;font-size:13px;font-weight:600;color:#e11d48;border-bottom:2px solid #e11d48;cursor:pointer;">All</span>
+          <span style="padding:10px 14px;font-size:13px;font-weight:500;color:#6b7280;cursor:pointer;">Sexual Health</span>
+          <span style="padding:10px 14px;font-size:13px;font-weight:500;color:#6b7280;cursor:pointer;">LGBTQ+</span>
+          <span style="padding:10px 14px;font-size:13px;font-weight:500;color:#6b7280;cursor:pointer;">Reproductive</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ── DESIGN PRINCIPLES ── -->
+  <div class="section">
+    <h2 class="section-title">Design Principles</h2>
+    <p class="section-sub">The rules behind every decision.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;">
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:24px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#e11d48;margin-bottom:8px;">Content First</div>
+        <div style="font-size:14px;color:#374151;line-height:1.6;">The design steps back. Articles, headlines, and images are the product — not the interface.</div>
+      </div>
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:24px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#e11d48;margin-bottom:8px;">One Accent</div>
+        <div style="font-size:14px;color:#374151;line-height:1.6;">Rose crimson is used sparingly — nav, buttons, category labels. Repetition on a neutral background makes it powerful.</div>
+      </div>
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:24px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#e11d48;margin-bottom:8px;">Trust Through Clarity</div>
+        <div style="font-size:14px;color:#374151;line-height:1.6;">Sensitive health topics demand an approachable, trustworthy tone. Clean type, generous whitespace, no clutter.</div>
+      </div>
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:24px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#e11d48;margin-bottom:8px;">Two Modes, One Brand</div>
+        <div style="font-size:14px;color:#374151;line-height:1.6;">Light mode for reading. Dark Editorial for atmosphere. The rose accent and serif type unify both experiences.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
 </body>
 </html>

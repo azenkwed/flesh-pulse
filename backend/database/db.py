@@ -4,7 +4,7 @@ from sqlalchemy import text
 
 DATABASE_URL = os.environ.get(
     "DATABASE_URL",
-    "postgresql+asyncpg://postgres:postgres@localhost:5432/flesh_pulse",
+    "postgresql+asyncpg://postgres:postgres@localhost:5432/sexhealthnews",
 )
 
 engine = create_async_engine(DATABASE_URL, echo=False, pool_pre_ping=True)

@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for flesh-pulse on 2026-06-14T22:44:12Z
+# fly.toml app configuration file generated for sex-health-news on 2026-06-14T22:44:12Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'flesh-pulse'
+app = 'sex-health-news'
 primary_region = 'iad'
 
 [build]

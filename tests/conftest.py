@@ -3,7 +3,7 @@ import os
 
 TEST_DB_URL = os.environ.get(
     "TEST_DATABASE_URL",
-    "postgresql+asyncpg://postgres:postgres@localhost:5432/flesh_pulse_test",
+    "postgresql+asyncpg://postgres:postgres@localhost:5432/sexhealthnews_test",
 )
 
 # Set required env vars before any app import

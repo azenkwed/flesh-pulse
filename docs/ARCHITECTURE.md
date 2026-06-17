@@ -116,9 +116,25 @@ next((c for c in CATEGORIES if c.replace(" ", "-").replace("&", "and").lower() =
 
 ## Full-text search
 
-SQLite FTS5 virtual table `articles_fts` — indexed on `title`, `description`, `ai_summary`, `tags`. Populated in the pipeline immediately after each article is written. The search route queries this table directly.
+PostgreSQL `tsvector` column (`search_vector`) on the `articles` table, with a GIN index and a `BEFORE INSERT OR UPDATE` trigger that keeps it current. Indexed on `title`, `description`, `ai_summary`, and `tags`.
+
+`init_db()` creates the column, GIN index, and trigger function on startup (`CREATE IF NOT EXISTS` — safe to re-run).
+
+Search queries use `plainto_tsquery('english', :q)` with `ts_rank` for relevance ordering. See `DATA_MODEL.md` for the full SQL and the `routes.py` query pattern.
 
 ---
+
+## Database connection
+
+`backend/database/db.py` reads `DATABASE_URL` from the environment and creates an async SQLAlchemy engine with `asyncpg`:
+
+```python
+engine = create_async_engine(os.environ["DATABASE_URL"], echo=False, pool_pre_ping=True)
+```
+
+`pool_pre_ping=True` detects stale connections — important for Supabase which closes idle connections after a timeout.
+
+For Supabase production with multiple Fly.io instances, use the pgBouncer Transaction mode pooler (port 6543) to avoid exhausting the Postgres connection limit. See `ENV_VARS.md` for the URL format.
 
 ## SSL on Windows
 

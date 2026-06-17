@@ -8,8 +8,28 @@ Copy `.env.example` to `.env` and fill in the required values before starting.
 
 | Variable | Purpose |
 |---|---|
-| `ANTHROPIC_API_KEY` | Claude API key — used for article curation and newsletter writing |
-| `JWT_SECRET_KEY` | Signs JWT cookies and session tokens. Generate with: `python -c "import secrets; print(secrets.token_hex(32))"` |
+| `ANTHROPIC_API_KEY` | Claude API key — article curation and newsletter writing |
+| `JWT_SECRET_KEY` | Signs JWT cookies and session tokens. Generate: `python -c "import secrets; print(secrets.token_hex(32))"` |
+| `DATABASE_URL` | Postgres connection string (see below) |
+
+### DATABASE_URL formats
+
+**Local Docker:**
+```
+DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:5432/flesh_pulse
+```
+
+**Supabase (production — direct connection, port 5432):**
+```
+DATABASE_URL=postgresql+asyncpg://postgres:[PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres
+```
+
+**Supabase (production — pgBouncer Transaction mode, port 6543 — use for multi-instance deploys):**
+```
+DATABASE_URL=postgresql+asyncpg://postgres.[PROJECT-REF]:[PASSWORD]@aws-0-eu-west-1.pooler.supabase.com:6543/postgres
+```
+
+Find your connection string in Supabase dashboard: **Project Settings → Database → Connection string**.
 
 ---
 
@@ -24,7 +44,7 @@ Copy `.env.example` to `.env` and fill in the required values before starting.
 | `ADMIN_PASSWORD` | — | Basic auth password for admin dashboard |
 | `DEBUG` | `false` | Enable uvicorn reload (dev only) |
 | `LOG_LEVEL` | `INFO` | Logging level |
-| `APP_URL` | `http://localhost:8000` | Base URL — used in email links and OAuth redirect URIs |
+| `APP_URL` | `http://localhost:8000` | Base URL for email links and OAuth redirect URIs |
 
 ---
 
@@ -34,7 +54,7 @@ Copy `.env.example` to `.env` and fill in the required values before starting.
 |---|---|---|
 | `COLLECTION_INTERVAL_MINUTES` | `60` | How often the pipeline runs |
 | `MIN_RELEVANCE_SCORE` | `0.65` | Articles below this score are rejected |
-| `ARTICLE_RETENTION_DAYS` | `0` (disabled) | Prune articles older than N days (0 = keep forever) |
+| `ARTICLE_RETENTION_DAYS` | `0` (disabled) | Prune articles older than N days |
 | `ALLOW_MANUAL_TRIGGER` | `true` | Enable `POST /api/trigger-collection` |
 | `DISABLE_NEWSAPI` | `false` | Skip NewsAPI collector — RSS feeds still run |
 
@@ -52,9 +72,9 @@ Copy `.env.example` to `.env` and fill in the required values before starting.
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `RESEND_API_KEY` | — | Transactional email. If unset, emails are silently skipped (dev mode). |
-| `FROM_EMAIL` | `Flesh Pulse <onboarding@resend.dev>` | Sender address. Use `onboarding@resend.dev` for testing; swap to verified domain for production. |
-| `CONTACT_EMAIL` | `contact@fleshpulse.com` | Recipient for contact form submissions |
+| `RESEND_API_KEY` | — | Transactional email. If unset, emails are silently skipped (logs a warning). |
+| `FROM_EMAIL` | `Flesh Pulse <onboarding@resend.dev>` | Sender. Use `onboarding@resend.dev` for testing; swap to verified domain for production. |
+| `CONTACT_EMAIL` | `contact@fleshpulse.com` | Recipient for contact form and DMCA/abuse reports |
 
 ---
 
@@ -88,8 +108,6 @@ http://localhost:8000/auth/microsoft/callback
 | `TWITTER_ACCESS_TOKEN` | — | OAuth 1.0a |
 | `TWITTER_ACCESS_TOKEN_SECRET` | — | OAuth 1.0a |
 
-Note: X/Twitter sign-in (OAuth 2.0) is disabled in code — posting tweets (OAuth 1.0a) is separate.
-
 ---
 
 ## Stripe (optional)
@@ -97,6 +115,14 @@ Note: X/Twitter sign-in (OAuth 2.0) is disabled in code — posting tweets (OAut
 | Variable | Purpose |
 |---|---|
 | `STRIPE_SECRET_KEY` | Membership payments and donations. Use `sk_test_...` for development. |
-| `STRIPE_WEBHOOK_SECRET` | For verifying Stripe webhook payloads |
+| `STRIPE_WEBHOOK_SECRET` | For verifying Stripe webhook event payloads |
 | `STRIPE_PRICE_ID_MEMBER` | Stripe Price ID for the Member tier |
 | `STRIPE_PRICE_ID_SUPPORTER` | Stripe Price ID for the Supporter tier |
+
+---
+
+## Testing
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `TEST_DATABASE_URL` | `postgresql+asyncpg://postgres:postgres@localhost:5432/flesh_pulse_test` | Postgres database used by pytest — separate from dev DB |

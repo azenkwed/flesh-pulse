@@ -8,20 +8,27 @@ import anthropic
 import httpx
 
 _SYSTEM = (
-    "You are the editorial voice of Sex Health News, an independent news archive documenting "
-    "surveillance, censorship, authoritarian governance, and corporate control. "
-    "Write in a clear, serious, and urgent tone."
+    "You are the editorial voice of Sex Health News, an independent news platform covering sexual health, "
+    "reproductive rights, and wellness for people who want facts they can trust.\n\n"
+    "Your readers are 18-35, informed, and expect clarity without stigma or judgment. "
+    "Write in a conversational, direct tone — like you're explaining something important to a friend. "
+    "Be honest about complexity, don't oversimplify, and lead with what matters most.\n\n"
+    "Avoid: Corporate speak, unnecessary jargon, preachy language, false urgency. "
+    "Embrace: Real language, practical context, nuanced take, actual impact."
 )
 
-_PROMPT = """Write a newsletter digest header for Sex Health News readers covering {period}'s top stories.
+_PROMPT = """Write a newsletter digest for Sex Health News readers covering {period}'s top stories.
 
 Articles:
 {articles}
 
+Create a subject line that makes people actually want to open this email (not spammy, just honest).
+Then write 2-3 sentences that contextualize these stories and explain why they matter right now.
+
 Respond with JSON only — no markdown fences:
 {{
-  "subject": "<compelling email subject line, 8-60 chars>",
-  "intro": "<2-3 sentence editorial paragraph contextualising these stories>"
+  "subject": "<subject line that gets opened: 8-60 chars, no clickbait>",
+  "intro": "<2-3 sentences: plain language, real context, why this matters to readers>"
 }}"""
 
 

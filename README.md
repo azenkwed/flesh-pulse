@@ -34,8 +34,10 @@ An automated news archive that continuously collects articles from global source
 
 ### Prerequisites
 - Python 3.10 or later
-- Docker (for PostgreSQL)
+- Docker (for PostgreSQL — all tools are containerized)
 - Anthropic API key ([console.anthropic.com](https://console.anthropic.com))
+
+**No need to install:** PostgreSQL CLI, postgresql-client, or any system tools — everything runs in Docker!
 
 ### Setup (first time)
 

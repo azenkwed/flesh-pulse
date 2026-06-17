@@ -239,10 +239,20 @@ Small (14px) / Medium (16px, default) / Large (18px) — applied to the `html` e
 
 PostgreSQL is managed via Docker. The database is created automatically when you run `docker-compose up -d`.
 
-### Inspect with PostgreSQL CLI
+### Browse and Query the Database
+
+**Option 1: pgAdmin UI (Recommended)** — No additional tools needed
+
+Open http://localhost:5050 and login with:
+- Email: `admin@example.com`
+- Password: `admin`
+
+You can browse tables, run queries, and manage the database graphically.
+
+**Option 2: PostgreSQL CLI (psql)** — Optional, if you have it installed
 
 ```bash
-# Connect to the database
+# Connect to the database (requires psql to be installed)
 psql -h localhost -U postgres -d sexhealthnews
 
 # List tables
@@ -253,14 +263,6 @@ SELECT count(*) FROM articles;
 SELECT category, count(*) FROM articles GROUP BY category;
 SELECT title, relevance_score, severity FROM articles ORDER BY collected_at DESC LIMIT 10;
 ```
-
-### Access pgAdmin UI
-
-Open http://localhost:5050 and login with:
-- Email: `admin@example.com`
-- Password: `admin`
-
-Browse and manage your database tables, run queries, and view database structure.
 
 Browse, query, and manage your database graphically.
 

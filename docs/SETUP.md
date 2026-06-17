@@ -166,10 +166,16 @@ No persistent volume needed — the database lives on Supabase, not on the Fly m
 ## Resetting the local database
 
 ```bash
-# Hard reset — drops and recreates the sexhealthnews database
+# Easiest method — remove volumes and recreate (recommended)
+docker compose down -v    # Remove containers and volumes
+docker compose up -d      # Recreate with fresh database
+make run                  # Tables are created automatically on startup
+```
+
+Alternative (if you have psql installed):
+```bash
 docker compose exec db psql -U postgres -c "DROP DATABASE IF EXISTS sexhealthnews;"
 docker compose exec db psql -U postgres -c "CREATE DATABASE sexhealthnews;"
-# Then restart the app — init_db() recreates all tables
 make run
 ```
 

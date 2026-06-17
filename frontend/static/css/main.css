@@ -8,7 +8,7 @@
   --border:      #e5e7eb;
   --bg:          #f9fafb;
   --white:       #ffffff;
-  --accent:      #0d9488;
+  --accent:      #e11d48;
   --sev-low:     #16a34a;
   --sev-medium:  #ca8a04;
   --sev-high:    #ea580c;
@@ -17,7 +17,7 @@
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   color: var(--text);
@@ -45,7 +45,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .brand-name {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'DM Serif Display', Georgia, serif;
   font-size: 30px;
   font-weight: 700;
   color: var(--text);
@@ -154,7 +154,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .hero-title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'DM Serif Display', Georgia, serif;
   font-size: 34px;
   font-weight: 700;
   line-height: 1.2;
@@ -325,7 +325,7 @@ img { max-width: 100%; height: auto; display: block; }
 .article-breadcrumb a:hover { text-decoration: underline; }
 
 .article-headline {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'DM Serif Display', Georgia, serif;
   font-size: 38px;
   font-weight: 700;
   line-height: 1.2;
@@ -539,7 +539,7 @@ body.modal-open { overflow: hidden; }
 }
 
 .auth-modal-title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'DM Serif Display', Georgia, serif;
   font-size: 24px;
   line-height: 1.25;
   margin-bottom: 10px;
@@ -652,7 +652,7 @@ body.modal-open { overflow: hidden; }
 .ai-summary {
   border-left: 3px solid var(--accent);
   padding: 14px 18px;
-  background: #f0f9ff;
+  background: #fff1f2;
   margin-bottom: 28px;
   border-radius: 0 4px 4px 0;
 }
@@ -746,7 +746,7 @@ body.modal-open { overflow: hidden; }
 }
 
 .page-header-title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'DM Serif Display', Georgia, serif;
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 4px;
@@ -881,7 +881,7 @@ body.modal-open { overflow: hidden; }
 }
 
 .error-title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'DM Serif Display', Georgia, serif;
   font-size: 28px;
   font-weight: 700;
   margin-bottom: 14px;
@@ -914,7 +914,7 @@ body.modal-open { overflow: hidden; }
 }
 
 .footer-brand {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'DM Serif Display', Georgia, serif;
   font-size: 20px;
   color: var(--white);
   font-weight: 700;
@@ -1103,7 +1103,7 @@ body.modal-open { overflow: hidden; }
 }
 
 .auth-title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'DM Serif Display', Georgia, serif;
   font-size: 26px;
   font-weight: 700;
   margin-bottom: 6px;
@@ -1192,7 +1192,7 @@ body.modal-open { overflow: hidden; }
 
 .auth-alert-error   { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
 .auth-alert-success { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
-.auth-alert-info    { background: #eff6ff; color: #0d9488; border: 1px solid #bfdbfe; }
+.auth-alert-info    { background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; }
 
 .auth-link {
   margin-top: 16px;
@@ -1266,7 +1266,7 @@ body.modal-open { overflow: hidden; }
 }
 
 .profile-title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'DM Serif Display', Georgia, serif;
   font-size: 28px;
   font-weight: 700;
   margin-bottom: 4px;
@@ -1460,14 +1460,14 @@ body.modal-open { overflow: hidden; }
   --border:     #374151;
   --bg:         #1f2937;
   --white:      #111827;
-  --accent:     #14b8a6;
+  --accent:     #fb7185;
 }
 
 [data-theme="dark"] .site-footer      { background: #1e293b; }
 [data-theme="dark"] .footer-brand     { color: #f3f4f6; }
 [data-theme="dark"] .footer-col-title { color: #f3f4f6; }
 
-[data-theme="dark"] .ai-summary { background: rgba(20, 184, 166, 0.08); }
+[data-theme="dark"] .ai-summary { background: rgba(225, 29, 72, 0.08); }
 
 [data-theme="dark"] .sev-badge.low      { background: #052e16; }
 [data-theme="dark"] .sev-badge.medium   { background: #422006; }

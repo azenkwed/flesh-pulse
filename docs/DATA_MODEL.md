@@ -1,4 +1,4 @@
-# Flesh Pulse — Data Model
+# Sex Health News — Data Model
 
 PostgreSQL via SQLAlchemy async ORM (`backend/database/models.py`). Seven tables.
 
@@ -9,7 +9,7 @@ PostgreSQL via SQLAlchemy async ORM (`backend/database/models.py`). Seven tables
 
 ## SQLite vs PostgreSQL — why PostgreSQL
 
-| Aspect | SQLite | Flesh Pulse (Postgres) |
+| Aspect | SQLite | Sex Health News (Postgres) |
 |---|---|---|
 | Full-text search | FTS5 virtual table | `tsvector` column + GIN index + trigger |
 | JSON fields | `Text` + `json.loads()` | `JSONB` — native indexable JSON |

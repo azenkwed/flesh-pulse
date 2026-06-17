@@ -32,7 +32,7 @@ async def main() -> None:
         failed = 0
 
         async with httpx.AsyncClient(
-            headers={"User-Agent": "Mozilla/5.0 (compatible; Flesh Pulse/1.0; +https://fleshpulse.com)"},
+            headers={"User-Agent": "Mozilla/5.0 (compatible; SexHealthNews/1.0; +https://sexhealthnew.com)"},
             verify=False,
         ) as client:
             for article in rows:

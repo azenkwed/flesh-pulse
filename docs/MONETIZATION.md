@@ -1,8 +1,8 @@
-# Flesh Pulse — Monetization
+# Sex Health News — Monetization
 
 ## Core principle
 
-Flesh Pulse's audience — sex workers, researchers, health professionals, activists, and informed adults — chose an independent platform. Every monetization decision must preserve editorial independence. **No display ads. No sponsored content.**
+Sex Health News's audience — sex workers, researchers, health professionals, activists, and informed adults — chose an independent platform. Every monetization decision must preserve editorial independence. **No display ads. No sponsored content.**
 
 ---
 
@@ -22,7 +22,7 @@ Flesh Pulse's audience — sex workers, researchers, health professionals, activ
 
 ### 2. API access
 
-The Flesh Pulse database is a structured, AI-curated dataset of sexuality news across categories. Commercial value exists for:
+The Sex Health News database is a structured, AI-curated dataset of sexuality news across categories. Commercial value exists for:
 
 - Academic researchers and universities studying sexuality
 - NGOs working on sex work policy or reproductive rights

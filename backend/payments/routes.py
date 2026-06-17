@@ -56,7 +56,7 @@ async def donate_checkout(amount: int = Form(...)):
                 "currency": "eur",
                 "unit_amount": amount * 100,
                 "product_data": {
-                    "name": "Support Flesh Pulse",
+                    "name": "Support Sex Health News",
                     "description": "Independent reporting on surveillance, censorship, and authoritarian control.",
                 },
             },

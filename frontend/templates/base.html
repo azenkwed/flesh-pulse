@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{% block title %}Flesh Pulse{% endblock %}</title>
-  <meta name="description" content="{% block meta_description %}Tracking real-world surveillance, censorship, authoritarian governance, and corporate control.{% endblock %}" />
-  <meta property="og:site_name" content="Flesh Pulse" />
+  <title>{% block title %}Sex Health News{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Independent reporting on sexual health, rights, and wellness for all.{% endblock %}" />
+  <meta property="og:site_name" content="Sex Health News" />
   <meta property="og:type" content="{% block og_type %}website{% endblock %}" />
-  <meta property="og:title" content="{% block og_title %}Flesh Pulse{% endblock %}" />
-  <meta property="og:description" content="{% block og_description %}Tracking real-world surveillance, censorship, authoritarian governance, and corporate control.{% endblock %}" />
+  <meta property="og:title" content="{% block og_title %}Sex Health News{% endblock %}" />
+  <meta property="og:description" content="{% block og_description %}Independent reporting on sexual health, rights, and wellness for all.{% endblock %}" />
   <meta property="og:image" content="{% block og_image %}/static/icons/social-800.png{% endblock %}" />
   <meta property="og:url" content="{{ request.url }}" />
   <link rel="canonical" href="{{ request.url }}" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="{% block twitter_title %}Flesh Pulse{% endblock %}" />
-  <meta name="twitter:description" content="{% block twitter_description %}Tracking real-world surveillance, censorship, authoritarian governance, and corporate control.{% endblock %}" />
+  <meta name="twitter:title" content="{% block twitter_title %}Sex Health News{% endblock %}" />
+  <meta name="twitter:description" content="{% block twitter_description %}Independent reporting on sexual health, rights, and wellness for all.{% endblock %}" />
   <meta name="twitter:image" content="{% block twitter_image %}/static/icons/social-800.png{% endblock %}" />
   <meta name="theme-color" content="#111827" />
   <meta name="readable" content="false" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Flesh Pulse" />
+  <meta name="apple-mobile-web-app-title" content="Sex Health News" />
   <link rel="manifest" href="/static/manifest.json" />
   <link rel="icon" href="/static/favicon.ico" sizes="any" />
   <link rel="icon" href="/static/icons/favicon-32.png" type="image/png" sizes="32x32" />
@@ -46,8 +46,8 @@
   <div class="header-top">
     <div>
       <a href="/">
-        <span class="brand-name">Flesh Pulse</span>
-        <span class="brand-tagline">Independent reporting on surveillance, censorship, and authoritarian control</span>
+        <span class="brand-name">Sex Health News</span>
+        <span class="brand-tagline">Independent reporting on sexual health, rights, and wellness for all</span>
       </a>
     </div>
     <div class="header-right">
@@ -77,7 +77,7 @@
           <a href="/register" class="auth-nav-register">Register</a>
         {% endif %}
       </nav>
-      <a href="https://x.com/flesh-pulse" target="_blank" rel="noopener noreferrer" class="header-x-link" aria-label="Follow Flesh Pulse on X">
+      <a href="https://x.com/sexhealthnew" target="_blank" rel="noopener noreferrer" class="header-x-link" aria-label="Follow Sex Health News on X">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="16" height="16" fill="currentColor"><path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66"/></svg>
       </a>
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
@@ -115,7 +115,7 @@
       {% endfor %}
     </nav>
     <div class="mobile-nav-auth">
-      {% if stripe_enabled %}<a href="/donate" class="mobile-nav-link" style="color:#b91c1c;font-weight:600;">Support Flesh Pulse</a>{% endif %}
+      {% if stripe_enabled %}<a href="/donate" class="mobile-nav-link" style="color:#b91c1c;font-weight:600;">Support Sex Health News</a>{% endif %}
       {% if current_user %}
         <a href="/saved" class="mobile-nav-link">Saved articles</a>
         <a href="/profile" class="mobile-nav-link">{{ current_user.display_name or current_user.email }}</a>
@@ -137,8 +137,8 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <div>
-      <div class="footer-brand">Flesh Pulse</div>
-      <p class="footer-desc">An independent archive documenting real-world events involving surveillance, censorship, authoritarian governance, and corporate control. All articles are sourced from public news outlets.</p>
+      <div class="footer-brand">Sex Health News</div>
+      <p class="footer-desc">An independent archive providing comprehensive reporting on sexual health, reproductive rights, and wellness. All articles are sourced from public news outlets.</p>
     </div>
     <div>
       <div class="footer-col-title">Categories</div>
@@ -154,12 +154,12 @@
         <li><a href="/">Home</a></li>
         <li><a href="/search">Search</a></li>
         <li><a href="/contact">Contact</a></li>
-        <li><a href="/donate">Support Flesh Pulse</a></li>
+        <li><a href="/donate">Support Sex Health News</a></li>
         <li><a href="/privacy">Privacy Policy</a></li>
         <li><a href="/terms">Terms of Service</a></li>
       </ul>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;">
-        <a href="https://x.com/flesh-pulse" target="_blank" rel="noopener noreferrer" class="social-pill social-pill--x">
+        <a href="https://x.com/sexhealthnew" target="_blank" rel="noopener noreferrer" class="social-pill social-pill--x">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="14" height="14" fill="currentColor"><path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66"/></svg>
           Follow us on X
         </a>
@@ -168,7 +168,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    © {{ now().year }} Flesh Pulse — All information is a matter of public record.
+    © {{ now().year }} Sex Health News — All information is a matter of public record.
   </div>
 </footer>
 

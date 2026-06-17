@@ -96,7 +96,7 @@ async def fetch_feed(client: httpx.AsyncClient, feed_config: dict[str, str]) -> 
 
 async def collect_all() -> list[dict[str, Any]]:
     async with httpx.AsyncClient(
-        headers={"User-Agent": "Mozilla/5.0 (compatible; FleshPulse/1.0; +https://fleshpulse.com)"},
+        headers={"User-Agent": "Mozilla/5.0 (compatible; SexHealthNews/1.0; +https://sexhealthnew.com)"},
         verify=sys.platform != "win32",
     ) as client:
         tasks = [fetch_feed(client, feed) for feed in RSS_FEEDS]

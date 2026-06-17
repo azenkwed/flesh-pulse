@@ -5,13 +5,13 @@ import pytest
 async def test_home_empty(client):
     resp = await client.get("/")
     assert resp.status_code == 200
-    assert b"Flesh Pulse" in resp.content
+    assert b"Sex Health News" in resp.content
 
 
 async def test_home_with_articles(client, sample_article):
     resp = await client.get("/")
     assert resp.status_code == 200
-    assert b"Flesh Pulse" in resp.content
+    assert b"Sex Health News" in resp.content
 
 
 async def test_home_pagination_page_1(client, sample_article):

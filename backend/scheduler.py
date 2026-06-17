@@ -23,7 +23,7 @@ async def _tweet_featured(session, featured_pairs: list[tuple]) -> None:
 
     app_url = os.getenv("APP_URL", "http://localhost:8000")
     is_local = app_url.startswith("http://localhost") or app_url.startswith("http://127.")
-    twitter_handle = os.getenv("TWITTER_HANDLE", "flesh-pulse")
+    twitter_handle = os.getenv("TWITTER_HANDLE", "sexhealthnew")
     max_per_run = int(os.getenv("TWITTER_MAX_PER_RUN", "1"))
 
     # Highest relevance score first, capped to max_per_run

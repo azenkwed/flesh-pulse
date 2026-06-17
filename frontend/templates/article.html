@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% import "macros.html" as ui %}
-{% block title %}{{ article.title }} — Flesh Pulse{% endblock %}
+{% block title %}{{ article.title }} — Sex Health News{% endblock %}
 {% block og_type %}article{% endblock %}
 {% block og_title %}{{ article.title }}{% endblock %}
 {% block og_description %}{{ (article.ai_summary or article.description or '')[:200] }}{% endblock %}
@@ -24,7 +24,7 @@
   "articleSection": {{ article.category | tojson }},
   "publisher": {
     "@type": "Organization",
-    "name": "Flesh Pulse",
+    "name": "Sex Health News",
     "url": "{{ request.base_url }}"
   }
 }

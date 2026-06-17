@@ -1,4 +1,4 @@
-# Flesh Pulse — Architecture
+# Sex Health News — Architecture
 
 Two FastAPI processes, one SQLite database, one AI pipeline.
 

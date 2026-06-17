@@ -355,7 +355,7 @@ async def submit_contact(
         "categories": CATEGORIES,
         "last_updated": _last_updated(),
         "current_user": current_user,
-        "error": "We could not send your message right now. Please email contact@fleshpulse.com directly.",
+        "error": "We could not send your message right now. Please email contact@sexhealthnew.com directly.",
         **form_values,
     })
 

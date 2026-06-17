@@ -1,8 +1,8 @@
-# Flesh Pulse — Project Overview
+# Sex Health News — Project Overview
 
 ## What it is
 
-Flesh Pulse is an AI-powered news aggregator for sexuality, sexual health, and the adult industry. It collects articles from curated RSS feeds and keyword sources, sends each one to Claude for relevance scoring and categorization, and presents the filtered result as a clean, browsable feed.
+Sex Health News is an AI-powered news aggregator for sexuality, sexual health, and the adult industry. It collects articles from curated RSS feeds and keyword sources, sends each one to Claude for relevance scoring and categorization, and presents the filtered result as a clean, browsable feed.
 
 It shares its pipeline architecture with another aggregator project — same tech stack, different editorial lens.
 
@@ -38,7 +38,7 @@ It shares its pipeline architecture with another aggregator project — same tec
 ## Repository structure
 
 ```
-flesh-pulse/
+sexhealthnews/
 ├── main.py                        # App entrypoint
 ├── backend/
 │   ├── collectors/

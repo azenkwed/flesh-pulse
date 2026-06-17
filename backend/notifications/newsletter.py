@@ -23,13 +23,13 @@ _MAX_ARTICLES = 10
 
 _WRAPPER = """
 <div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;padding:40px 20px;color:#111827;">
-  <div style="font-size:22px;font-weight:700;margin-bottom:4px;">Flesh Pulse</div>
+  <div style="font-size:22px;font-weight:700;margin-bottom:4px;">Sex Health News</div>
   <p style="color:#9ca3af;font-size:11px;margin-bottom:36px;text-transform:uppercase;letter-spacing:0.05em;">
     Independent reporting on surveillance, censorship, and authoritarian control
   </p>
   {body}
   <p style="margin-top:40px;font-size:11px;color:#9ca3af;border-top:1px solid #e5e7eb;padding-top:16px;">
-    You're receiving this because you subscribed to the {frequency} digest on Flesh Pulse.
+    You're receiving this because you subscribed to the {frequency} digest on Sex Health News.
     <a href="{profile_url}" style="color:#9ca3af;">Manage preferences</a>
   </p>
 </div>
@@ -135,7 +135,7 @@ async def send_newsletters(frequency: str) -> None:
                 skipped += 1
                 continue
 
-        subject = copy.get("subject") or f"Flesh Pulse {frequency.title()} Digest"
+        subject = copy.get("subject") or f"Sex Health News {frequency.title()} Digest"
         intro = html.escape(copy.get("intro") or "")
 
         rows_html = "".join(_article_row(a) for a in articles)
@@ -148,7 +148,7 @@ async def send_newsletters(frequency: str) -> None:
             f'<p style="margin-top:8px;">'
             f'<a href="{APP_URL}" style="display:inline-block;padding:10px 24px;'
             f'background:#111827;color:#fff;text-decoration:none;font-weight:600;font-size:13px;">'
-            f'Read more on Flesh Pulse</a></p>'
+            f'Read more on Sex Health News</a></p>'
         )
         email_html = _WRAPPER.format(body=body, frequency=frequency, profile_url=f"{APP_URL}/profile")
 
@@ -214,6 +214,6 @@ async def preview_newsletter(frequency: str = "daily") -> str:
         f'<p style="margin-top:8px;">'
         f'<a href="{APP_URL}" style="display:inline-block;padding:10px 24px;'
         f'background:#111827;color:#fff;text-decoration:none;font-weight:600;font-size:13px;">'
-        f'Read more on Flesh Pulse</a></p>'
+        f'Read more on Sex Health News</a></p>'
     )
     return _WRAPPER.format(body=body, frequency=frequency, profile_url=f"{APP_URL}/profile")

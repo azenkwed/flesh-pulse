@@ -5,18 +5,18 @@ import os
 import resend
 
 resend.api_key = os.getenv("RESEND_API_KEY", "")
-FROM_EMAIL = os.getenv("FROM_EMAIL", "Flesh Pulse <onboarding@resend.dev>")
+FROM_EMAIL = os.getenv("FROM_EMAIL", "Sex Health News <onboarding@resend.dev>")
 APP_URL = os.getenv("APP_URL", "http://localhost:8000")
 
 _WRAPPER = """
 <div style="font-family:Georgia,serif;max-width:520px;margin:0 auto;padding:40px 20px;color:#111827;">
-  <div style="font-size:22px;font-weight:700;margin-bottom:4px;">Flesh Pulse</div>
+  <div style="font-size:22px;font-weight:700;margin-bottom:4px;">Sex Health News</div>
   <p style="color:#9ca3af;font-size:11px;margin-bottom:36px;text-transform:uppercase;letter-spacing:0.05em;">
     Independent reporting on surveillance, censorship, and authoritarian control
   </p>
   {body}
   <p style="margin-top:40px;font-size:11px;color:#9ca3af;border-top:1px solid #e5e7eb;padding-top:16px;">
-    You received this email because an account was created or a request was made at fleshpulse.com.
+    You received this email because an account was created or a request was made at sexhealthnew.com.
   </p>
 </div>
 """
@@ -48,7 +48,7 @@ def send_verification_email(to: str, token: str) -> bool:
         Verify my email
       </a>
     """
-    return _send(to, "Verify your Flesh Pulse account", _WRAPPER.format(body=body))
+    return _send(to, "Verify your Sex Health News account", _WRAPPER.format(body=body))
 
 
 def send_password_reset_email(to: str, token: str) -> bool:
@@ -65,11 +65,11 @@ def send_password_reset_email(to: str, token: str) -> bool:
         Reset my password
       </a>
     """
-    return _send(to, "Reset your Flesh Pulse password", _WRAPPER.format(body=body))
+    return _send(to, "Reset your Sex Health News password", _WRAPPER.format(body=body))
 
 
 def send_contact_message(name: str, email: str, topic: str, message: str) -> bool:
-    to = os.getenv("CONTACT_EMAIL", "contact@fleshpulse.com")
+    to = os.getenv("CONTACT_EMAIL", "contact@sexhealthnew.com")
     safe_name = html.escape(name)
     safe_email = html.escape(email)
     safe_topic = html.escape(topic)
@@ -83,4 +83,4 @@ def send_contact_message(name: str, email: str, topic: str, message: str) -> boo
         {safe_message}
       </div>
     """
-    return _send(to, f"Flesh Pulse contact: {topic}", _WRAPPER.format(body=body))
+    return _send(to, f"Sex Health News contact: {topic}", _WRAPPER.format(body=body))

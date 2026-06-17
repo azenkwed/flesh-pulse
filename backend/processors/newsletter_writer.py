@@ -8,12 +8,12 @@ import anthropic
 import httpx
 
 _SYSTEM = (
-    "You are the editorial voice of Flesh Pulse, an independent news archive documenting "
+    "You are the editorial voice of Sex Health News, an independent news archive documenting "
     "surveillance, censorship, authoritarian governance, and corporate control. "
     "Write in a clear, serious, and urgent tone."
 )
 
-_PROMPT = """Write a newsletter digest header for Flesh Pulse readers covering {period}'s top stories.
+_PROMPT = """Write a newsletter digest header for Sex Health News readers covering {period}'s top stories.
 
 Articles:
 {articles}

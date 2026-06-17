@@ -1,15 +1,15 @@
-# Flesh Pulse — Roadmap
+# Sex Health News — Roadmap
 
 ---
 
 ## Phase 1 — Fork & adapt (week 1)
 
-- [x] Fork codebase and adapt for Flesh Pulse
-- [x] Replace `CATEGORIES` in `curator.py` and `routes.py` with Flesh Pulse categories (see `CATEGORIES.md`)
+- [x] Fork codebase and adapt for Sex Health News
+- [x] Replace `CATEGORIES` in `curator.py` and `routes.py` with Sex Health News categories (see `CATEGORIES.md`)
 - [x] Rewrite curator system prompt for sexuality/health editorial lens
 - [x] Replace `RSS_FEEDS` list with sources from `SOURCES.md`
 - [x] Add Google News RSS keyword feeds
-- [x] Update all brand strings to "Flesh Pulse"
+- [x] Update all brand strings to "Sex Health News"
 - [x] Switch database layer to PostgreSQL + asyncpg (Supabase)
 - [ ] Replace category default images
 - [ ] Update privacy policy and terms of service templates
@@ -30,7 +30,7 @@
 ## Phase 3 — Launch (week 2–3)
 
 - [ ] Deploy to Fly.io (`fly launch` + persistent volume for SQLite)
-- [ ] Configure custom domain (fleshpulse.com or aphrodiqa.com)
+- [ ] Configure custom domain (sexhealthnew.com or aphrodiqa.com)
 - [ ] Set up Resend with verified domain for transactional email
 - [ ] First pipeline run — review accepted articles manually
 - [ ] Tune `MIN_RELEVANCE_SCORE` based on initial results

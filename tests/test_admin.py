@@ -66,7 +66,7 @@ async def test_admin_dashboard_wrong_password(admin_client):
 async def test_admin_dashboard_loads(admin_client):
     resp = await admin_client.get("/", headers=_basic_auth())
     assert resp.status_code == 200
-    assert b"Flesh Pulse" in resp.content or b"Admin" in resp.content or b"Dashboard" in resp.content
+    assert b"Sex Health News" in resp.content or b"Admin" in resp.content or b"Dashboard" in resp.content
 
 
 async def test_admin_articles_list(admin_client):

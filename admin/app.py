@@ -23,7 +23,7 @@ class BasicAuthMiddleware(BaseHTTPMiddleware):
         if not password:
             return Response(
                 status_code=401,
-                headers={"WWW-Authenticate": 'Basic realm="Flesh Pulse Admin"'},
+                headers={"WWW-Authenticate": 'Basic realm="Sex Health News Admin"'},
                 content="ADMIN_PASSWORD is not configured.",
             )
         auth = request.headers.get("Authorization", "")
@@ -37,7 +37,7 @@ class BasicAuthMiddleware(BaseHTTPMiddleware):
                 pass
         return Response(
             status_code=401,
-            headers={"WWW-Authenticate": 'Basic realm="Flesh Pulse Admin"'},
+            headers={"WWW-Authenticate": 'Basic realm="Sex Health News Admin"'},
         )
 
 
@@ -47,7 +47,7 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(title="Flesh Pulse Admin", lifespan=lifespan)
+app = FastAPI(title="Sex Health News Admin", lifespan=lifespan)
 app.add_middleware(BasicAuthMiddleware)
 app.mount("/static", StaticFiles(directory="admin/static"), name="static")
 app.include_router(router)

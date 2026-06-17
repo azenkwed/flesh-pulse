@@ -1,8 +1,8 @@
-# Flesh Pulse
+# Sex Health News
 
-Independent reporting on surveillance, censorship, and authoritarian control.
+Independent reporting on sexual health, rights, and wellness for all.
 
-Live at **[fleshpulse.com](https://fleshpulse.com)**
+Live at **[sexhealthnew.com](https://sexhealthnew.com)**
 
 An automated news archive that continuously collects articles from global sources, curates and categorizes them, and publishes them through a clean editorial web interface.
 
@@ -20,21 +20,21 @@ An automated news archive that continuously collects articles from global source
 
 | Category | Examples |
 |---|---|
-| Surveillance & Privacy | Mass monitoring, facial recognition, biometric databases |
-| Censorship & Information Control | Internet shutdowns, journalist arrests, propaganda |
-| Authoritarian Governance | Emergency powers, political detention, rigged elections |
-| Corporate Control | Monopoly abuse, algorithmic manipulation, data exploitation |
-| Climate Collapse | Displacement, resource wars, environmental authoritarianism |
-| AI & Technology Control | Autonomous weapons, deepfakes, predictive policing |
-| Economic Oppression | Debt bondage, forced labor, extreme inequality |
-| War & Militarization | Extrajudicial action, indefinite detention, arms escalation |
-| Biopolitics & Body Control | Forced procedures, reproductive rights rollbacks, population control |
+| Sexual Health & Wellness | Sexual function, sexual satisfaction, menstrual health, fertility, PCOS, endometriosis |
+| Reproductive Health & Policy | Abortion access, contraception regulation, family planning laws |
+| Maternal & Child Health | Pregnancy care, childbirth, postpartum care, maternal mortality, child sexual health |
+| Infectious Diseases & STIs | HIV/AIDS, STI testing and treatment, viral infections, prevention strategies |
+| Mental Health & Sexuality | Body image, anxiety, depression, sexual dysfunction, relationships |
+| LGBTQ+ Rights & Issues | Legal rights, discrimination, same-sex marriage, trans healthcare, gender identity |
+| Sex Education & Literacy | School curriculum, public awareness campaigns, misinformation |
+| Sexual Violence & Consent | Assault, harassment, survivor support, consent education |
+| Sex Workers & Adult Industry | Sex work legalization, labor protections, content creators, industry safety |
 
 ## Quick start
 
 ```bash
 # 1. Clone and enter the project
-cd flesh-pulse
+cd sexhealthnews
 
 # 2. Configure API keys
 cp .env.example .env
@@ -76,7 +76,7 @@ Open `http://127.0.0.1:8001` to:
 ## Project structure
 
 ```
-flesh-pulse/
+sexhealthnews/
 ├── main.py                          # App entry point, scheduler startup
 ├── admin/                           # Local admin dashboard (port 8001)
 ├── run.bat / run_admin.bat          # Windows launchers
@@ -103,7 +103,7 @@ flesh-pulse/
 │       ├── css/main.css             # Stylesheet
 │       └── js/main.js               # Minimal frontend JS
 └── data/
-    └── flesh-pulse.db                 # SQLite database (auto-created, git-ignored)
+    └── sexhealthnews.db               # SQLite database (auto-created, git-ignored)
 ```
 
 ## REST API
@@ -138,7 +138,7 @@ ARTICLE_RETENTION_DAYS=0
 
 # Email (Resend — leave empty to disable)
 RESEND_API_KEY=
-FROM_EMAIL=Flesh Pulse <noreply@fleshpulse.com>
+FROM_EMAIL=Sex Health News <noreply@sexhealthnew.com>
 
 # OAuth (leave empty to disable a provider)
 GOOGLE_CLIENT_ID=
@@ -177,16 +177,16 @@ fly deploy
 
 ```bash
 # Add certs
-fly certs add fleshpulse.com -a flesh-pulse
-fly certs add www.fleshpulse.com -a flesh-pulse
+fly certs add sexhealthnew.com -a sexhealthnews
+fly certs add www.sexhealthnew.com -a sexhealthnews
 
 # Update APP_URL secret
-fly secrets set APP_URL=https://fleshpulse.com -a flesh-pulse
+fly secrets set APP_URL=https://sexhealthnew.com -a sexhealthnews
 ```
 
 In your DNS provider add:
-- `A` record: `@` → your Fly.io v4 IP (`fly ips list -a flesh-pulse`)
+- `A` record: `@` → your Fly.io v4 IP (`fly ips list -a sexhealthnews`)
 - `AAAA` record: `@` → your Fly.io v6 IP
-- `CNAME` record: `www` → `flesh-pulse.fly.dev.`
+- `CNAME` record: `www` → `sexhealthnews.fly.dev.`
 
 See `docs/OAUTH_SETUP.md` → Production checklist for updating OAuth redirect URIs after deploying.

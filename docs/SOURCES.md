@@ -1,4 +1,4 @@
-# Flesh Pulse — Content Sources
+# Sex Health News — Content Sources
 
 Sources are defined in `backend/collectors/rss_collector.py` as the `RSS_FEEDS` list. Each entry has `url`, `country`, and `name`.
 

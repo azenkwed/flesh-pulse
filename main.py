@@ -1,4 +1,4 @@
-"""Flesh Pulse — entry point."""
+"""Sex Health News — entry point."""
 import logging
 import os
 import sys
@@ -56,8 +56,8 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="Flesh Pulse",
-    description="Independent news archive tracking surveillance, censorship, and authoritarian control",
+    title="Sex Health News",
+    description="Independent reporting on sexual health, rights, and wellness for all",
     lifespan=lifespan,
 )
 

@@ -1,4 +1,4 @@
-"""Shared fixtures for the Flesh Pulse test suite."""
+"""Shared fixtures for the Sex Health News test suite."""
 import os
 
 TEST_DB_URL = os.environ.get(

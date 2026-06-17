@@ -7,39 +7,41 @@ from typing import Any
 import anthropic
 
 CATEGORIES = {
-    "SEXUAL_HEALTH":       "Sexual Health & Education",
-    "SEX_WORK":            "Sex Work & Policy",
-    "ADULT_INDUSTRY":      "Adult Industry",
-    "LGBTQ_SEXUALITY":     "LGBTQ+ & Queer Sexuality",
-    "RELATIONSHIPS":       "Relationships & Intimacy",
-    "CENSORSHIP_MORALITY": "Censorship & Morality",
-    "BODY_AUTONOMY":       "Body Autonomy & Rights",
-    "SCIENCE_RESEARCH":    "Science & Research",
-    "NONE":                "Not Relevant",
+    "SEXUAL_HEALTH":           "Sexual Health & Wellness",
+    "REPRODUCTIVE_HEALTH":     "Reproductive Health & Policy",
+    "MATERNAL_CHILD_HEALTH":   "Maternal & Child Health",
+    "INFECTIOUS_DISEASES":     "Infectious Diseases & STIs",
+    "MENTAL_HEALTH":           "Mental Health & Sexuality",
+    "LGBTQ_RIGHTS":            "LGBTQ+ Rights & Issues",
+    "SEX_EDUCATION":           "Sex Education & Literacy",
+    "SEXUAL_VIOLENCE":         "Sexual Violence & Consent",
+    "SEX_WORKERS_INDUSTRY":    "Sex Workers & Adult Industry",
+    "NONE":                    "Not Relevant",
 }
 
 SEVERITY_LEVELS = ["low", "medium", "high", "critical"]
 
-SYSTEM_PROMPT = """You are the editorial AI for Flesh Pulse, an independent news aggregator covering sexuality, sexual health, sex work, and the adult industry. Your role is to evaluate news articles and determine whether they are relevant to this editorial mission.
+SYSTEM_PROMPT = """You are the editorial AI for Sex Health News, an independent news aggregator providing comprehensive reporting on sexual health, reproductive rights, and wellness. Your role is to evaluate news articles and determine whether they are relevant to this editorial mission.
 
 A relevant article covers real events or findings involving:
-- Sexual health: STIs, contraception, sex education policy, reproductive health research
-- Sex work: decriminalization efforts, FOSTA-SESTA effects, performer rights, trafficking vs. consensual distinctions
-- Adult industry: business news, platform policy, regulation, performer welfare (XBIZ, AVN territory)
-- LGBTQ+ sexuality: queer identity, same-sex rights, conversion therapy bans, trans sexuality
-- Relationships & intimacy: dating culture, consent, attachment research, intimacy science
-- Censorship & morality: platform content moderation, obscenity law, age verification legislation, moral panic
-- Body autonomy: abortion, reproductive coercion, bodily integrity rights
-- Science & research: academic sexology, psychology of sexuality, clinical studies
+- Sexual health & wellness: sexual function, satisfaction, menstrual health, fertility, PCOS, endometriosis, sexual health research
+- Reproductive health & policy: abortion access, contraception regulation, family planning laws, reproductive medicine
+- Maternal & child health: pregnancy care, childbirth, postpartum care, maternal mortality, child sexual health education
+- Infectious diseases & STIs: HIV/AIDS, STI testing and treatment, viral infections, prevention strategies
+- Mental health & sexuality: body image, anxiety, depression, sexual dysfunction, relationships, sexual psychology
+- LGBTQ+ rights & issues: legal rights, discrimination, same-sex marriage, trans healthcare, gender identity
+- Sex education & literacy: school curriculum, public awareness campaigns, misinformation debunking
+- Sexual violence & consent: assault, harassment, survivor support, consent education
+- Sex workers & adult industry: sex work legalization, labor protections, content creators, industry safety
 
 HARD REJECT — score 0.0 regardless of other factors:
 - Any content involving minors in a sexual context
-- Generic politics, crime, or business news with no sexuality angle
-- Celebrity gossip with no substantive health, rights, or industry dimension
+- Generic politics, crime, or business news with no sexual health, rights, or wellness angle
+- Celebrity gossip with no substantive health, rights, or educational dimension
 
 Evaluate each article and respond with JSON only — no explanation, no markdown."""
 
-EVAL_PROMPT = """Evaluate this news article for relevance to Flesh Pulse.
+EVAL_PROMPT = """Evaluate this news article for relevance to Sex Health News.
 
 Title: {title}
 Source: {source}
@@ -49,7 +51,7 @@ Content: {content}
 Respond with this exact JSON structure:
 {{
   "relevance_score": <float 0.0-1.0, how strongly relevant>,
-  "category": <one of: SEXUAL_HEALTH, SEX_WORK, ADULT_INDUSTRY, LGBTQ_SEXUALITY, RELATIONSHIPS, CENSORSHIP_MORALITY, BODY_AUTONOMY, SCIENCE_RESEARCH, NONE>,
+  "category": <one of: SEXUAL_HEALTH, REPRODUCTIVE_HEALTH, MATERNAL_CHILD_HEALTH, INFECTIOUS_DISEASES, MENTAL_HEALTH, LGBTQ_RIGHTS, SEX_EDUCATION, SEXUAL_VIOLENCE, SEX_WORKERS_INDUSTRY, NONE>,
   "severity": <one of: low, medium, high, critical>,
   "tags": [<up to 5 short descriptive tags>],
   "summary": <one sentence: what makes this relevant, or why it does not qualify>

@@ -45,7 +45,7 @@ magick input.png \
   -font /System/Library/Fonts/Supplemental/Arial.ttf -pointsize 32 \
   -fill "rgba(255,255,255,0.72)" \
   -undercolor "rgba(0,0,0,0.35)" \
-  -annotate +32+32 "© 2026 Flesh Pulse" \
+  -annotate +32+32 "© 2026 Sex Health News" \
   -quality 85 output.webp
 ```
 

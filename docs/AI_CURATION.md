@@ -1,4 +1,4 @@
-# Flesh Pulse — AI Curation
+# Sex Health News — AI Curation
 
 The curator (`backend/processors/curator.py`) sends each new article to Claude Haiku and gets back a structured JSON evaluation.
 
@@ -12,10 +12,10 @@ Use `claude-sonnet-4-6` only if curation quality is insufficient after tuning th
 
 ---
 
-## System prompt (adapt this for Flesh Pulse)
+## System prompt (adapt this for Sex Health News)
 
 ```python
-SYSTEM_PROMPT = """You are the editorial AI for Flesh Pulse, an independent news aggregator covering sexuality, sexual health, sex work, and the adult industry. Your role is to evaluate news articles and determine whether they are relevant to this editorial mission.
+SYSTEM_PROMPT = """You are the editorial AI for Sex Health News, an independent news aggregator covering sexuality, sexual health, sex work, and the adult industry. Your role is to evaluate news articles and determine whether they are relevant to this editorial mission.
 
 A relevant article covers real events or findings involving:
 - Sexual health: STIs, contraception, sex education policy, reproductive health research
@@ -41,7 +41,7 @@ Evaluate each article and respond with JSON only — no explanation, no markdown
 ## Evaluation prompt
 
 ```python
-EVAL_PROMPT = """Evaluate this news article for relevance to Flesh Pulse.
+EVAL_PROMPT = """Evaluate this news article for relevance to Sex Health News.
 
 Title: {title}
 Source: {source}

@@ -1,4 +1,4 @@
-# Flesh Pulse — Setup Guide
+# Sex Health News — Setup Guide
 
 ## Prerequisites
 
@@ -21,13 +21,13 @@ This starts a Postgres 15 container on port 5432. Data is persisted in a named D
 
 ```bash
 docker compose up -d        # starts both db + pgAdmin
-open http://localhost:5050  # pgAdmin — login: admin@flesh-pulse.local / admin
+open http://localhost:5050  # pgAdmin — login: admin@sexhealthnews.local / admin
 ```
 
 In pgAdmin, add a server connection:
 - Host: `db` (if connecting from another container) or `localhost` (from host machine)
 - Port: `5432`
-- Database: `flesh_pulse`
+- Database: `sexhealthnews`
 - Username: `postgres`
 - Password: `postgres`
 
@@ -52,7 +52,7 @@ Minimum required values:
 ```env
 ANTHROPIC_API_KEY=sk-ant-...
 JWT_SECRET_KEY=<generate with: python -c "import secrets; print(secrets.token_hex(32))">
-DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:5432/flesh_pulse
+DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:5432/sexhealthnews
 ```
 
 ### 4. Start the app
@@ -73,7 +73,7 @@ make install      # Create .venv and install dependencies
 make run          # Start main app on port 8000
 make admin        # Start admin dashboard on port 8001
 make trigger      # Manually fire the collection pipeline
-make db-reset     # Drop and recreate the flesh_pulse database (dev only)
+make db-reset     # Drop and recreate the sexhealthnews database (dev only)
 make test         # Run pytest suite
 ```
 
@@ -135,7 +135,7 @@ DATABASE_URL=postgresql+asyncpg://postgres:[PASSWORD]@db.[PROJECT-REF].supabase.
 ANTHROPIC_API_KEY=sk-ant-...
 JWT_SECRET_KEY=<production secret>
 RESEND_API_KEY=re_...
-APP_URL=https://fleshpulse.com
+APP_URL=https://sexhealthnew.com
 ```
 
 ---
@@ -146,14 +146,14 @@ APP_URL=https://fleshpulse.com
 # Install flyctl: https://fly.io/docs/hands-on/install-flyctl/
 
 fly auth login
-fly launch --name flesh-pulse --region cdg
+fly launch --name sexhealthnews --region cdg
 
 # Set secrets — no volume needed, DB is on Supabase
 fly secrets set DATABASE_URL="postgresql+asyncpg://postgres:..."
 fly secrets set ANTHROPIC_API_KEY=sk-ant-...
 fly secrets set JWT_SECRET_KEY=$(python -c "import secrets; print(secrets.token_hex(32))")
 fly secrets set RESEND_API_KEY=re_...
-fly secrets set APP_URL=https://fleshpulse.com
+fly secrets set APP_URL=https://sexhealthnew.com
 
 fly deploy
 fly logs
@@ -166,9 +166,9 @@ No persistent volume needed — the database lives on Supabase, not on the Fly m
 ## Resetting the local database
 
 ```bash
-# Hard reset — drops and recreates the flesh_pulse database
-docker compose exec db psql -U postgres -c "DROP DATABASE IF EXISTS flesh_pulse;"
-docker compose exec db psql -U postgres -c "CREATE DATABASE flesh_pulse;"
+# Hard reset — drops and recreates the sexhealthnews database
+docker compose exec db psql -U postgres -c "DROP DATABASE IF EXISTS sexhealthnews;"
+docker compose exec db psql -U postgres -c "CREATE DATABASE sexhealthnews;"
 # Then restart the app — init_db() recreates all tables
 make run
 ```
@@ -211,4 +211,4 @@ make test
 pytest tests/ -v
 ```
 
-Tests use a separate `flesh_pulse_test` database. Set `TEST_DATABASE_URL` in `.env` or the test suite will create it automatically.
+Tests use a separate `sexhealthnews_test` database. Set `TEST_DATABASE_URL` in `.env` or the test suite will create it automatically.

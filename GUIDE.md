@@ -1,8 +1,8 @@
-# Flesh Pulse — Operator Guide
+# Sex Health News — Operator Guide
 
 A practical reference for running, extending, and deploying the system.
 
-Live site: [fleshpulse.com](https://fleshpulse.com)
+Live site: [sexhealthnew.com](https://sexhealthnew.com)
 
 ---
 
@@ -29,8 +29,27 @@ Live site: [fleshpulse.com](https://fleshpulse.com)
 
 ### Steps
 
+**1. Create and activate virtual environment:**
+
+```bash
+python3 -m venv .venv
+
+# macOS / Linux:
+source .venv/bin/activate
+
+# Windows:
+.venv\Scripts\activate
+```
+
+**2. Install dependencies:**
+
 ```bash
 pip install -r requirements.txt
+```
+
+**3. Configure environment:**
+
+```bash
 cp .env.example .env
 ```
 
@@ -40,13 +59,15 @@ Edit `.env` and fill in at minimum:
 ANTHROPIC_API_KEY=sk-ant-...
 ```
 
-Then start:
+**4. Run the application:**
 
 ```bash
 make run      # recommended — auto-kills any existing process on the port first
 ./run.sh      # Linux / macOS alternative
 run.bat       # Windows alternative
 ```
+
+All of these scripts automatically activate the venv if it exists.
 
 The pipeline fires immediately on startup. Within a few minutes (depending on how many articles need curating) the feed will populate.
 
@@ -197,12 +218,12 @@ Small (14px) / Medium (16px, default) / Large (18px) — applied to the `html` e
 
 ## 6. Managing the database
 
-The database is stored at `data/flesh-pulse.db` (SQLite). It is created automatically on first run and is excluded from git.
+The database is stored at `data/sexhealthnews.db` (SQLite). It is created automatically on first run and is excluded from git.
 
 ### Inspect with SQLite CLI
 
 ```bash
-sqlite3 data/flesh-pulse.db
+sqlite3 data/sexhealthnews.db
 
 .tables
 SELECT count(*) FROM articles;
@@ -216,8 +237,8 @@ Stop the server, then:
 
 ```bash
 make reset        # cross-platform
-del data\flesh-pulse.db   # Windows manual
-rm data/flesh-pulse.db    # Linux / macOS manual
+del data\sexhealthnews.db   # Windows manual
+rm data/sexhealthnews.db    # Linux / macOS manual
 ```
 
 The next startup recreates it from scratch. The next pipeline run repopulates it.
@@ -234,17 +255,17 @@ curl http://localhost:8000/api/articles?limit=100 > export.json
 
 ### With systemd (Linux)
 
-Create `/etc/systemd/system/flesh-pulse.service`:
+Create `/etc/systemd/system/sexhealthnews.service`:
 
 ```ini
 [Unit]
-Description=Flesh Pulse
+Description=Sex Health News
 After=network.target
 
 [Service]
-WorkingDirectory=/opt/flesh-pulse
+WorkingDirectory=/opt/sexhealthnews
 ExecStart=python -m uvicorn main:app --host 0.0.0.0 --port 8000
-EnvironmentFile=/opt/flesh-pulse/.env
+EnvironmentFile=/opt/sexhealthnews/.env
 Restart=always
 RestartSec=5
 
@@ -253,8 +274,8 @@ WantedBy=multi-user.target
 ```
 
 ```bash
-sudo systemctl enable --now flesh-pulse
-sudo journalctl -fu flesh-pulse
+sudo systemctl enable --now sexhealthnews
+sudo journalctl -fu sexhealthnews
 ```
 
 ### With Docker
@@ -272,8 +293,8 @@ CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000
 ```
 
 ```bash
-docker build -t flesh-pulse .
-docker run -d -p 8000:8000 --env-file .env -v $(pwd)/data:/app/data flesh-pulse
+docker build -t sexhealthnews .
+docker run -d -p 8000:8000 --env-file .env -v $(pwd)/data:/app/data sexhealthnews
 ```
 
 ### Behind nginx

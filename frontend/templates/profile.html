@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Profile — Flesh Pulse{% endblock %}
+{% block title %}Profile — Sex Health News{% endblock %}
 
 {% block content %}
 <div class="profile-page">
@@ -25,7 +25,7 @@
   {% elif msg == 'password-changed' %}
   <div class="auth-alert auth-alert-success profile-alert">Password updated.</div>
   {% elif msg == 'welcome' %}
-  <div class="auth-alert auth-alert-info profile-alert">Welcome to Flesh Pulse. Set your newsletter preferences below to get started.</div>
+  <div class="auth-alert auth-alert-info profile-alert">Welcome to Sex Health News. Set your newsletter preferences below to get started.</div>
   {% endif %}
 
   {% if pw_error %}
@@ -88,7 +88,7 @@
     <section class="profile-section">
       <h2 class="profile-section-title">Account</h2>
 
-      {% if current_user.email.endswith('@flesh-pulse.local') %}
+      {% if current_user.email.endswith('@sexhealthnews.local') %}
       <div class="auth-alert auth-alert-info" style="margin-bottom:16px;font-size:13px;">
         You signed in with X (Twitter), which doesn't share your email address.
         Add an email below to receive newsletters and password reset links.
@@ -99,7 +99,7 @@
         <div class="account-info-row">
           <dt class="account-info-label">Email</dt>
           <dd class="account-info-value">
-            {% if current_user.email.endswith('@flesh-pulse.local') %}
+            {% if current_user.email.endswith('@sexhealthnews.local') %}
               <span style="color:var(--text-muted);font-style:italic;">Not set</span>
             {% else %}
               {{ current_user.email }}

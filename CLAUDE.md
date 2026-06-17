@@ -12,12 +12,12 @@ make admin     # start admin dashboard on port 8001 (127.0.0.1 only)
 
 Or just run `./run.sh` (macOS/Linux) / `run.bat` (Windows) — both auto-create `.venv` and install deps if needed.
 
-Requires a `.env` file (copy from `.env.example`). `ANTHROPIC_API_KEY` and `JWT_SECRET_KEY` are required; all other keys are optional. The database (`data/flesh-pulse.db`) is created automatically on first startup.
+Requires a `.env` file (copy from `.env.example`). `ANTHROPIC_API_KEY` and `JWT_SECRET_KEY` are required; all other keys are optional. The database (`data/sexhealthnews.db`) is created automatically on first startup.
 
 ```bash
 make trigger   # manually fire the collection pipeline
 make reset     # delete the database (stop server first)
-sqlite3 data/flesh-pulse.db "SELECT category, count(*) FROM articles GROUP BY category;"
+sqlite3 data/sexhealthnews.db "SELECT category, count(*) FROM articles GROUP BY category;"
 ```
 
 Set `DISABLE_NEWSAPI=true` in `.env` (or via `fly secrets set`) to skip the NewsAPI collector during testing — RSS feeds still run normally. Unset or set to `false` to re-enable.
@@ -159,8 +159,8 @@ Six tables in `backend/database/models.py`:
 | `ANTHROPIC_API_KEY` | yes | — | AI curation and newsletter writing |
 | `JWT_SECRET_KEY` | yes | `dev-secret-change-in-production` | JWT signing + session middleware |
 | `RESEND_API_KEY` | no | — | Email delivery (verification, reset, contact) |
-| `FROM_EMAIL` | no | `Flesh Pulse <onboarding@resend.dev>` | Sender address for transactional emails |
-| `CONTACT_EMAIL` | no | `contact@fleshpulse.com` | Recipient for contact form submissions |
+| `FROM_EMAIL` | no | `Sex Health News <noreply@sexhealthnew.com>` | Sender address for transactional emails |
+| `CONTACT_EMAIL` | no | `contact@sexhealthnew.com` | Recipient for contact form submissions |
 | `APP_URL` | no | `http://localhost:8000` | Base URL in email links and OAuth redirect URIs |
 | `NEWSAPI_KEY` | no | — | Adds keyword search on top of RSS feeds |
 | `DISABLE_NEWSAPI` | no | `false` | Skip NewsAPI collector (RSS still runs) |

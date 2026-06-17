@@ -82,7 +82,7 @@ async def find_or_create_oauth_user(
     if not user:
         # Twitter may not return an email — store a placeholder so the unique constraint holds
         user = User(
-            email=email or f"{provider}_{provider_user_id}@flesh-pulse.local",
+            email=email or f"{provider}_{provider_user_id}@sexhealthnews.local",
             password_hash="",          # OAuth-only accounts have no password
             display_name=display_name,
             email_verified=bool(email),

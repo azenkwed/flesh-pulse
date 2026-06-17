@@ -513,8 +513,8 @@ _ENV_VARS = [
     ("LOG_LEVEL",                  False, "INFO",                       "Logging verbosity",                               False),
     # ── Email ─────────────────────────────────────────────────────────────────
     ("RESEND_API_KEY",             False, None,                         "Email delivery (verification, reset, contact)",   True),
-    ("FROM_EMAIL",                 False, "Flesh Pulse <onboarding@resend.dev>", "Sender address for transactional email",  False),
-    ("CONTACT_EMAIL",              False, "contact@fleshpulse.com",      "Recipient for contact-form submissions",          False),
+    ("FROM_EMAIL",                 False, "Sex Health News <noreply@sexhealthnew.com>", "Sender address for transactional email",  False),
+    ("CONTACT_EMAIL",              False, "contact@sexhealthnew.com",      "Recipient for contact-form submissions",          False),
     # ── OAuth ─────────────────────────────────────────────────────────────────
     ("GOOGLE_CLIENT_ID",           False, None,                         "Google OAuth (button appears only if both set)",  True),
     ("GOOGLE_CLIENT_SECRET",       False, None,                         "Google OAuth secret",                             True),
@@ -763,7 +763,7 @@ async def tweet_send(
 
     app_url = os.getenv("APP_URL", "http://localhost:8000")
     is_local = app_url.startswith("http://localhost") or app_url.startswith("http://127.")
-    twitter_handle = os.getenv("TWITTER_HANDLE", "flesh-pulse")
+    twitter_handle = os.getenv("TWITTER_HANDLE", "sexhealthnew")
     url = f"https://x.com/{twitter_handle}" if is_local else f"{app_url}/article/{article.id}"
     tweet_text = ""
     success = False

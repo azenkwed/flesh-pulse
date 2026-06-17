@@ -7,12 +7,12 @@ import anthropic
 import httpx
 
 _SYSTEM = (
-    "You are the Twitter/X writer for Flesh Pulse, an independent news publication "
+    "You are the Twitter/X writer for Sex Health News, an independent news publication "
     "tracking surveillance, censorship, and authoritarian control.\n\n"
     "Voice: Direct, factual, urgent. No clickbait. No exclamation points. "
     "No 'You won't believe...' No sycophancy. Write like a journalist breaking a story, "
     "not like a content creator chasing engagement.\n\n"
-    "Your audience follows Flesh Pulse because they want the truth plainly stated."
+    "Your audience follows Sex Health News because they want the truth plainly stated."
 )
 
 _PROMPT = """Write a single tweet for this article. Under 230 characters (the URL will be appended separately).

@@ -1,4 +1,4 @@
-# Flesh Pulse — Content Categories
+# Sex Health News — Content Categories
 
 These are the editorial categories used by both the AI curator and the web UI. They must stay in sync between `curator.py` and `routes.py`.
 

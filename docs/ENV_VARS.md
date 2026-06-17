@@ -1,4 +1,4 @@
-# Flesh Pulse — Environment Variables
+# Sex Health News — Environment Variables
 
 Copy `.env.example` to `.env` and fill in the required values before starting.
 
@@ -16,7 +16,7 @@ Copy `.env.example` to `.env` and fill in the required values before starting.
 
 **Local Docker:**
 ```
-DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:5432/flesh_pulse
+DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:5432/sexhealthnews
 ```
 
 **Supabase (production — direct connection, port 5432):**
@@ -73,8 +73,8 @@ Find your connection string in Supabase dashboard: **Project Settings → Databa
 | Variable | Default | Purpose |
 |---|---|---|
 | `RESEND_API_KEY` | — | Transactional email. If unset, emails are silently skipped (logs a warning). |
-| `FROM_EMAIL` | `Flesh Pulse <onboarding@resend.dev>` | Sender. Use `onboarding@resend.dev` for testing; swap to verified domain for production. |
-| `CONTACT_EMAIL` | `contact@fleshpulse.com` | Recipient for contact form and DMCA/abuse reports |
+| `FROM_EMAIL` | `Sex Health News <onboarding@resend.dev>` | Sender. Use `onboarding@resend.dev` for testing; swap to verified domain for production. |
+| `CONTACT_EMAIL` | `contact@sexhealthnew.com` | Recipient for contact form and DMCA/abuse reports |
 
 ---
 
@@ -101,7 +101,7 @@ http://localhost:8000/auth/microsoft/callback
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `TWITTER_HANDLE` | `fleshpulse` | X account — used as fallback URL in local dev |
+| `TWITTER_HANDLE` | `sexhealthnew` | X account — used as fallback URL in local dev |
 | `TWITTER_MAX_PER_RUN` | `1` | Max featured articles to tweet per pipeline run |
 | `TWITTER_CONSUMER_KEY` | — | OAuth 1.0a — posting tweets |
 | `TWITTER_CONSUMER_SECRET` | — | OAuth 1.0a |
@@ -125,4 +125,4 @@ http://localhost:8000/auth/microsoft/callback
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `TEST_DATABASE_URL` | `postgresql+asyncpg://postgres:postgres@localhost:5432/flesh_pulse_test` | Postgres database used by pytest — separate from dev DB |
+| `TEST_DATABASE_URL` | `postgresql+asyncpg://postgres:postgres@localhost:5432/sexhealthnews_test` | Postgres database used by pytest — separate from dev DB |

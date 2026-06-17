@@ -1,10 +1,10 @@
-# Flesh Pulse — Legal & Compliance
+# Sex Health News — Legal & Compliance
 
-This document covers the legal considerations specific to running a news aggregator in the sexuality/adult content space. Flesh Pulse is a **news aggregator** — it links to articles, not host explicit content — but the topic area has specific regulatory exposure.
+This document covers the legal considerations specific to running a news aggregator in the sexuality/adult content space. Sex Health News is a **news aggregator** — it links to articles, not host explicit content — but the topic area has specific regulatory exposure.
 
 ---
 
-## What Flesh Pulse is (and is not)
+## What Sex Health News is (and is not)
 
 **Is**: A news aggregator that indexes publicly available articles about sexuality, sexual health, sex work, and the adult industry. All content links back to the original publisher.
 
@@ -18,7 +18,7 @@ This distinction matters enormously for legal exposure.
 
 The Allow States and Victims to Fight Online Sex Trafficking Act (2018) creates civil and criminal liability for platforms that "facilitate" sex trafficking.
 
-**Risk level for Flesh Pulse: Low.** The law targets platforms that host or enable solicitation ads. Aggregating journalism about sex work policy is protected editorial activity, not facilitation.
+**Risk level for Sex Health News: Low.** The law targets platforms that host or enable solicitation ads. Aggregating journalism about sex work policy is protected editorial activity, not facilitation.
 
 **What to avoid**: Do not add any feature that allows users to post ads, listings, or contact requests. Do not aggregate escort directories or adult classifieds. Stick to journalism and research.
 
@@ -28,7 +28,7 @@ The Allow States and Victims to Fight Online Sex Trafficking Act (2018) creates 
 
 18 U.S.C. § 2256 and equivalent laws in every jurisdiction make CSAM absolutely illegal with severe penalties.
 
-**Flesh Pulse must**:
+**Sex Health News must**:
 - Never ingest sources that could produce content sexualizing minors
 - Vet all RSS sources before adding them — inspect 20+ articles manually before adding a new source
 - The AI curation prompt must explicitly reject any article involving minors in a sexual context
@@ -41,7 +41,7 @@ The Allow States and Victims to Fight Online Sex Trafficking Act (2018) creates 
 
 Several US states (Louisiana, Utah, Texas, others) have passed laws requiring age verification for sites with "substantial" adult content. UK's Online Safety Act has similar provisions.
 
-**Current risk for Flesh Pulse: Low.** A news aggregator linking to journalism is unlikely to be classified as a pornographic site under these laws.
+**Current risk for Sex Health News: Low.** A news aggregator linking to journalism is unlikely to be classified as a pornographic site under these laws.
 
 **Watch**: If the site's category mix shifts heavily toward adult industry content, reconsider.
 
@@ -86,7 +86,7 @@ Stripe, PayPal, and most payment processors have restrictions on "adult content"
 
 ## DMCA safe harbor
 
-As an aggregator, Flesh Pulse qualifies for DMCA safe harbor (17 U.S.C. § 512) provided:
+As an aggregator, Sex Health News qualifies for DMCA safe harbor (17 U.S.C. § 512) provided:
 - You have a registered DMCA agent (file with US Copyright Office, ~$6/year)
 - You have a published DMCA takedown procedure
 - You respond promptly to valid takedown notices
@@ -98,9 +98,9 @@ Linking to articles does not create infringement liability. Displaying a headlin
 
 ## Defamation
 
-Aggregating articles that are themselves defamatory: Section 230 (Communications Decency Act) provides immunity to platforms for third-party content. Flesh Pulse does not author the articles it aggregates.
+Aggregating articles that are themselves defamatory: Section 230 (Communications Decency Act) provides immunity to platforms for third-party content. Sex Health News does not author the articles it aggregates.
 
-**Exception**: AI-generated summaries are authored by Flesh Pulse. Keep summaries factual and descriptive. Do not have Claude editorialize or make claims not supported by the source article.
+**Exception**: AI-generated summaries are authored by Sex Health News. Keep summaries factual and descriptive. Do not have Claude editorialize or make claims not supported by the source article.
 
 ---
 
